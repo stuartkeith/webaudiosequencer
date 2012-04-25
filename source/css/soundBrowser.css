@@ -7,23 +7,32 @@
 
 .sound {
 	background-color: #f8f8f8;
-	border-bottom: 4px solid #f0f0f0;
-	border-left: 4px solid #fafafa;
-	border-right: 4px solid #f0f0f0;
-	border-top: 4px solid #fafafa;
+	border-bottom: 2px solid #f0f0f0;
+	border-left: 2px solid #fafafa;
+	border-right: 2px solid #f0f0f0;
+	border-top: 2px solid #fafafa;
 	cursor: move;
 	float: left;
-	height: 24px;
+	height: 28px;
 	overflow: hidden;
 	position: relative;
-	width: 152px;
+	width: 148px;
 }
 
 .title {
+	display: block;
 	font-size: 12px;
-	left: 4px;
-	line-height: 24px;
+	left: 30px;
+	line-height: 28px;
 	overflow: hidden;
 	position: relative;
-	width: 144px;
+	white-space: nowrap;
+	width: 112px;
+}
+
+.play {
+	background-position: 0 0;
+	left: 5px;
+	position: absolute;
+	top: 5px;
 }
