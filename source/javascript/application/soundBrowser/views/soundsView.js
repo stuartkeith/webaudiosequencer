@@ -5,7 +5,7 @@ define([
 	"./soundView"
 ], function(_, Backbone, BaseView, SoundView) {
 	var SoundsView = BaseView.extend({
-		className: "sounds-view",
+		className: "sounds",
 
 		render: function (collection) {
 			this.removeAllChildViews();

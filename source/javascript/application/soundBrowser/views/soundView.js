@@ -6,7 +6,7 @@ define([
 	"text!templates/soundBrowser/sound.html"
 ], function($, _, Backbone, BaseView, soundTemplateString) {
 	var SoundView = BaseView.extend({
-		className: "sound-view",
+		className: "sound",
 
 		soundTemplate: _.template(soundTemplateString),
 
