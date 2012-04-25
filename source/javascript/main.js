@@ -24,8 +24,11 @@ require.config({
 });
 
 require([
+	"use!backbone",
 	"application/applicationView"
-], function (ApplicationView) {
-	var applicationView = new ApplicationView({ el: "#container" });
+], function (Backbone, ApplicationView) {
+	var eventBus = _.clone(Backbone.Events);
+
+	var applicationView = new ApplicationView({ eventBus: eventBus, el: "#container" });
 	applicationView.render();
 });

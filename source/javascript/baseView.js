@@ -4,7 +4,7 @@ define([
 ], function(_, Backbone) {
 	var ExtendedView = function (options) {
 		this.childViews = [];
-		this.eventBus = options.eventBus || _.clone(Backbone.Events);;
+		this.eventBus = options.eventBus;
 		this.eventBusEvents = options.eventBusEvents || this.eventBusEvents;
 		this.modelEvents = options.modelEvents || this.modelEvents;
 
