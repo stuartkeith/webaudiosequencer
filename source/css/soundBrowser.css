@@ -1,0 +1,29 @@
+.sounds {
+	background-color: #ababab;
+	border: 16px solid #cdcdcd;
+	height: 32px;
+	overflow: hidden;
+}
+
+.sound {
+	background-color: #f8f8f8;
+	border-bottom: 4px solid #f0f0f0;
+	border-left: 4px solid #fafafa;
+	border-right: 4px solid #f0f0f0;
+	border-top: 4px solid #fafafa;
+	cursor: move;
+	float: left;
+	height: 24px;
+	overflow: hidden;
+	position: relative;
+	width: 152px;
+}
+
+.title {
+	font-size: 12px;
+	left: 4px;
+	line-height: 24px;
+	overflow: hidden;
+	position: relative;
+	width: 144px;
+}
