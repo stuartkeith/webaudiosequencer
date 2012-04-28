@@ -6,9 +6,15 @@ define([
 		name: "FreeSound",
 		url: "http://www.freesound.org/api/sounds/search/",
 		apiKey: "f9c1dfcdd51e4d90940f7719c964a43a",
+		urlSubIndex: "http://www.freesound.org/data/previews/".length,
+		fixedSoundURLPath: "freesound/",
 
 		initialize: function (options) {
 			this.defaultFetchOptions = options.defaultFetchOptions;
+		},
+
+		fixSoundURL: function (sound_url) {
+			return this.fixedSoundURLPath + sound_url.substr(this.urlSubIndex) + "?apiKey=" + this.apiKey;
 		},
 
 		parse: function (response) {
@@ -18,7 +24,7 @@ define([
 				convertedResponse.push({
 					duration: sound.duration,
 					id: sound.id,
-					sound_url: sound['preview-hq-mp3'] + "?apiKey=" + this.apiKey,
+					sound_url: this.fixSoundURL(sound['preview-hq-mp3']),
 					source_name: this.name,
 					source_url: sound.url,
 					tags: sound.tags,

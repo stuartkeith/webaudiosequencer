@@ -6,9 +6,15 @@ define([
 		name: "SoundCloud",
 		url: "http://api.soundcloud.com/tracks.json",
 		clientID: "92a7894544c99bb2ba74e6ded0f3945a",
+		urlSubIndex: "http://api.soundcloud.com/tracks/".length,
+		fixedSoundURLPath: "soundcloud/tracks/",
 
 		initialize: function (options) {
 			this.defaultFetchOptions = options.defaultFetchOptions;
+		},
+
+		fixSoundURL: function (sound_url) {
+			return this.fixedSoundURLPath + sound_url.substr(this.urlSubIndex) + "?client_id=" + this.clientID;
 		},
 
 		parse: function (response) {
@@ -18,7 +24,7 @@ define([
 				convertedResponse.push({
 					duration: sound.duration / 1000,
 					id: sound.id,
-					sound_url: sound.stream_url + "?client_id=" + this.clientID,
+					sound_url: this.fixSoundURL(sound.stream_url),
 					source_name: this.name,
 					source_url: sound.permalink_url,
 					tags: sound.tag_list.split(" "),
