@@ -4,6 +4,7 @@ define([
 ], function(_, Backbone) {
 	var FreeSoundCollection = Backbone.Collection.extend({
 		name: "FreeSound",
+		className: "freesound",
 		url: "http://www.freesound.org/api/sounds/search/",
 		apiKey: "f9c1dfcdd51e4d90940f7719c964a43a",
 		urlSubIndex: "http://www.freesound.org/data/previews/".length,

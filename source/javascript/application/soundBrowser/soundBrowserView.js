@@ -75,7 +75,12 @@ define([
 		},
 
 		changeCollection: function (collection) {
+			if (this.collection)
+				this.$el.removeClass(this.collection.className);
+
 			this.collection = collection;
+
+			this.$el.addClass(this.collection.className);
 
 			this.collectionSelect.val(this.collection.name);
 
