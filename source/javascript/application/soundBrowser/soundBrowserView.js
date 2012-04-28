@@ -24,13 +24,17 @@ define([
 				new SoundCloudCollection(this.collectionOptions)
 			];
 
-			this.collection = this.collections[0];
-
 			this.collectionSelectOptions = "";
 
 			_.each(this.collections, function (collection) {
 				this.collectionSelectOptions += "<option>" + collection.name + "</option>";
 			}, this);
+		},
+
+		events: {
+			"change .collection-select": function (event) {
+				this.changeCollection(this.collections[event.target.selectedIndex]);
+			}
 		},
 
 		fetch: function () {
@@ -53,14 +57,24 @@ define([
 
 			this.$el.html(this.soundBrowserTemplate());
 
+			this.collectionSelect = this.$el.find(".collection-select:first");
+			this.collectionSelect.html(this.collectionSelectOptions);
+
 			var sounds = this.$el.find(".sounds:first");
 
 			this.soundsView = this.addChildView(SoundsView, { el: sounds });
-			this.soundsView.render();
 
-			this.fetch();
+			this.changeCollection(this.collections[0]);
 
 			return this;
+		},
+
+		changeCollection: function (collection) {
+			this.collection = collection;
+
+			this.collectionSelect.val(this.collection.name);
+
+			this.fetch();
 		}
 	});
 
