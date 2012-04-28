@@ -24,32 +24,20 @@ require.config({
 });
 
 require([
+	"use!underscore",
 	"use!backbone",
 	"soundOutput/soundOutput",
+	"commandMap",
 	"application/applicationView"
-], function (Backbone, SoundOutput, ApplicationView) {
+], function (_, Backbone, SoundOutput, CommandMap, ApplicationView) {
 	var eventBus = _.clone(Backbone.Events);
 
 	var soundOutput = new SoundOutput();
 
-	eventBus.on("playSoundAttributes", function (soundAttributes, deferred) {
-		deferred.notify("loading");
+	var commandMap = new CommandMap(soundOutput);
 
-		var loadDeferred = soundOutput.loadSoundAttributes(soundAttributes);
-
-		loadDeferred.fail(function (error, data) {
-			deferred.reject(error, data);
-		});
-
-		loadDeferred.done(function (soundObject) {
-			deferred.notify("playing");
-
-			soundOutput.playSoundObject(soundObject, 1, 0, function () {
-				soundOutput.freeSoundAttributes(soundAttributes);
-
-				deferred.resolve();
-			});
-		});
+	_.each(commandMap, function (fn, event) {
+		eventBus.on(event, fn);
 	});
 
 	var applicationView = new ApplicationView({ eventBus: eventBus, el: "#container" });
