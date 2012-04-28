@@ -34,7 +34,8 @@ define([
 		events: {
 			"change .collection-select": function (event) {
 				this.changeCollection(this.collections[event.target.selectedIndex]);
-			}
+			},
+			"click .refresh": "fetch"
 		},
 
 		fetch: function () {
@@ -62,6 +63,8 @@ define([
 			this.collectionSelect = this.$el.find(".collection-select:first");
 			this.collectionSelect.html(this.collectionSelectOptions);
 
+			this.refreshButton = this.$el.find(".refresh:first");
+
 			var sounds = this.$el.find(".sounds:first");
 
 			this.soundsView = this.addChildView(SoundsView, { el: sounds });
@@ -81,6 +84,7 @@ define([
 
 		setEnabled: function (value) {
 			this.collectionSelect.attr('disabled', !value);
+			this.refreshButton.attr('disabled', !value);
 		}
 	});
 
