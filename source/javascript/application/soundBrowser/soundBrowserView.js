@@ -7,7 +7,7 @@ define([
 	"./collections/soundCloudCollection",
 	"./views/soundsView"
 ], function(_, Backbone, BaseView, SoundBrowserTemplateString, FreeSoundCollection, SoundCloudCollection, SoundsView) {
-	var SoundBrowser = BaseView.extend({
+	var SoundBrowserView = BaseView.extend({
 		className: "sound-browser",
 		soundBrowserTemplate: _.template(SoundBrowserTemplateString),
 
@@ -93,5 +93,5 @@ define([
 		}
 	});
 
-	return SoundBrowser;
+	return SoundBrowserView;
 });
