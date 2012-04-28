@@ -8,9 +8,9 @@ define([
 		className: "sounds",
 
 		render: function (collection) {
-			if (collection) {
-				this.removeAllChildViews();
+			this.removeAllChildViews();
 
+			if (collection) {
 				var totalWidth = 0;
 				var view;
 

@@ -40,10 +40,12 @@ define([
 		fetch: function () {
 			var that = this;
 
+			this.setEnabled(false);
 			this.soundsView.render();
 
 			this.collection.fetch({
 				success: function (collection, response) {
+					that.setEnabled(true);
 					that.soundsView.render(collection);
 				},
 				error: function () {
@@ -75,6 +77,10 @@ define([
 			this.collectionSelect.val(this.collection.name);
 
 			this.fetch();
+		},
+
+		setEnabled: function (value) {
+			this.collectionSelect.attr('disabled', !value);
 		}
 	});
 
