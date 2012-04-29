@@ -3,17 +3,17 @@ define([
 	"use!backbone",
 	"baseView",
 	"./soundBrowser/soundBrowserView",
-	"./loopEditor/loopEditorView",
+	"./trackEditor/trackEditorView",
 	"text!templates/application.html"
-], function(_, Backbone, BaseView, SoundBrowserView, LoopEditorView, applicationTemplateString) {
+], function(_, Backbone, BaseView, SoundBrowserView, TrackEditorView, applicationTemplateString) {
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
 
 		modelEvents: {
 			"trackAdded": function (track) {
-				var loopEditorView = this.addChildView(LoopEditorView, { model: track });
+				var trackEditorView = this.addChildView(TrackEditorView, { model: track });
 
-				this.loopEditorContainer.append(loopEditorView.render().$el);
+				this.trackEditorContainer.append(trackEditorView.render().$el);
 			}
 		},
 
@@ -27,7 +27,7 @@ define([
 			var soundBrowserView = this.addChildView(SoundBrowserView, { el: soundBrowser });
 			soundBrowserView.render();
 
-			this.loopEditorContainer = this.$el.find(".loop-editor-container:first");
+			this.trackEditorContainer = this.$el.find(".track-editor-container:first");
 
 			return this;
 		}
