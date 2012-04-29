@@ -27,19 +27,24 @@ require([
 	"use!underscore",
 	"use!backbone",
 	"soundOutput/soundOutput",
+	"sequencer/sequencer",
 	"commandMap",
 	"application/applicationView"
-], function (_, Backbone, SoundOutput, CommandMap, ApplicationView) {
+], function (_, Backbone, SoundOutput, Sequencer, CommandMap, ApplicationView) {
 	var eventBus = _.clone(Backbone.Events);
 
 	var soundOutput = new SoundOutput();
 
-	var commandMap = new CommandMap(soundOutput);
+	var sequencer = new Sequencer();
+
+	var commandMap = new CommandMap(eventBus, soundOutput, sequencer);
 
 	_.each(commandMap, function (fn, event) {
 		eventBus.on(event, fn);
 	});
 
-	var applicationView = new ApplicationView({ eventBus: eventBus, el: "#container" });
+	var applicationView = new ApplicationView({ eventBus: eventBus, el: "#container", model: sequencer });
 	applicationView.render();
+
+	eventBus.trigger("initialize");
 });

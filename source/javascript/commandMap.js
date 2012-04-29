@@ -1,9 +1,13 @@
 define([
+	"commands/addTrack",
+	"commands/initialize",
 	"commands/playSoundAttributes"
-], function (playSoundAttributes) {
-	var CommandMap = function (soundOutput) {
+], function (addTrack, initialize, playSoundAttributes) {
+	var CommandMap = function (eventBus, soundOutput, sequencer) {
 		return {
-			playSoundAttributes: playSoundAttributes(soundOutput)
+			addTrack: addTrack(sequencer),
+			initialize: initialize(eventBus),
+			playSoundAttributes: playSoundAttributes(eventBus, soundOutput)
 		};
 	};
 

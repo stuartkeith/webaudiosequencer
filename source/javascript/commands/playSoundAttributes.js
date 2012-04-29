@@ -1,5 +1,5 @@
 define(function () {
-	var playSoundAttributes = function (soundOutput) {
+	var playSoundAttributes = function (eventBus, soundOutput) {
 		return function (soundAttributes, deferred) {
 			deferred.notify("loading");
 

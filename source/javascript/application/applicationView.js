@@ -9,6 +9,14 @@ define([
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
 
+		modelEvents: {
+			"trackAdded": function (track) {
+				var loopEditorView = this.addChildView(LoopEditorView, { model: track });
+
+				this.loopEditorContainer.append(loopEditorView.render().$el);
+			}
+		},
+
 		render: function () {
 			this.removeAllChildViews();
 
@@ -19,10 +27,7 @@ define([
 			var soundBrowserView = this.addChildView(SoundBrowserView, { el: soundBrowser });
 			soundBrowserView.render();
 
-			var loopEditor = this.$el.find(".loop-editor:first");
-
-			var loopEditorView = this.addChildView(LoopEditorView, { el: loopEditor });
-			loopEditorView.render();
+			this.loopEditorContainer = this.$el.find(".loop-editor-container:first");
 
 			return this;
 		}
