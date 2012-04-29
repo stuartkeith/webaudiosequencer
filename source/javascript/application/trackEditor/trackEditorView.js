@@ -9,6 +9,18 @@ define([
 		className: "track-editor",
 		trackEditorTemplate: _.template(TrackEditorTemplateString),
 
+		events: {
+			"click .remove-track": function (event) {
+				this.eventBus.trigger("removeTrack", this.model);
+			}
+		},
+
+		modelEvents: {
+			"removed": function () {
+				this.remove();
+			}
+		},
+
 		render: function () {
 			this.$el.html(this.trackEditorTemplate());
 

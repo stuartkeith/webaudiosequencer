@@ -15,6 +15,21 @@ define([
 			this.trigger("trackAdded", track);
 
 			return track;
+		},
+
+		removeTrack: function (track) {
+			var index = this.tracks.indexOf(track);
+
+			if (index >= 0) {
+				this.tracks.splice(index, 1);
+
+				track.trigger("removed");
+				this.trigger("trackRemoved", track);
+
+				return true;
+			} else {
+				return false;
+			}
 		}
 	});
 
