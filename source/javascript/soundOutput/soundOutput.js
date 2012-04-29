@@ -1,6 +1,7 @@
 define([
+	"use!backbone",
 	"jquery"
-], function($) {
+], function(Backbone, $) {
 	var noteToPlaybackRate = [];
 
 	var noteRange = 48;
@@ -18,87 +19,91 @@ define([
 		this._deferredURLs = {};
 	};
 
-	SoundOutput.prototype.getVolume = function () {
-		return this._gainNode.gain.value;
-	};
+	_.extend(SoundOutput.prototype, Backbone.Events, {
+		getVolume: function () {
+			return this._gainNode.gain.value;
+		},
 
-	SoundOutput.prototype.setVolume = function (volume) {
-		this._gainNode.gain.value = volume;
-	};
+		setVolume: function (volume) {
+			this._gainNode.gain.value = volume;
 
-	SoundOutput.prototype.playSoundObject = function (soundObject, playbackRate, delay, callback) {
-		var buffer = soundObject._buffer;
-		var delay = delay || 0;
-		var playbackRate = playbackRate || 1;
+			this.trigger("volume", volume);
+		},
 
-		var bufferSource = this._context.createBufferSource();
-		bufferSource.buffer = buffer;
-		bufferSource.connect(this._gainNode);
-		bufferSource.playbackRate.value = playbackRate;
-		bufferSource.noteOn(delay ? this._context.currentTime + delay : 0);
+		playSoundObject: function (soundObject, playbackRate, delay, callback) {
+			var buffer = soundObject._buffer;
+			var delay = delay || 0;
+			var playbackRate = playbackRate || 1;
 
-		if (callback) {
-			// calculate total time in seconds.
-			var time = delay + (buffer.duration * playbackRate);
-			// convert to milliseconds for setTimeout.
-			setTimeout(callback, time * 1000);
-		}
-	};
+			var bufferSource = this._context.createBufferSource();
+			bufferSource.buffer = buffer;
+			bufferSource.connect(this._gainNode);
+			bufferSource.playbackRate.value = playbackRate;
+			bufferSource.noteOn(delay ? this._context.currentTime + delay : 0);
 
-	SoundOutput.prototype.freeSoundAttributes = function (soundAttributes) {
-		var existing = this._deferredURLs[soundAttributes.sound_url];
+			if (callback) {
+				// calculate total time in seconds.
+				var time = delay + (buffer.duration * playbackRate);
+				// convert to milliseconds for setTimeout.
+				setTimeout(callback, time * 1000);
+			}
+		},
 
-		if (existing) {
-			if (existing.count === 1)
-				delete this._deferredURLs[soundAttributes.sound_url];
-			else
-				existing.count--;
-		}
-	};
+		freeSoundAttributes: function (soundAttributes) {
+			var existing = this._deferredURLs[soundAttributes.sound_url];
 
-	SoundOutput.prototype.loadSoundAttributes = function (soundAttributes) {
-		var existing = this._deferredURLs[soundAttributes.sound_url];
+			if (existing) {
+				if (existing.count === 1)
+					delete this._deferredURLs[soundAttributes.sound_url];
+				else
+					existing.count--;
+			}
+		},
 
-		if (existing) {
-			existing.count++;
+		loadSoundAttributes: function (soundAttributes) {
+			var existing = this._deferredURLs[soundAttributes.sound_url];
 
-			return existing.promise;
-		} else {
-			var deferred = new $.Deferred();
+			if (existing) {
+				existing.count++;
 
-			deferred.fail(function () {
-				this.freeSound(soundAttributes);
-			}.bind(this));
+				return existing.promise;
+			} else {
+				var deferred = new $.Deferred();
 
-			var request = new XMLHttpRequest();
-			request.open("GET", soundAttributes.sound_url, true);
-			request.responseType = "arraybuffer";
-			request.onloadend = function (event) {
-				if (request.status === 200) {
-					this._context.decodeAudioData(request.response,
-						function (buffer) {
-							deferred.resolve({
-								_buffer: buffer,
-								soundAttributes: soundAttributes
+				deferred.fail(function () {
+					this.freeSound(soundAttributes);
+				}.bind(this));
+
+				var request = new XMLHttpRequest();
+				request.open("GET", soundAttributes.sound_url, true);
+				request.responseType = "arraybuffer";
+				request.onloadend = function (event) {
+					if (request.status === 200) {
+						this._context.decodeAudioData(request.response,
+							function (buffer) {
+								deferred.resolve({
+									_buffer: buffer,
+									soundAttributes: soundAttributes
+								});
+							},
+							function () {
+								deferred.reject('decode');
 							});
-						},
-						function () {
-							deferred.reject('decode');
-						});
-				} else {
-					deferred.reject('request', request);
-				}
-			}.bind(this);
+					} else {
+						deferred.reject('request', request);
+					}
+				}.bind(this);
 
-			request.send();
+				request.send();
 
-			var promise = deferred.promise();
+				var promise = deferred.promise();
 
-			this._deferredURLs[soundAttributes.sound_url] = { count: 1, promise: promise };
+				this._deferredURLs[soundAttributes.sound_url] = { count: 1, promise: promise };
 
-			return promise;
+				return promise;
+			}
 		}
-	};
+	});
 
 	return SoundOutput;
 });
