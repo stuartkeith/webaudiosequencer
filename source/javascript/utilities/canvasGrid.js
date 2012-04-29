@@ -110,5 +110,24 @@ define([
 		this._redrawCanvas = false;
 	};
 
+	CanvasGrid.prototype.pixelToColumn = function (pixel) {
+		return Math.floor(pixel / this.columnWidth);
+	};
+
+	CanvasGrid.prototype.pixelToRow = function (pixel) {
+		return Math.floor(pixel / this.rowHeight);
+	};
+
+	CanvasGrid.prototype.mouseEventToColumnAndRow = function ($el, event) {
+		var offset = $el.offset();
+		var offsetX = event.pageX - offset.left;
+		var offsetY = event.pageY - offset.top;
+
+		return {
+			x: this.pixelToColumn(offsetX),
+			y: this.pixelToRow(offsetY)
+		};
+	};
+
 	return CanvasGrid;
 });

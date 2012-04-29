@@ -13,7 +13,13 @@ define(function () {
 	return {
 		subCanvasses: {
 			off: squareFunctionFactory("#aaaaaa", "#777777"),
-			on: squareFunctionFactory("#bbbbbb", "#888888")
+			on: squareFunctionFactory("#bbbbbb", "#888888"),
+			note: function (context, width, height) {
+				context.fillStyle = "#eeee88";
+				context.fillRect(0, 0, width, height);
+				context.fillStyle = "#ffffbb";
+				context.fillRect(1, 1, width - 2, height - 2);
+			}
 		},
 
 		canvasSelector: function (subCanvasses, x, y, columns, rows) {

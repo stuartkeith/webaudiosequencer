@@ -13,7 +13,7 @@ define([
 			this.$el.html(this.trackEditorTemplate());
 
 			var gridCanvas = this.$el.find(".grid-canvas:first");
-			var gridView = this.addChildView(GridView, { el: gridCanvas });
+			var gridView = this.addChildView(GridView, { el: gridCanvas, model: this.model });
 			gridView.render();
 
 			return this;
