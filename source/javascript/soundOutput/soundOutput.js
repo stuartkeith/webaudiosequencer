@@ -71,7 +71,7 @@ define([
 				var deferred = new $.Deferred();
 
 				deferred.fail(function () {
-					this.freeSound(soundAttributes);
+					this.freeSoundAttributes(soundAttributes);
 				}.bind(this));
 
 				var request = new XMLHttpRequest();
