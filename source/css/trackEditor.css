@@ -1,0 +1,20 @@
+.track-editor-container {
+	margin: 8px;
+	overflow: hidden;
+}
+
+.track-editor {
+	background-color: #343434;
+	border: 8px solid #ffffff;
+	color: #fefefe;
+	float: left;
+	padding: 8px;
+}
+
+.drag-available {
+	border-color: #ff00ff;
+}
+
+.drag-over {
+	border-color: #00ff00;
+}

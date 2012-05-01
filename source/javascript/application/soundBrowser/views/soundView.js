@@ -3,10 +3,13 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
+	"dragDropMixIn",
 	"text!templates/soundBrowser/sound.html"
-], function($, _, Backbone, BaseView, soundTemplateString) {
+], function($, _, Backbone, BaseView, dragDropMixIn, soundTemplateString) {
 	var SoundView = BaseView.extend({
 		className: "sound",
+		dragSource: "SoundExtended",
+		dragEffect: "copy",
 
 		soundTemplate: _.template(soundTemplateString),
 
@@ -15,6 +18,14 @@ define([
 		},
 
 		events: {
+			"mouseenter": function (event) {
+				this.eventBus.trigger("overSoundExtended");
+			},
+
+			"mouseleave": function (event) {
+				this.eventBus.trigger("outSoundExtended");
+			},
+
 			"click .play": function (event) {
 				if (this.playIsDisabled)
 					return;
@@ -60,6 +71,8 @@ define([
 			return this;
 		}
 	});
+
+	_.extend(SoundView.prototype, dragDropMixIn(BaseView));
 
 	return SoundView;
 });

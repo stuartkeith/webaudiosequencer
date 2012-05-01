@@ -2,16 +2,42 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
+	"dragDropMixIn",
 	"text!templates/trackEditor/trackEditor.html",
 	"./views/gridView"
-], function(_, Backbone, BaseView, TrackEditorTemplateString, GridView) {
+], function(_, Backbone, BaseView, dragDropMixIn, TrackEditorTemplateString, GridView) {
 	var TrackEditorView = BaseView.extend({
 		className: "track-editor",
 		trackEditorTemplate: _.template(TrackEditorTemplateString),
 
+		dragTarget: "SoundExtended",
+		dropEffect: "copy",
+
 		events: {
 			"click .remove-track": function (event) {
 				this.eventBus.trigger("removeTrack", this.model);
+			},
+
+			"dragenter": function (model, event) {
+				this.$el.addClass("drag-over");
+			},
+
+			"dragleave": function (model, event) {
+				this.$el.removeClass("drag-over");
+			},
+
+			"drop": function (model, event) {
+				this.$el.removeClass("drag-over");
+			}
+		},
+
+		eventBusEvents: {
+			"overSoundExtended": function () {
+				this.$el.addClass("drag-available");
+			},
+
+			"outSoundExtended": function () {
+				this.$el.removeClass("drag-available");
 			}
 		},
 
@@ -31,6 +57,8 @@ define([
 			return this;
 		}
 	});
+
+	_.extend(TrackEditorView.prototype, dragDropMixIn(BaseView));
 
 	return TrackEditorView;
 });
