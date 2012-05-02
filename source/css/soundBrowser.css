@@ -27,12 +27,18 @@
 	overflow: hidden;
 	position: relative;
 	white-space: nowrap;
-	width: 112px;
+	width: 90px;
 }
 
 .play {
 	background-position: 0 0;
 	left: 5px;
+	position: absolute;
+	top: 5px;
+}
+
+.add {
+	right: 5px;
 	position: absolute;
 	top: 5px;
 }
