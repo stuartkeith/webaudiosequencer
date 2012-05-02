@@ -1,7 +1,5 @@
 define(function () {
-	var initialize = function (eventBus) {
-		return function () {
-		};
+	var initialize = function () {
 	};
 
 	return initialize;

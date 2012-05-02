@@ -1,10 +1,8 @@
 define(function () {
-	var removeTrack = function (eventBus, sequencer) {
-		return function (track) {
-			sequencer.removeSequence(track.sequence);
+	var removeTrack = function (track) {
+		this.sequencer.removeSequence(track.sequence);
 
-			eventBus.trigger("trackRemoved");
-		};
+		this.eventBus.trigger("trackRemoved");
 	};
 
 	return removeTrack;
