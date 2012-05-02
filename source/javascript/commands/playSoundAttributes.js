@@ -11,7 +11,7 @@ define(function () {
 		loadDeferred.done(function (soundObject) {
 			deferred.notify("playing");
 
-			this.soundOutput.playSoundObject(soundObject, 1, 0, function () {
+			this.soundOutput.playSoundObject(soundObject, 0, 0, function () {
 				this.soundOutput.freeSoundAttributes(soundAttributes);
 
 				deferred.resolve();

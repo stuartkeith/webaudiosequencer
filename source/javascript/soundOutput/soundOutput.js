@@ -30,10 +30,15 @@ define([
 			this.trigger("volume", volume);
 		},
 
-		playSoundObject: function (soundObject, playbackRate, delay, callback) {
+		playSoundObject: function (soundObject, note, delay, callback) {
 			var buffer = soundObject._buffer;
 			var delay = delay || 0;
-			var playbackRate = playbackRate || 1;
+			var playbackRate;
+
+			if (note != null)
+				playbackRate = noteToPlaybackRate[note + noteRangeHalved];
+			else
+				playbackRate = 1;
 
 			var bufferSource = this._context.createBufferSource();
 			bufferSource.buffer = buffer;
