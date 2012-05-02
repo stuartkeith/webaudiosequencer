@@ -6,10 +6,10 @@ define([
 ], function (addTrack, initialize, playSoundAttributes, removeTrack) {
 	var CommandMap = function (eventBus, soundOutput, sequencer) {
 		return {
-			addTrack: addTrack(sequencer),
+			addTrack: addTrack(eventBus, sequencer),
 			initialize: initialize(eventBus),
 			playSoundAttributes: playSoundAttributes(eventBus, soundOutput),
-			removeTrack: removeTrack(sequencer)
+			removeTrack: removeTrack(eventBus, sequencer)
 		};
 	};
 

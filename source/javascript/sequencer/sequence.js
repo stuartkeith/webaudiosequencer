@@ -2,11 +2,11 @@ define([
 	"use!backbone",
 	"utilities/array2d"
 ], function(Backbone, Array2d) {
-	var Track = function () {
+	var Sequence = function () {
 		this.notes = new Array2d();
 	};
 
-	_.extend(Track.prototype, Backbone.Events, {
+	_.extend(Sequence.prototype, Backbone.Events, {
 		getNoteAt: function (location) {
 			return this.notes.get(location);
 		},
@@ -38,5 +38,5 @@ define([
 		}
 	});
 
-	return Track;
+	return Sequence;
 });

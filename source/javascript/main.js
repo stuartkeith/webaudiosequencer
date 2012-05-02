@@ -43,7 +43,7 @@ require([
 		eventBus.on(event, fn);
 	});
 
-	var applicationView = new ApplicationView({ eventBus: eventBus, el: "#container", model: sequencer });
+	var applicationView = new ApplicationView({ eventBus: eventBus, el: "#container" });
 	applicationView.render();
 
 	eventBus.trigger("initialize");

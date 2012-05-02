@@ -1,30 +1,30 @@
 define([
 	"use!backbone",
-	"./track"
-], function(Backbone, Track) {
+	"./sequence"
+], function(Backbone, Sequence) {
 	var Sequencer = function () {
-		this.tracks = [];
+		this.sequences = [];
 	};
 
 	_.extend(Sequencer.prototype, Backbone.Events, {
-		addTrack: function () {
-			var track = new Track();
+		addSequence: function () {
+			var sequence = new Sequence();
 
-			this.tracks.push(track);
+			this.sequences.push(sequence);
 
-			this.trigger("trackAdded", track);
+			this.trigger("sequenceAdded", sequence);
 
-			return track;
+			return sequence;
 		},
 
-		removeTrack: function (track) {
-			var index = this.tracks.indexOf(track);
+		removeSequence: function (sequence) {
+			var index = this.sequences.indexOf(sequence);
 
 			if (index >= 0) {
-				this.tracks.splice(index, 1);
+				this.sequences.splice(index, 1);
 
-				track.trigger("removed");
-				this.trigger("trackRemoved", track);
+				sequence.trigger("removed");
+				this.trigger("sequenceRemoved", sequence);
 
 				return true;
 			} else {

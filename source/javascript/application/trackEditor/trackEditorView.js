@@ -38,11 +38,9 @@ define([
 
 			"outSoundExtended": function () {
 				this.$el.removeClass("drag-available");
-			}
-		},
+			},
 
-		modelEvents: {
-			"removed": function () {
+			"trackRemoved": function () {
 				this.remove();
 			}
 		},
@@ -51,7 +49,7 @@ define([
 			this.$el.html(this.trackEditorTemplate());
 
 			var gridCanvas = this.$el.find(".grid-canvas:first");
-			var gridView = this.addChildView(GridView, { el: gridCanvas, model: this.model });
+			var gridView = this.addChildView(GridView, { el: gridCanvas, model: this.model.sequence });
 			gridView.render();
 
 			return this;

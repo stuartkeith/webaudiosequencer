@@ -9,9 +9,9 @@ define([
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
 
-		modelEvents: {
-			"trackAdded": function (track) {
-				var trackEditorView = this.addChildView(TrackEditorView, { model: track });
+		eventBusEvents: {
+			"trackAdded": function (trackModel) {
+				var trackEditorView = this.addChildView(TrackEditorView, { model: trackModel });
 
 				this.trackEditorContainer.append(trackEditorView.render().$el);
 			}
