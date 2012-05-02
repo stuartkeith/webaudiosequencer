@@ -2,17 +2,17 @@ define(function () {
 	var playSoundAttributes = function (soundAttributes, deferred) {
 		deferred.notify("loading");
 
-		var loadDeferred = this.soundOutput.loadSoundAttributes(soundAttributes);
+		var loadDeferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);
 
 		loadDeferred.fail(function (error, data) {
 			deferred.reject(error, data);
 		});
 
-		loadDeferred.done(function (soundObject) {
+		loadDeferred.done(function (buffer) {
 			deferred.notify("playing");
 
-			this.soundOutput.playSoundObject(soundObject, 0, 0, function () {
-				this.soundOutput.freeSoundAttributes(soundAttributes);
+			this.soundOutput.playBuffer(buffer, 0, 0, function () {
+				this.soundOutput.freeSoundURL(soundAttributes.sound_url);
 
 				deferred.resolve();
 			}.bind(this));

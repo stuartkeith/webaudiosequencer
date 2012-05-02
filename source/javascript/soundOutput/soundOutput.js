@@ -30,8 +30,7 @@ define([
 			this.trigger("volume", volume);
 		},
 
-		playSoundObject: function (soundObject, note, delay, callback) {
-			var buffer = soundObject._buffer;
+		playBuffer: function (buffer, note, delay, callback) {
 			var delay = delay || 0;
 			var playbackRate;
 
@@ -54,19 +53,19 @@ define([
 			}
 		},
 
-		freeSoundAttributes: function (soundAttributes) {
-			var existing = this._deferredURLs[soundAttributes.sound_url];
+		freeSoundURL: function (url) {
+			var existing = this._deferredURLs[url];
 
 			if (existing) {
 				if (existing.count === 1)
-					delete this._deferredURLs[soundAttributes.sound_url];
+					delete this._deferredURLs[url];
 				else
 					existing.count--;
 			}
 		},
 
-		loadSoundAttributes: function (soundAttributes) {
-			var existing = this._deferredURLs[soundAttributes.sound_url];
+		loadSoundURL: function (url) {
+			var existing = this._deferredURLs[url];
 
 			if (existing) {
 				existing.count++;
@@ -76,21 +75,16 @@ define([
 				var deferred = new $.Deferred();
 
 				deferred.fail(function () {
-					this.freeSoundAttributes(soundAttributes);
+					this.freeSoundURL(url);
 				}.bind(this));
 
 				var request = new XMLHttpRequest();
-				request.open("GET", soundAttributes.sound_url, true);
+				request.open("GET", url, true);
 				request.responseType = "arraybuffer";
 				request.onloadend = function (event) {
 					if (request.status === 200) {
 						this._context.decodeAudioData(request.response,
-							function (buffer) {
-								deferred.resolve({
-									_buffer: buffer,
-									soundAttributes: soundAttributes
-								});
-							},
+							deferred.resolve,
 							function () {
 								deferred.reject('decode');
 							});
@@ -103,7 +97,7 @@ define([
 
 				var promise = deferred.promise();
 
-				this._deferredURLs[soundAttributes.sound_url] = { count: 1, promise: promise };
+				this._deferredURLs[url] = { count: 1, promise: promise };
 
 				return promise;
 			}
