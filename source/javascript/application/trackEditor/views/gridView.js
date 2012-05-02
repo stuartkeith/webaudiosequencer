@@ -11,7 +11,7 @@ define([
 		initialize: function () {
 			this.canvasGrid = new CanvasGrid(this.el);
 
-			this.canvasGrid.setColumns(16);
+			this.canvasGrid.setColumns(this.model.length);
 			this.canvasGrid.setRows(8);
 			this.canvasGrid.setColumnWidth(32);
 			this.canvasGrid.setRowHeight(16);

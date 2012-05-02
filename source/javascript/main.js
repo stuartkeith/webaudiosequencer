@@ -36,6 +36,7 @@ require([
 	var soundOutput = new SoundOutput();
 
 	var sequencer = new Sequencer();
+	sequencer.play();
 
 	var commandMap = new CommandMap(eventBus, soundOutput, sequencer);
 

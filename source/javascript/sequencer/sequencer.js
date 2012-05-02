@@ -1,14 +1,38 @@
 define([
+	"use!underscore",
 	"use!backbone",
 	"./sequence"
-], function(Backbone, Sequence) {
+], function(_, Backbone, Sequence) {
 	var Sequencer = function () {
 		this.sequences = [];
+
+		this.isPlaying = false;
 	};
 
 	_.extend(Sequencer.prototype, Backbone.Events, {
-		addSequence: function () {
-			var sequence = new Sequence();
+		play: function () {
+			if (!this.isPlaying) {
+				this.isPlaying = true;
+
+				this.update();
+			}
+		},
+
+		stop: function () {
+			this.isPlaying = false;
+		},
+
+		update: function () {
+			_.each(this.sequences, function (sequence) {
+				sequence.update();
+			});
+
+			if (this.isPlaying)
+				setTimeout(_.bind(this.update, this), 1000);
+		},
+
+		addSequence: function (length) {
+			var sequence = new Sequence(length);
 
 			this.sequences.push(sequence);
 

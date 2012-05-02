@@ -2,13 +2,24 @@ define([
 	"use!backbone",
 	"utilities/array2d"
 ], function(Backbone, Array2d) {
-	var Sequence = function () {
+	var Sequence = function (length) {
+		this.length = length;
 		this.notes = new Array2d();
+		this.position = 0;
 	};
 
 	_.extend(Sequence.prototype, Backbone.Events, {
 		getNoteAt: function (location) {
 			return this.notes.get(location);
+		},
+
+		update: function () {
+			if (this.position >= this.length)
+				this.position = 0;
+
+			var notes = this.notes._columns[this.position];
+
+			this.position++;
 		},
 
 		addNoteAt: function (location, data) {
