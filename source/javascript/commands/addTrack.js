@@ -1,7 +1,7 @@
 define(function () {
 	var addTrack = function (sequencer) {
-		return function () {
-			sequencer.addTrack();
+		return function (soundAttributes) {
+			var track = sequencer.addTrack();
 		};
 	};
 

@@ -62,6 +62,10 @@ define([
 				this.eventBus.trigger("playSoundAttributes", this.model.attributes, deferred);
 
 				return false;
+			},
+
+			"click .add": function (event) {
+				this.eventBus.trigger("addTrack", this.model.attributes);
 			}
 		},
 
