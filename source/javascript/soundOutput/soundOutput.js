@@ -43,7 +43,7 @@ define([
 
 			if (callback) {
 				// calculate total time in seconds.
-				var time = delay + (buffer.duration * playbackRate);
+				var time = delay + (buffer.duration / playbackRate);
 				// convert to milliseconds for setTimeout.
 				setTimeout(callback, time * 1000);
 			}
