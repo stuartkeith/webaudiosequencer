@@ -1,6 +1,7 @@
 define([
-	"instruments/createMelodicInstrumentManager"
-], function (createMelodicInstrumentManager) {
+	"instruments/createMelodicInstrumentManager",
+	"track/track"
+], function (createMelodicInstrumentManager, Track) {
 	var addTrack = function (soundAttributes) {
 		var sequence = this.sequencer.addSequence(16);
 		var instrumentManager = createMelodicInstrumentManager();
@@ -8,10 +9,11 @@ define([
 		sequence.instrumentManager = instrumentManager;
 		instrumentManager.soundOutput = this.soundOutput;
 
-		this.eventBus.trigger("trackAdded", {
-			instrumentManager: instrumentManager,
-			sequence: sequence
-		});
+		var track = new Track();
+		track.instrumentManager = instrumentManager;
+		track.sequence = sequence;
+
+		this.eventBus.trigger("trackAdded", track);
 
 		var instrument = instrumentManager.addInstrument();
 

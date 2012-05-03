@@ -2,7 +2,7 @@ define(function () {
 	var removeTrack = function (track) {
 		this.sequencer.removeSequence(track.sequence);
 
-		this.eventBus.trigger("trackRemoved");
+		track.remove();
 	};
 
 	return removeTrack;

@@ -38,9 +38,11 @@ define([
 
 			"outSoundExtended": function () {
 				this.$el.removeClass("drag-available");
-			},
+			}
+		},
 
-			"trackRemoved": function () {
+		modelEvents: {
+			"remove": function () {
 				this.remove();
 			}
 		},
