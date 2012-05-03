@@ -55,14 +55,13 @@ body {
   height: 18px;
   width: 18px; }
 
-.sounds {
+.sound-browser .sounds {
   background-color: #cdcdcd;
   border: solid #343434;
   border-width: 16px;
   height: 32px;
   overflow: hidden; }
-
-.sound {
+.sound-browser .sound {
   border: solid #f0f0f0;
   border-width: 2px;
   height: 28px;
@@ -70,20 +69,17 @@ body {
   float: left;
   overflow: hidden;
   position: relative; }
-
-.draggable {
+.sound-browser .draggable {
   background-color: #cdcdcd;
   cursor: move;
   height: 100%;
   position: absolute;
   width: 100%; }
-  .draggable:hover {
+  .sound-browser .draggable:hover {
     background-color: aqua; }
-
-.dragstart, .dragstart:hover {
+.sound-browser .dragstart, .sound-browser .dragstart:hover {
   background-color: #00abab; }
-
-.title {
+.sound-browser .title {
   display: block;
   font-size: 12px;
   left: 28px;
@@ -92,42 +88,34 @@ body {
   position: relative;
   white-space: nowrap;
   width: 100px; }
-
-.play {
+.sound-browser .play {
   background-position: 0px 0px;
   left: 5px;
   position: absolute;
   top: 5px; }
-
-.add {
+.sound-browser .add {
   background-position: -72px 0px;
   right: 5px;
   position: absolute;
   top: 5px; }
-
-.loading {
+.sound-browser .loading {
   background-position: -18px 0px;
   cursor: wait; }
-
-.playing {
+.sound-browser .playing {
   background-position: -36px 0px;
   cursor: wait; }
-
-.error {
+.sound-browser .error {
   background-position: -54px 0px; }
 
 .track-editor-container {
   margin: 8px;
   overflow: hidden; }
-
-.track-editor {
-  background-color: #343434;
-  border: 8px solid white;
-  float: left;
-  padding: 8px; }
-
-.drag-available {
-  border-color: #00abab; }
-
-.drag-over {
-  border-color: aqua; }
+  .track-editor-container .track-editor {
+    background-color: #343434;
+    border: 8px solid white;
+    float: left;
+    padding: 8px; }
+  .track-editor-container .drag-available {
+    border-color: #00abab; }
+  .track-editor-container .drag-over {
+    border-color: aqua; }

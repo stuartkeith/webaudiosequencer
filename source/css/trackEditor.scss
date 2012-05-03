@@ -1,19 +1,19 @@
 .track-editor-container {
 	margin: 8px;
 	overflow: hidden;
-}
 
-.track-editor {
-	background-color: $panel-dark;
-	border: 8px solid $background;
-	float: left;
-	padding: 8px;
-}
+	.track-editor {
+		background-color: $panel-dark;
+		border: 8px solid $background;
+		float: left;
+		padding: 8px;
+	}
 
-.drag-available {
-	border-color: $action-dark;
-}
+	.drag-available {
+		border-color: $action-dark;
+	}
 
-.drag-over {
-	border-color: $action-light;
+	.drag-over {
+		border-color: $action-light;
+	}
 }
