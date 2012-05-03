@@ -26,6 +26,14 @@ define([
 				this.eventBus.trigger("outSoundExtended");
 			},
 
+			"dragstart": function (event) {
+				this.$el.addClass("dragstart");
+			},
+
+			"dragend": function (event) {
+				this.$el.removeClass("dragstart");
+			},
+
 			"click .play": function (event) {
 				if (this.playIsDisabled)
 					return;

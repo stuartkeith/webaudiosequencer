@@ -1,0 +1,18 @@
+$button-image: url('images/buttons.png');
+$button-width: 18px;
+$button-height: 18px;
+
+.button {
+	background-image: $button-image;
+	cursor: pointer;
+	height: $button-width;
+	width: $button-height;
+
+	&:hover {
+		background-color: $action-light;
+	}
+}
+
+@mixin button-sprite($x, $y) {
+	background-position: $button-width * -$x $button-height * -$y;
+}

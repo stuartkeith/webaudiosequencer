@@ -4,17 +4,16 @@
 }
 
 .track-editor {
-	background-color: #343434;
-	border: 8px solid #ffffff;
-	color: #fefefe;
+	background-color: $panel-dark;
+	border: 8px solid $background;
 	float: left;
 	padding: 8px;
 }
 
 .drag-available {
-	border-color: #ff00ff;
+	border-color: $action-dark;
 }
 
 .drag-over {
-	border-color: #00ff00;
+	border-color: $action-light;
 }

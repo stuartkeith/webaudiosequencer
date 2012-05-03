@@ -1,4 +1,131 @@
-@import url("reset.css");
-@import url("general.css");
-@import url("soundBrowser.css");
-@import url("trackEditor.css");
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  background-color: white;
+  font-family: "Lucida Grande", Arial, Helvetica, sans-serif; }
+
+.button {
+  background-image: url("images/buttons.png");
+  cursor: pointer;
+  height: 18px;
+  width: 18px; }
+  .button:hover {
+    background-color: aqua; }
+
+.sounds {
+  background-color: #cdcdcd;
+  border: solid #343434;
+  border-width: 16px;
+  height: 32px;
+  overflow: hidden; }
+
+.sound {
+  background-color: #cdcdcd;
+  border: solid #f0f0f0;
+  border-width: 2px;
+  height: 28px;
+  width: 156px;
+  cursor: move;
+  float: left;
+  overflow: hidden;
+  position: relative; }
+
+.sound:hover {
+  background-color: aqua; }
+
+.dragstart, .dragstart:hover {
+  background-color: #00abab; }
+
+.title {
+  display: block;
+  font-size: 12px;
+  left: 28px;
+  line-height: 28px;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  width: 100px; }
+
+.play {
+  background-position: 0px 0px;
+  left: 5px;
+  position: absolute;
+  top: 5px; }
+
+.add {
+  background-position: -72px 0px;
+  right: 5px;
+  position: absolute;
+  top: 5px; }
+
+.loading {
+  background-position: -18px 0px;
+  cursor: wait; }
+
+.playing {
+  background-position: -36px 0px;
+  cursor: wait; }
+
+.error {
+  background-position: -54px 0px; }
+
+.track-editor-container {
+  margin: 8px;
+  overflow: hidden; }
+
+.track-editor {
+  background-color: #343434;
+  border: 8px solid white;
+  float: left;
+  padding: 8px; }
+
+.drag-available {
+  border-color: #00abab; }
+
+.drag-over {
+  border-color: aqua; }

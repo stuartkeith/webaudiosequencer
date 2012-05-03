@@ -1,0 +1,75 @@
+// 160, 32, 2
+$sound-width: 160px;
+$sound-height: 32px;
+$sound-border: 2px;
+
+$inner-height: $sound-height - ($sound-border * 2);
+
+$button-offset: ($inner-height - $button-height) / 2;
+$title-left: $inner-height;
+$title-width: $sound-width - ($sound-border * 2) - ($inner-height * 2);
+
+.sounds {
+	background-color: $panel-light;
+	border: solid $panel-dark;
+	@include box("", $sound-height * 2, $sound-height / 2);
+	overflow: hidden;
+}
+
+.sound {
+	background-color: $panel-light;
+	border: solid $panel-highlight;
+	@include box($sound-width, $sound-height, $sound-border);
+	cursor: move;
+	float: left;
+	overflow: hidden;
+	position: relative;
+}
+
+.sound:hover {
+	background-color: $action-light;
+}
+
+.dragstart, .dragstart:hover {
+	background-color: $action-dark;
+}
+
+.title {
+	display: block;
+	font-size: 12px;
+	left: $title-left;
+	line-height: $sound-height - ($sound-border * 2);
+	overflow: hidden;
+	position: relative;
+	white-space: nowrap;
+	width: $title-width;
+}
+
+
+.play {
+	@include button-sprite(0, 0);
+	left: $button-offset;
+	position: absolute;
+	top: $button-offset;
+}
+
+.add {
+	@include button-sprite(4, 0);
+	right: $button-offset;
+	position: absolute;
+	top: $button-offset;
+}
+
+.loading {
+	@include button-sprite(1, 0);
+	cursor: wait;
+}
+
+.playing {
+	@include button-sprite(2, 0);
+	cursor: wait;
+}
+
+.error {
+	@include button-sprite(3, 0);
+}
