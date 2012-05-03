@@ -2,12 +2,14 @@ define([
 	"commands/addTrack",
 	"commands/initialize",
 	"commands/playSoundAttributes",
-	"commands/removeTrack"
-], function (addTrack, initialize, playSoundAttributes, removeTrack) {
+	"commands/removeTrack",
+	"commands/updateInstrument"
+], function (addTrack, initialize, playSoundAttributes, removeTrack, updateInstrument) {
 	return {
 		addTrack: addTrack,
 		initialize: initialize,
 		playSoundAttributes: playSoundAttributes,
-		removeTrack: removeTrack
+		removeTrack: removeTrack,
+		updateInstrument: updateInstrument
 	};
 });
