@@ -3,37 +3,15 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
-	"dragDropMixIn",
+	"./draggableView",
 	"text!templates/soundBrowser/sound.html"
-], function($, _, Backbone, BaseView, dragDropMixIn, soundTemplateString) {
+], function($, _, Backbone, BaseView, DraggableView, soundTemplateString) {
 	var SoundView = BaseView.extend({
 		className: "sound",
-		dragSource: "SoundExtended",
-		dragEffect: "copy",
 
 		soundTemplate: _.template(soundTemplateString),
 
-		attributes: {
-			draggable: true
-		},
-
 		events: {
-			"mouseenter": function (event) {
-				this.eventBus.trigger("overSoundExtended");
-			},
-
-			"mouseleave": function (event) {
-				this.eventBus.trigger("outSoundExtended");
-			},
-
-			"dragstart": function (event) {
-				this.$el.addClass("dragstart");
-			},
-
-			"dragend": function (event) {
-				this.$el.removeClass("dragstart");
-			},
-
 			"click .play": function (event) {
 				if (this.playIsDisabled)
 					return;
@@ -80,11 +58,13 @@ define([
 		render: function () {
 			this.$el.html(this.soundTemplate(this.model.toJSON()));
 
+			var draggable = this.$el.find(".draggable:first");
+
+			this.addChildView(DraggableView, { el: draggable });
+
 			return this;
 		}
 	});
-
-	_.extend(SoundView.prototype, dragDropMixIn(BaseView));
 
 	return SoundView;
 });

@@ -7,10 +7,6 @@ $button-height: 18px;
 	cursor: pointer;
 	height: $button-width;
 	width: $button-height;
-
-	&:hover {
-		background-color: $action-light;
-	}
 }
 
 @mixin button-sprite($x, $y) {

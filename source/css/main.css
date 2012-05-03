@@ -54,8 +54,6 @@ body {
   cursor: pointer;
   height: 18px;
   width: 18px; }
-  .button:hover {
-    background-color: aqua; }
 
 .sounds {
   background-color: #cdcdcd;
@@ -65,18 +63,22 @@ body {
   overflow: hidden; }
 
 .sound {
-  background-color: #cdcdcd;
   border: solid #f0f0f0;
   border-width: 2px;
   height: 28px;
   width: 156px;
-  cursor: move;
   float: left;
   overflow: hidden;
   position: relative; }
 
-.sound:hover {
-  background-color: aqua; }
+.draggable {
+  background-color: #cdcdcd;
+  cursor: move;
+  height: 100%;
+  position: absolute;
+  width: 100%; }
+  .draggable:hover {
+    background-color: aqua; }
 
 .dragstart, .dragstart:hover {
   background-color: #00abab; }

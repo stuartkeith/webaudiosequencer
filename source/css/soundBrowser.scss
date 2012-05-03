@@ -17,17 +17,23 @@ $title-width: $sound-width - ($sound-border * 2) - ($inner-height * 2);
 }
 
 .sound {
-	background-color: $panel-light;
 	border: solid $panel-highlight;
 	@include box($sound-width, $sound-height, $sound-border);
-	cursor: move;
 	float: left;
 	overflow: hidden;
 	position: relative;
 }
 
-.sound:hover {
-	background-color: $action-light;
+.draggable {
+	background-color: $panel-light;
+	cursor: move;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+
+	&:hover {
+		background-color: $action-light;
+	}
 }
 
 .dragstart, .dragstart:hover {
