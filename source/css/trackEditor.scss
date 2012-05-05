@@ -21,8 +21,8 @@ $instrument-view-width: 256px;
 
 	.instrument {
 		background-color: $panel-light;
-		border: 8px solid $background;
-		width: $instrument-view-width;
+		border: solid $background;
+		@include box($instrument-view-width, "", 8px);
 	}
 
 	.drag-available {

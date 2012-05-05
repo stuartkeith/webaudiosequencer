@@ -121,8 +121,9 @@ body {
     width: 256px; }
   .track-editor-container .instrument {
     background-color: #cdcdcd;
-    border: 8px solid white;
-    width: 256px; }
+    border: solid white;
+    border-width: 8px;
+    width: 240px; }
   .track-editor-container .drag-available {
     border-color: #00abab; }
   .track-editor-container .drag-over {
