@@ -60,7 +60,7 @@ define([
 
 			var draggable = this.$el.find(".draggable:first");
 
-			this.addChildView(DraggableView, { el: draggable });
+			this.addChildView(DraggableView, { el: draggable, model: this.model.attributes });
 
 			return this;
 		}
