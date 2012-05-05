@@ -2,42 +2,17 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
-	"dragDropMixIn",
 	"text!templates/trackEditor/trackEditor.html",
-	"./views/gridView"
-], function(_, Backbone, BaseView, dragDropMixIn, TrackEditorTemplateString, GridView) {
+	"./views/gridView",
+	"./views/instrumentManagerView"
+], function(_, Backbone, BaseView, TrackEditorTemplateString, GridView, InstrumentManagerView) {
 	var TrackEditorView = BaseView.extend({
 		className: "track-editor",
 		trackEditorTemplate: _.template(TrackEditorTemplateString),
 
-		dragTarget: "SoundExtended",
-		dropEffect: "copy",
-
 		events: {
 			"click .remove-track": function (event) {
 				this.eventBus.trigger("removeTrack", this.model);
-			},
-
-			"dragenter": function (model, event) {
-				this.$el.addClass("drag-over");
-			},
-
-			"dragleave": function (model, event) {
-				this.$el.removeClass("drag-over");
-			},
-
-			"drop": function (model, event) {
-				this.$el.removeClass("drag-over");
-			}
-		},
-
-		eventBusEvents: {
-			"overSoundExtended": function () {
-				this.$el.addClass("drag-available");
-			},
-
-			"outSoundExtended": function () {
-				this.$el.removeClass("drag-available");
 			}
 		},
 
@@ -50,6 +25,9 @@ define([
 		render: function () {
 			this.$el.html(this.trackEditorTemplate());
 
+			var instrumentManager = this.$el.find(".instrument-manager");
+			this.addChildView(InstrumentManagerView, { el: instrumentManager, model: this.model.instrumentManager }).render();
+
 			var gridCanvas = this.$el.find(".grid-canvas:first");
 			var gridView = this.addChildView(GridView, { el: gridCanvas, model: this.model.sequence });
 			gridView.render();
@@ -57,8 +35,6 @@ define([
 			return this;
 		}
 	});
-
-	_.extend(TrackEditorView.prototype, dragDropMixIn(BaseView));
 
 	return TrackEditorView;
 });

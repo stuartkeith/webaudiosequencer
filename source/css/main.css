@@ -112,9 +112,17 @@ body {
   overflow: hidden; }
   .track-editor-container .track-editor {
     background-color: #343434;
-    border: 8px solid white;
     float: left;
     padding: 8px; }
+  .track-editor-container .instrument-manager-and-grid-canvas {
+    overflow: hidden; }
+  .track-editor-container .instrument-manager {
+    float: left;
+    width: 256px; }
+  .track-editor-container .instrument {
+    background-color: #cdcdcd;
+    border: 8px solid white;
+    width: 256px; }
   .track-editor-container .drag-available {
     border-color: #00abab; }
   .track-editor-container .drag-over {

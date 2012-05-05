@@ -1,12 +1,28 @@
+$instrument-view-width: 256px;
+
 .track-editor-container {
 	margin: 8px;
 	overflow: hidden;
 
 	.track-editor {
 		background-color: $panel-dark;
-		border: 8px solid $background;
 		float: left;
 		padding: 8px;
+	}
+
+	.instrument-manager-and-grid-canvas {
+		overflow: hidden;
+	}
+
+	.instrument-manager {
+		float: left;
+		width: $instrument-view-width;
+	}
+
+	.instrument {
+		background-color: $panel-light;
+		border: 8px solid $background;
+		width: $instrument-view-width;
 	}
 
 	.drag-available {
