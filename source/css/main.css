@@ -128,3 +128,5 @@ body {
     border-color: #00abab; }
   .track-editor-container .drag-over {
     border-color: aqua; }
+  .track-editor-container .is-loading {
+    font-style: italic; }

@@ -9,14 +9,21 @@ define([
 		instrument.isLoading = true;
 		instrument.soundAttributes = soundAttributes;
 
+		instrument.changed();
+
 		var deferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);
 
-		deferred.always(function () {
+		deferred.fail(function () {
 			instrument.isLoading = false;
+
+			instrument.changed();
 		});
 
 		deferred.done(function (buffer) {
 			instrument.buffer = buffer;
+			instrument.isLoading = false;
+
+			instrument.changed();
 		});
 	};
 

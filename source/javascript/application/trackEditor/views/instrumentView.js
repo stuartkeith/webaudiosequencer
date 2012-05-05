@@ -41,8 +41,16 @@ define([
 			}
 		},
 
+		modelEvents: {
+			"changed": function () {
+				this.render();
+			}
+		},
+
 		render: function () {
-			this.$el.html(this.instrumentTemplate());
+			this.$el.html(this.instrumentTemplate(this.model));
+
+			this.$el.toggleClass("is-loading", this.model.isLoading);
 
 			return this;
 		}

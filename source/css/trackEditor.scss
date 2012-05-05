@@ -32,4 +32,8 @@ $instrument-view-width: 256px;
 	.drag-over {
 		border-color: $action-light;
 	}
+
+	.is-loading {
+		font-style: italic;
+	}
 }

@@ -5,10 +5,14 @@ define([
 	var Instrument = function () {
 		this.buffer = null;
 		this.isLoading = false;
-		this.soundExtended = null;
+		this.soundAttributes = null;
 	};
 
-	_.extend(Instrument.prototype, Backbone.Events);
+	_.extend(Instrument.prototype, Backbone.Events, {
+		changed: function () {
+			this.trigger("changed");
+		}
+	});
 
 	return Instrument;
 });
