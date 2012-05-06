@@ -56,11 +56,13 @@ define([
 		},
 
 		render: function () {
-			this.$el.html(this.soundTemplate(this.model.toJSON()));
+			if (this.model) {
+				this.$el.html(this.soundTemplate(this.model.toJSON()));
 
-			var draggable = this.$el.find(".draggable:first");
+				var draggable = this.$el.find(".draggable:first");
 
-			this.addChildView(DraggableView, { el: draggable, model: this.model.attributes });
+				this.addChildView(DraggableView, { el: draggable, model: this.model.attributes });
+			}
 
 			return this;
 		}

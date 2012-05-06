@@ -67,7 +67,10 @@ define([
 
 			var sounds = this.$el.find(".sounds:first");
 
-			this.soundsView = this.addChildView(SoundsView, { el: sounds });
+			this.soundsView = this.addChildView(SoundsView, {
+				el: sounds,
+				limit: this.collectionOptions.defaultFetchOptions.limit
+			});
 
 			this.changeCollection(this.collections[0]);
 
