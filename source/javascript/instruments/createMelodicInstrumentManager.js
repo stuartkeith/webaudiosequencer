@@ -17,6 +17,7 @@ define([
 				var instrument = new Instrument();
 
 				instrument.range = this.range;
+				instrument.transpose = Math.floor(this.range / -2);
 
 				return instrument;
 			}
@@ -27,7 +28,7 @@ define([
 
 			if (notes && instrument && instrument.buffer) {
 				_.each(notes, function (data, note) {
-					this.soundOutput.playBuffer(instrument.buffer, parseInt(note));
+					this.soundOutput.playBuffer(instrument.buffer, parseInt(note) + instrument.transpose);
 				}, this);
 			}
 		}

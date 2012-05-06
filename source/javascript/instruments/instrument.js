@@ -7,6 +7,7 @@ define([
 		this.isLoading = false;
 		this.range = 0;
 		this.soundAttributes = null;
+		this.transpose = 0;
 	};
 
 	_.extend(Instrument.prototype, Backbone.Events, {
