@@ -114,28 +114,32 @@ body {
 .track-editor-container {
   margin: 8px;
   overflow: hidden; }
-  .track-editor-container .track-editor {
-    background-color: #343434;
-    float: left;
-    padding: 8px; }
-  .track-editor-container .instrument-manager-and-grid-canvas {
-    overflow: hidden; }
-  .track-editor-container .instrument-manager {
-    float: left;
-    width: 256px; }
-  .track-editor-container .instrument {
+
+.track-editor {
+  background-color: #343434;
+  float: left;
+  padding: 8px; }
+
+.track-editor-controls {
+  margin-bottom: 8px;
+  overflow: hidden; }
+  .track-editor-controls .close {
+    background-position: -90px 0px;
+    float: right; }
+
+.instrument-manager-and-grid-canvas {
+  overflow: hidden; }
+
+.instrument-manager {
+  float: left;
+  width: 256px; }
+  .instrument-manager .instrument {
     background-color: #cdcdcd;
     border: solid white;
     width: 256px; }
-  .track-editor-container .drag-available {
+  .instrument-manager .drag-available {
     border-color: #00abab; }
-  .track-editor-container .drag-over {
+  .instrument-manager .drag-over {
     border-color: aqua; }
-  .track-editor-container .is-loading {
+  .instrument-manager .is-loading {
     font-style: italic; }
-  .track-editor-container .controls {
-    margin-bottom: 8px;
-    overflow: hidden; }
-  .track-editor-container .close {
-    background-position: -90px 0px;
-    float: right; }

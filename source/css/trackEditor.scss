@@ -3,21 +3,31 @@ $instrument-view-width: 256px;
 .track-editor-container {
 	margin: 8px;
 	overflow: hidden;
+}
 
-	.track-editor {
-		background-color: $panel-dark;
-		float: left;
-		padding: 8px;
-	}
+.track-editor {
+	background-color: $panel-dark;
+	float: left;
+	padding: 8px;
+}
 
-	.instrument-manager-and-grid-canvas {
-		overflow: hidden;
-	}
+.track-editor-controls {
+	margin-bottom: 8px;
+	overflow: hidden;
 
-	.instrument-manager {
-		float: left;
-		width: $instrument-view-width;
+	.close {
+		@include button-sprite(5, 0);
+		float: right;
 	}
+}
+
+.instrument-manager-and-grid-canvas {
+	overflow: hidden;
+}
+
+.instrument-manager {
+	float: left;
+	width: $instrument-view-width;
 
 	.instrument {
 		background-color: $panel-light;
@@ -36,14 +46,5 @@ $instrument-view-width: 256px;
 	.is-loading {
 		font-style: italic;
 	}
-
-	.controls {
-		margin-bottom: 8px;
-		overflow: hidden;
-	}
-
-	.close {
-		@include button-sprite(5, 0);
-		float: right;
-	}
 }
+
