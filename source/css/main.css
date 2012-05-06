@@ -45,6 +45,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+* {
+  box-sizing: border-box; }
+
 body {
   background-color: white;
   font-family: "Lucida Grande", Arial, Helvetica, sans-serif; }
@@ -55,20 +58,21 @@ body {
   height: 18px;
   width: 18px; }
 
-.sound-browser .sounds {
+.sound-browser .sounds-wrapper {
   background-color: #cdcdcd;
-  border: solid #343434;
-  border-width: 16px;
-  height: 32px;
+  border: 16px solid #343434;
+  display: inline-block;
+  height: 64px;
+  width: auto; }
+.sound-browser .sounds {
   overflow: hidden; }
 .sound-browser .sound {
-  border: solid #f0f0f0;
-  border-width: 2px;
-  height: 28px;
-  width: 156px;
+  border: 2px solid #f0f0f0;
   float: left;
+  height: 32px;
   overflow: hidden;
-  position: relative; }
+  position: relative;
+  width: 160px; }
 .sound-browser .draggable {
   background-color: #cdcdcd;
   cursor: move;
@@ -122,7 +126,6 @@ body {
   .track-editor-container .instrument {
     background-color: #cdcdcd;
     border: solid white;
-    box-sizing: border-box;
     width: 256px; }
   .track-editor-container .drag-available {
     border-color: #00abab; }
