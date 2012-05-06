@@ -2,9 +2,10 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
+	"settings",
 	"utilities/canvasGrid",
 	"templates/trackEditor/gridView/canvasGridConfiguration"
-], function(_, Backbone, BaseView, CanvasGrid, canvasGridConfiguration) {
+], function(_, Backbone, BaseView, settings, CanvasGrid, canvasGridConfiguration) {
 	var GridView = BaseView.extend({
 		className: "grid-view",
 
@@ -12,9 +13,9 @@ define([
 			this.canvasGrid = new CanvasGrid(this.el);
 
 			this.canvasGrid.setColumns(this.model.length);
-			this.canvasGrid.setRows(8);
+			this.canvasGrid.setRows(settings.maxNotes);
 			this.canvasGrid.setColumnWidth(32);
-			this.canvasGrid.setRowHeight(16);
+			this.canvasGrid.setRowHeight(settings.instrumentHeight);
 			this.canvasGrid.setSubCanvasses(canvasGridConfiguration.subCanvasses);
 			this.canvasGrid.setCanvasSelector(canvasGridConfiguration.canvasSelector);
 		},

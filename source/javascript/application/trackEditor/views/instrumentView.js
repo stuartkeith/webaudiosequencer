@@ -2,9 +2,10 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
+	"settings",
 	"dragDropMixIn",
 	"text!templates/trackEditor/instrument.html"
-], function(_, Backbone, BaseView, dragDropMixIn, instrumentTemplateString) {
+], function(_, Backbone, BaseView, settings, dragDropMixIn, instrumentTemplateString) {
 	var InstrumentView = BaseView.extend({
 		className: "instrument",
 		instrumentTemplate: _.template(instrumentTemplateString),
@@ -51,6 +52,8 @@ define([
 			this.$el.html(this.instrumentTemplate(this.model));
 
 			this.$el.toggleClass("is-loading", this.model.isLoading);
+
+			this.$el.height(this.model.range * settings.instrumentHeight);
 
 			return this;
 		}

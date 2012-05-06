@@ -16,6 +16,8 @@ define([
 			if (this.instruments.length === 0) {
 				var instrument = new Instrument();
 
+				instrument.range = this.range;
+
 				return instrument;
 			}
 		},

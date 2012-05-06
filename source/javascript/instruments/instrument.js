@@ -5,6 +5,7 @@ define([
 	var Instrument = function () {
 		this.buffer = null;
 		this.isLoading = false;
+		this.range = 0;
 		this.soundAttributes = null;
 	};
 

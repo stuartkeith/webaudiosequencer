@@ -2,12 +2,10 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
+	"settings",
 	"./instrumentView"
-], function(_, Backbone, BaseView, InstrumentView) {
+], function(_, Backbone, BaseView, settings, InstrumentView) {
 	var InstrumentManagerView = BaseView.extend({
-		initialize: function () {
-		},
-
 		modelEvents: {
 			"instrumentAdded": function (instrument) {
 				var instrumentView = this.addChildView(InstrumentView, { model: instrument });
@@ -22,6 +20,8 @@ define([
 		},
 
 		render: function () {
+			this.$el.height(this.model.range * settings.instrumentHeight);
+
 			return this;
 		}
 	});

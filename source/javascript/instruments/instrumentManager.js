@@ -1,9 +1,11 @@
 define([
 	"use!underscore",
-	"use!backbone"
-], function (_, Backbone) {
+	"use!backbone",
+	"settings"
+], function (_, Backbone, settings) {
 	var InstrumentManager = function () {
 		this.instruments = [];
+		this.range = settings.maxNotes;
 	};
 
 	_.extend(InstrumentManager.prototype, Backbone.Events, {
