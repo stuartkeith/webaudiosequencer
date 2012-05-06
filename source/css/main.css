@@ -130,3 +130,9 @@ body {
     border-color: aqua; }
   .track-editor-container .is-loading {
     font-style: italic; }
+  .track-editor-container .controls {
+    margin-bottom: 8px;
+    overflow: hidden; }
+  .track-editor-container .close {
+    background-position: -90px 0px;
+    float: right; }

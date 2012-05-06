@@ -11,7 +11,7 @@ define([
 		trackEditorTemplate: _.template(TrackEditorTemplateString),
 
 		events: {
-			"click .remove-track": function (event) {
+			"click .close": function (event) {
 				this.eventBus.trigger("removeTrack", this.model);
 			}
 		},

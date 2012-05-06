@@ -36,4 +36,14 @@ $instrument-view-width: 256px;
 	.is-loading {
 		font-style: italic;
 	}
+
+	.controls {
+		margin-bottom: 8px;
+		overflow: hidden;
+	}
+
+	.close {
+		@include button-sprite(5, 0);
+		float: right;
+	}
 }
