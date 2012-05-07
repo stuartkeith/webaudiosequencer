@@ -44,7 +44,12 @@ define([
 			this.setEnabled(false);
 			this.soundsView.render();
 
+			var data = {
+				search: this.searchInput.val()
+			};
+
 			this.collection.fetch({
+				data: data,
 				success: function (collection, response) {
 					that.setEnabled(true);
 					that.soundsView.render(collection);
@@ -64,6 +69,8 @@ define([
 			this.collectionSelect.html(this.collectionSelectOptions);
 
 			this.refreshButton = this.$el.find(".refresh:first");
+
+			this.searchInput = this.$el.find(".search-input:first");
 
 			var sounds = this.$el.find(".sounds:first");
 

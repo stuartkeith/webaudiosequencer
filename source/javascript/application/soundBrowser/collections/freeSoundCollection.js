@@ -53,6 +53,9 @@ define([
 			var searchOptions = ["created_desc"];
 			options.data.s = searchOptions.join(" ");
 
+			if (existingData.search)
+				options.data.q = existingData.search;
+
 			return Backbone.Collection.prototype.fetch.call(this, options);
 		}
 	});
