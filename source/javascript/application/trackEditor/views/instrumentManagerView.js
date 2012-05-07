@@ -3,8 +3,9 @@ define([
 	"use!backbone",
 	"baseView",
 	"settings",
-	"./instrumentView"
-], function(_, Backbone, BaseView, settings, InstrumentView) {
+	"./instrumentView",
+	"./newInstrumentAreaView"
+], function(_, Backbone, BaseView, settings, InstrumentView, NewInstrumentAreaView) {
 	var InstrumentManagerView = BaseView.extend({
 		modelEvents: {
 			"instrumentAdded": function (instrument) {
@@ -22,6 +23,8 @@ define([
 
 		render: function () {
 			this.newInstrumentArea = this.$el.find(".new-instrument-area:first");
+
+			this.addChildView(NewInstrumentAreaView, { el: this.newInstrumentArea });
 
 			this.instrumentContainer = this.$el.find(".instrument-container:first");
 

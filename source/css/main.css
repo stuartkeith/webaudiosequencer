@@ -133,16 +133,20 @@ body {
 .new-instrument-area {
   background-color: #ab00ab; }
 
+.drag-target {
+  border: 2px solid white; }
+
+.drag-available {
+  border-color: #00abab; }
+
+.drag-over {
+  border-color: aqua; }
+
 .instrument-manager {
   float: left;
   width: 256px; }
   .instrument-manager .instrument {
     background-color: #cdcdcd;
-    border: solid white;
     width: 256px; }
-  .instrument-manager .drag-available {
-    border-color: #00abab; }
-  .instrument-manager .drag-over {
-    border-color: aqua; }
   .instrument-manager .is-loading {
     font-style: italic; }

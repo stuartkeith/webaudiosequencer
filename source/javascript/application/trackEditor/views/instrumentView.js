@@ -7,7 +7,7 @@ define([
 	"text!templates/trackEditor/instrument.html"
 ], function(_, Backbone, BaseView, settings, dragDropMixIn, instrumentTemplateString) {
 	var InstrumentView = BaseView.extend({
-		className: "instrument",
+		className: "instrument drag-target",
 		instrumentTemplate: _.template(instrumentTemplateString),
 
 		dragTarget: "SoundExtended",

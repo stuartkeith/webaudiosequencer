@@ -29,22 +29,25 @@ $instrument-view-width: 256px;
 	background-color: #ab00ab;
 }
 
+.drag-target {
+	border: 2px solid $background;
+}
+
+.drag-available {
+	border-color: $action-dark;
+}
+
+.drag-over {
+	border-color: $action-light;
+}
+
 .instrument-manager {
 	float: left;
 	width: $instrument-view-width;
 
 	.instrument {
 		background-color: $panel-light;
-		border: solid $background;
 		width: $instrument-view-width;
-	}
-
-	.drag-available {
-		border-color: $action-dark;
-	}
-
-	.drag-over {
-		border-color: $action-light;
 	}
 
 	.is-loading {
