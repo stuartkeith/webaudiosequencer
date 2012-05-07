@@ -22,9 +22,7 @@ define([
 
 		this.eventBus.trigger("trackAdded", track);
 
-		var instrument = instrumentManager.addInstrument();
-
-		this.eventBus.trigger("updateInstrument", instrument, soundAttributes);
+		this.eventBus.trigger("addInstrument", instrumentManager, soundAttributes);
 	};
 
 	return addTrack;

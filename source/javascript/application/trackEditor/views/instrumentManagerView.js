@@ -24,7 +24,10 @@ define([
 		render: function () {
 			this.newInstrumentArea = this.$el.find(".new-instrument-area:first");
 
-			this.addChildView(NewInstrumentAreaView, { el: this.newInstrumentArea });
+			this.addChildView(NewInstrumentAreaView, {
+				el: this.newInstrumentArea,
+				model: this.model
+			});
 
 			this.instrumentContainer = this.$el.find(".instrument-container:first");
 

@@ -19,6 +19,8 @@ define([
 
 			"drop": function (model, event) {
 				this.$el.removeClass("drag-over");
+
+				this.eventBus.trigger("addInstrument", this.model, model);
 			}
 		},
 
