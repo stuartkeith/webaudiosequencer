@@ -51,7 +51,7 @@ define([
 			},
 
 			"click .add": function (event) {
-				this.eventBus.trigger("addTrack", this.model.attributes);
+				this.eventBus.trigger("addTrack", "percussive", this.model.attributes);
 			}
 		},
 

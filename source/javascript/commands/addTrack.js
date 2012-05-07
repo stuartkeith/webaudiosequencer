@@ -1,10 +1,17 @@
 define([
 	"instruments/createMelodicInstrumentManager",
+	"instruments/createPercussiveInstrumentManager",
 	"track/track"
-], function (createMelodicInstrumentManager, Track) {
-	var addTrack = function (soundAttributes) {
+], function (createMelodicInstrumentManager, createPercussiveInstrumentManager, Track) {
+	var addTrack = function (instrumentManagerType, soundAttributes) {
 		var sequence = this.sequencer.addSequence(16);
-		var instrumentManager = createMelodicInstrumentManager();
+
+		var instrumentManager;
+
+		if (instrumentManagerType === "melodic")
+			instrumentManager = createMelodicInstrumentManager();
+		else if (instrumentManagerType === "percussive")
+			instrumentManager = createPercussiveInstrumentManager();
 
 		sequence.instrumentManager = instrumentManager;
 		instrumentManager.soundOutput = this.soundOutput;

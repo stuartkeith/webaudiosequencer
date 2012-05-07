@@ -25,6 +25,10 @@ $instrument-view-width: 256px;
 	overflow: hidden;
 }
 
+.new-instrument-area {
+	background-color: #ab00ab;
+}
+
 .instrument-manager {
 	float: left;
 	width: $instrument-view-width;

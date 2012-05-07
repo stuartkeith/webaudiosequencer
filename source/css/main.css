@@ -130,6 +130,9 @@ body {
 .instrument-manager-and-grid-canvas {
   overflow: hidden; }
 
+.new-instrument-area {
+  background-color: #ab00ab; }
+
 .instrument-manager {
   float: left;
   width: 256px; }

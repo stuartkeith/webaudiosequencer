@@ -12,17 +12,20 @@ define([
 
 				instrumentView.render();
 
-				this.$el.append(instrumentView.$el);
+				this.instrumentContainer.append(instrumentView.$el);
+
+				var remainingHeight = this.$el.outerHeight(true) - this.instrumentContainer.outerHeight(true);
+
+				this.newInstrumentArea.height(remainingHeight);
 			}
 		},
 
-		events: {
-		},
-
 		render: function () {
-			this.$el.height(this.model.range * settings.instrumentHeight);
+			this.newInstrumentArea = this.$el.find(".new-instrument-area:first");
 
-			return this;
+			this.instrumentContainer = this.$el.find(".instrument-container:first");
+
+			this.$el.height(this.model.range * settings.instrumentHeight);
 		}
 	});
 
