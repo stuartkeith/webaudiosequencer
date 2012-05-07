@@ -50,7 +50,7 @@ define([
 					that.soundsView.render(collection);
 				},
 				error: function () {
-					console.log("error", arguments);
+					that.setEnabled(true);
 				}
 			});
 		},
