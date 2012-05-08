@@ -41,17 +41,28 @@ $instrument-view-width: 256px;
 	border-color: $action-light;
 }
 
+$instrument-controls-height: 24px;
+
 .instrument-manager {
 	float: left;
 	width: $instrument-view-width;
 
 	.instrument {
 		background-color: $panel-light;
+		font-size: 10px;
+		height: $instrument-controls-height;
+		line-height: $instrument-controls-height;
+		position: relative;
 		width: $instrument-view-width;
-	}
 
-	.is-loading {
-		font-style: italic;
+		.remove-instrument {
+			@include button-sprite(5, 0);
+			float: left;
+			position: relative;
+		}
+
+		.is-loading {
+			font-style: italic;
+		}
 	}
 }
-

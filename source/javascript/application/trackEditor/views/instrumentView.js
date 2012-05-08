@@ -29,6 +29,10 @@ define([
 				this.$el.removeClass("drag-over");
 
 				this.eventBus.trigger("updateInstrument", this.model, model);
+			},
+
+			"click .remove-instrument": function (event) {
+				this.trigger("removeInstrument", this.model);
 			}
 		},
 
@@ -45,6 +49,10 @@ define([
 		modelEvents: {
 			"changed": function () {
 				this.render();
+			},
+
+			"remove": function () {
+				this.remove();
 			}
 		},
 

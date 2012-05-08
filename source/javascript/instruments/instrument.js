@@ -13,6 +13,10 @@ define([
 	_.extend(Instrument.prototype, Backbone.Events, {
 		changed: function () {
 			this.trigger("changed");
+		},
+
+		remove: function () {
+			this.trigger("remove");
 		}
 	});
 

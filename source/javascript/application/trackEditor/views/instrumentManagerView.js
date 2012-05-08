@@ -11,13 +11,17 @@ define([
 			"instrumentAdded": function (instrument) {
 				var instrumentView = this.addChildView(InstrumentView, { model: instrument });
 
+				instrumentView.on("removeInstrument", this.removeInstrument, this);
+
 				instrumentView.render();
 
 				this.instrumentContainer.append(instrumentView.$el);
 
-				var remainingHeight = this.$el.outerHeight(true) - this.instrumentContainer.outerHeight(true);
+				this.resizeNewInstrumentArea();
+			},
 
-				this.newInstrumentArea.height(remainingHeight);
+			"instrumentRemoved": function (instrument) {
+				this.resizeNewInstrumentArea();
 			}
 		},
 
@@ -32,6 +36,16 @@ define([
 			this.instrumentContainer = this.$el.find(".instrument-container:first");
 
 			this.$el.height(this.model.range * settings.instrumentHeight);
+		},
+
+		removeInstrument: function (instrument) {
+			this.eventBus.trigger("removeInstrument", this.model, instrument);
+		},
+
+		resizeNewInstrumentArea: function () {
+			var remainingHeight = this.$el.outerHeight(true) - this.instrumentContainer.outerHeight(true);
+
+			this.newInstrumentArea.height(remainingHeight);
 		}
 	});
 

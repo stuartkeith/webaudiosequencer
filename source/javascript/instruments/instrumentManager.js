@@ -29,6 +29,8 @@ define([
 			if (index >= 0) {
 				this.instruments.splice(index, 1);
 
+				instrument.remove();
+
 				this.trigger("instrumentRemoved", instrument);
 			} else {
 				return false;

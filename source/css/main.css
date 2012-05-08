@@ -147,6 +147,14 @@ body {
   width: 256px; }
   .instrument-manager .instrument {
     background-color: #cdcdcd;
+    font-size: 10px;
+    height: 24px;
+    line-height: 24px;
+    position: relative;
     width: 256px; }
-  .instrument-manager .is-loading {
-    font-style: italic; }
+    .instrument-manager .instrument .remove-instrument {
+      background-position: -90px 0px;
+      float: left;
+      position: relative; }
+    .instrument-manager .instrument .is-loading {
+      font-style: italic; }

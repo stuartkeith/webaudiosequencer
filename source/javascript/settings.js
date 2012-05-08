@@ -1,4 +1,4 @@
 define({
-	instrumentHeight: 16,
+	instrumentHeight: 24,
 	maxNotes: 24
 });

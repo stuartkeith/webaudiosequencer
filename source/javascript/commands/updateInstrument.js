@@ -6,6 +6,10 @@ define([
 		if (instrument.soundAttributes)
 			this.soundOutput.freeSoundURL(instrument.soundAttributes.url);
 
+		// this instrument might just be removing itself.
+		if (!soundAttributes)
+			return;
+
 		instrument.isLoading = true;
 		instrument.soundAttributes = soundAttributes;
 
