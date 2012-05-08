@@ -48,6 +48,9 @@ define([
 			options.data.limit = existingData.limit || this.defaultFetchOptions.limit;
 			options.data.client_id = this.clientID;
 
+			if (existingData.page)
+				options.data.offset = options.data.limit * (existingData.page - 1);
+
 			if (existingData.search)
 				options.data.q = existingData.search;
 

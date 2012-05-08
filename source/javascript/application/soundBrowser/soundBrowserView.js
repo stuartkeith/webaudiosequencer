@@ -10,6 +10,7 @@ define([
 	var SoundBrowserView = BaseView.extend({
 		className: "sound-browser",
 		soundBrowserTemplate: _.template(SoundBrowserTemplateString),
+		page: 1,
 
 		collectionOptions: {
 			defaultFetchOptions: {
@@ -35,16 +36,42 @@ define([
 			"change .collection-select": function (event) {
 				this.changeCollection(this.collections[event.target.selectedIndex]);
 			},
-			"click .refresh": "fetch"
+
+			"click .refresh": "fetch",
+
+			"click .previous": "fetchPrevious",
+
+			"click .next": "fetchNext",
+
+			"change .search-input": "fetch"
 		},
 
 		fetch: function () {
+			this.page = 1;
+
+			this._fetch();
+		},
+
+		fetchNext: function () {
+			this.page++;
+
+			this._fetch();
+		},
+
+		fetchPrevious: function () {
+			this.page--;
+
+			this._fetch();
+		},
+
+		_fetch: function () {
 			var that = this;
 
 			this.setEnabled(false);
 			this.soundsView.render();
 
 			var data = {
+				page: this.page,
 				search: this.searchInput.val()
 			};
 
@@ -69,6 +96,8 @@ define([
 			this.collectionSelect.html(this.collectionSelectOptions);
 
 			this.refreshButton = this.$el.find(".refresh:first");
+			this.nextButton = this.$el.find(".next:first");
+			this.previousButton = this.$el.find(".previous:first");
 
 			this.searchInput = this.$el.find(".search-input:first");
 
@@ -98,8 +127,15 @@ define([
 		},
 
 		setEnabled: function (value) {
+			var limit = this.collectionOptions.defaultFetchOptions.limit;
+			var previousEnabled = this.page > 1;
+			var nextEnabled = this.collection.length >= limit;
+
 			this.collectionSelect.attr('disabled', !value);
+			this.searchInput.attr('disabled', !value);
 			this.refreshButton.attr('disabled', !value);
+			this.previousButton.attr('disabled', !(value && previousEnabled));
+			this.nextButton.attr('disabled', !(value && nextEnabled));
 		}
 	});
 
