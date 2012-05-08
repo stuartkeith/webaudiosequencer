@@ -30,7 +30,7 @@ define([
 				instrument = this.instruments[note];
 
 				if (instrument && instrument.buffer)
-					this.soundOutput.playBuffer(instrument.buffer, parseInt(note) + instrument.transpose);
+					this.soundOutput.playBuffer(instrument.buffer, instrument.transpose);
 			}, this);
 		}
 	};
