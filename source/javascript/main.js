@@ -6,7 +6,7 @@ require.config({
 		templates: "../templates",
 		text: "libraries/require/text-1.0.8",
 		order: "libraries/require/order-1.0.5",
-		use: "libraries/require/use-0.2.0"
+		use: "libraries/require/use-0.3.0"
 	},
 
 	use: {
