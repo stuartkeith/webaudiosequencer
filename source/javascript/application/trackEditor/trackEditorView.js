@@ -25,12 +25,15 @@ define([
 		render: function () {
 			this.$el.html(this.trackEditorTemplate());
 
-			var instrumentManager = this.$el.find(".instrument-manager");
-			this.addChildView(InstrumentManagerView, { el: instrumentManager, model: this.model.instrumentManager }).render();
+			this.addChildView(InstrumentManagerView, {
+				el: this.$el.find(".instrument-manager:first"),
+				model: this.model.get("instrumentManager")
+			}).render();
 
-			var gridCanvas = this.$el.find(".grid-canvas:first");
-			var gridView = this.addChildView(GridView, { el: gridCanvas, model: this.model.sequence });
-			gridView.render();
+			var gridView = this.addChildView(GridView, {
+				el: this.$el.find(".grid-canvas:first"),
+				model: this.model.get("sequence")
+			}).render();
 
 			return this;
 		}
