@@ -3,17 +3,29 @@ define([
 	"use!backbone",
 	"baseView",
 	"./soundBrowser/soundBrowserView",
-	"./trackEditor/trackEditorView",
+	"./trackPanelView",
 	"text!templates/application.html"
-], function(_, Backbone, BaseView, SoundBrowserView, TrackEditorView, applicationTemplateString) {
+], function(_, Backbone, BaseView, SoundBrowserView, TrackPanelView, applicationTemplateString) {
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
 
 		modelEvents: {
 			"add": function (trackModel, trackCollection) {
-				var trackEditorView = this.addChildView(TrackEditorView, { model: trackModel });
+				if (trackCollection.length === 1) {
+					this.trackPanelView = this.addChildView(TrackPanelView, {
+						model: trackCollection
+					}).render();
 
-				this.trackEditorContainer.append(trackEditorView.render().$el);
+					this.trackPanelContainer.append(this.trackPanelView.$el);
+				}
+			},
+
+			"remove": function (trackModel, trackCollection) {
+				if (trackCollection.length === 0) {
+					this.removeChildView(this.trackPanelView);
+
+					this.trackPanelView = null;
+				}
 			}
 		},
 
@@ -22,12 +34,11 @@ define([
 
 			this.$el.html(this.applicationTemplate());
 
-			var soundBrowser = this.$el.find(".sound-browser:first");
+			var soundBrowserView = this.addChildView(SoundBrowserView, {
+				el: this.$el.find(".sound-browser:first")
+			}).render();
 
-			var soundBrowserView = this.addChildView(SoundBrowserView, { el: soundBrowser });
-			soundBrowserView.render();
-
-			this.trackEditorContainer = this.$el.find(".track-editor-container:first");
+			this.trackPanelContainer = this.$el.find(".track-panel-container:first");
 
 			return this;
 		}

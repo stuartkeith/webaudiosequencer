@@ -111,23 +111,21 @@ body {
 .sound-browser .error {
   background-position: -54px 0px; }
 
-.track-editor-container {
-  margin: 8px;
+.track-controls {
+  height: 32px;
   overflow: hidden; }
 
-.track-editor {
+.track-control {
   background-color: #343434;
   float: left;
-  padding: 8px; }
-
-.track-editor-controls {
-  margin-bottom: 8px;
-  overflow: hidden; }
-  .track-editor-controls .close {
+  height: 100%;
+  margin-right: 8px;
+  width: 128px; }
+  .track-control .close {
     background-position: -90px 0px;
     float: right; }
 
-.instrument-manager-and-grid-canvas {
+.track-controls {
   overflow: hidden; }
 
 .new-instrument-area {
