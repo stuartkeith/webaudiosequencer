@@ -1,8 +1,8 @@
 define(function () {
-	var removeTrack = function (track) {
-		this.sequencer.removeSequence(track.sequence);
+	var removeTrack = function (trackModel) {
+		this.sequencer.removeSequence(trackModel.get("sequence"));
 
-		track.remove();
+		this.trackCollection.remove(trackModel);
 	};
 
 	return removeTrack;
