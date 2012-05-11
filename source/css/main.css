@@ -154,5 +154,5 @@ body {
       background-position: -90px 0px;
       float: left;
       position: relative; }
-    .instrument-manager .instrument .is-loading {
-      font-style: italic; }
+  .instrument-manager .is-loading {
+    font-style: italic; }
