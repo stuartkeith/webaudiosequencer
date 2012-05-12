@@ -21,6 +21,19 @@ define(function() {
 		return true;
 	};
 
+	Array2d.prototype.each = function (callback, context) {
+		var context = context || this;
+		var columns;
+
+		Object.keys(this._columns).forEach(function (outerKey) {
+			columns = this._columns[key];
+
+			Object.keys(columns).forEach(function (innerKey) {
+				callback.call(context, outerKey, innerKey, columns[innerKey]);
+			}, this);
+		}, this);
+	};
+
 	Array2d.prototype.clear = function (location) {
 		var row = this._columns[location.x];
 		
