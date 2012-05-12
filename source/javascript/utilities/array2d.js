@@ -26,7 +26,7 @@ define(function() {
 		var columns;
 
 		Object.keys(this._columns).forEach(function (outerKey) {
-			columns = this._columns[key];
+			columns = this._columns[outerKey];
 
 			Object.keys(columns).forEach(function (innerKey) {
 				callback.call(context, outerKey, innerKey, columns[innerKey]);
