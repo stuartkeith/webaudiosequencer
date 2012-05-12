@@ -9,8 +9,11 @@ define(function () {
 			trackModel = trackModelOrIndex;
 		}
 
-		if (trackModel)
+		if (trackModel) {
+			this.selectedTrackModel = trackModel;
+
 			this.eventBus.trigger("trackSelected", trackModel);
+		}
 	};
 
 	return selectTrack;
