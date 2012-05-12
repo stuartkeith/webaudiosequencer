@@ -12,7 +12,6 @@ define([
 		initialize: function () {
 			this.canvasGrid = new CanvasGrid(this.el);
 
-			this.canvasGrid.setColumns(this.model.length);
 			this.canvasGrid.setRows(settings.maxNotes);
 			this.canvasGrid.setColumnWidth(32);
 			this.canvasGrid.setRowHeight(settings.instrumentHeight);
@@ -22,7 +21,7 @@ define([
 
 		modelEvents: {
 			"note:added": function (location) {
-				this.canvasGrid.drawCanvasAt(location.x, location.y, this.canvasGrid.subCanvasses.note);
+				this.drawNoteAt(location.x, location.y);
 			},
 
 			"note:removed": function (location) {
@@ -69,8 +68,17 @@ define([
 			}
 		},
 
+		drawNoteAt: function (x, y) {
+			this.canvasGrid.drawCanvasAt(x, y, this.canvasGrid.subCanvasses.note);
+		},
+
 		render: function () {
-			this.canvasGrid.drawGrid();
+			this.canvasGrid.setColumns(this.model.length);
+			this.canvasGrid.drawGrid(true);
+
+			this.model.notes.each(function (x, y, value) {
+				this.drawNoteAt(x, y);
+			}, this);
 
 			return this;
 		}

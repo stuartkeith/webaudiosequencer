@@ -1,18 +1,37 @@
 .track-controls {
 	height: 32px;
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .track-control {
-    background-color: $panel-dark;
-    float: left;
-    height: 100%;
-    margin-right: 8px;
-    width: 128px;
+	float: left;
+	height: 100%;
+	margin-right: 8px;
+	position: relative;
+	width: 128px;
 
-    .close {
-        @include button-sprite(5, 0);
-        float: right;
-    }
+	.select {
+    	background-color: $panel-dark;
+		height: 100%;
+		position: absolute;
+		width: 100%;
+
+		&:hover {
+			background-color: $action-light;
+		}
+	}
+
+	.selected {
+		background-color: $panel-light;
+
+		&:hover {
+			background-color: $panel-light;
+		}
+	}
+
+	.close {
+		@include button-sprite(5, 0);
+		position: absolute;
+	}
 }
 

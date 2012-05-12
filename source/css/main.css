@@ -116,14 +116,25 @@ body {
   overflow: hidden; }
 
 .track-control {
-  background-color: #343434;
   float: left;
   height: 100%;
   margin-right: 8px;
+  position: relative;
   width: 128px; }
+  .track-control .select {
+    background-color: #343434;
+    height: 100%;
+    position: absolute;
+    width: 100%; }
+    .track-control .select:hover {
+      background-color: aqua; }
+  .track-control .selected {
+    background-color: #cdcdcd; }
+    .track-control .selected:hover {
+      background-color: #cdcdcd; }
   .track-control .close {
     background-position: -90px 0px;
-    float: right; }
+    position: absolute; }
 
 .track-controls {
   overflow: hidden; }
@@ -140,19 +151,19 @@ body {
 .drag-over {
   border-color: aqua; }
 
-.instrument-manager {
+.instrument-panel {
   float: left;
   width: 256px; }
-  .instrument-manager .instrument {
+  .instrument-panel .instrument {
     background-color: #cdcdcd;
     font-size: 10px;
     height: 24px;
     line-height: 24px;
     position: relative;
     width: 256px; }
-    .instrument-manager .instrument .remove-instrument {
+    .instrument-panel .instrument .remove-instrument {
       background-position: -90px 0px;
       float: left;
       position: relative; }
-  .instrument-manager .is-loading {
+  .instrument-panel .is-loading {
     font-style: italic; }

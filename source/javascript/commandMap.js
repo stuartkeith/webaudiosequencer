@@ -5,8 +5,9 @@ define([
 	"commands/playSoundAttributes",
 	"commands/removeInstrument",
 	"commands/removeTrack",
+	"commands/selectTrack",
 	"commands/updateInstrument"
-], function (addInstrument, addTrack, initialize, playSoundAttributes, removeInstrument, removeTrack, updateInstrument) {
+], function (addInstrument, addTrack, initialize, playSoundAttributes, removeInstrument, removeTrack, selectTrack, updateInstrument) {
 	return {
 		addInstrument: addInstrument,
 		addTrack: addTrack,
@@ -14,6 +15,7 @@ define([
 		playSoundAttributes: playSoundAttributes,
 		removeInstrument: removeInstrument,
 		removeTrack: removeTrack,
+		selectTrack: selectTrack,
 		updateInstrument: updateInstrument
 	};
 });

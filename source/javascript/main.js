@@ -30,8 +30,9 @@ require([
 	"sequencer/sequencer",
 	"tracks/trackCollection",
 	"commandMap",
-	"application/applicationView"
-], function (_, Backbone, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView) {
+	"application/applicationView",
+	"./keyboardShortcuts"
+], function (_, Backbone, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts) {
 	var eventBus = _.clone(Backbone.Events);
 
 	var commandObject = {
@@ -46,6 +47,8 @@ require([
 	});
 
 	commandObject.sequencer.play();
+
+	var keyboardShortcuts = keyboardShortcuts(eventBus);
 
 	var applicationView = new ApplicationView({
 		eventBus: eventBus,

@@ -22,6 +22,8 @@ define([
 
 		this.trackCollection.add(trackModel);
 
+		this.eventBus.trigger("selectTrack", trackModel);
+
 		this.eventBus.trigger("addInstrument", instrumentManager, soundAttributes);
 	};
 

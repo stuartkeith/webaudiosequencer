@@ -4,20 +4,11 @@ define([
 	"baseView",
 	"settings",
 	"./instrumentView",
-	"./newInstrumentAreaView"
-], function(_, Backbone, BaseView, settings, InstrumentView, NewInstrumentAreaView) {
+], function(_, Backbone, BaseView, settings, InstrumentView) {
 	var InstrumentManagerView = BaseView.extend({
 		modelEvents: {
 			"instrumentAdded": function (instrument) {
-				var instrumentView = this.addChildView(InstrumentView, { model: instrument });
-
-				instrumentView.on("removeInstrument", this.removeInstrument, this);
-
-				instrumentView.render();
-
-				this.instrumentContainer.append(instrumentView.$el);
-
-				this.resizeNewInstrumentArea();
+				this.addInstrumentView(instrument);
 			},
 
 			"instrumentRemoved": function (instrument) {
@@ -26,29 +17,35 @@ define([
 		},
 
 		render: function () {
-			this.newInstrumentArea = this.$el.find(".new-instrument-area:first");
+			this.removeAllChildViews();
 
-			this.newInstrumentAreaView = this.addChildView(NewInstrumentAreaView, {
-				el: this.newInstrumentArea,
-				model: this.model
+			_.each(this.model.instruments, function (instrument) {
+				this.addInstrumentView(instrument, true);
+			}, this);
+
+			this.trigger("resize");
+
+			return this;
+		},
+
+		addInstrumentView: function (instrument, preventResizeEvent) {
+			var instrumentView = this.addChildView(InstrumentView, {
+				model: instrument
 			});
 
-			this.instrumentContainer = this.$el.find(".instrument-container:first");
+			instrumentView.on("removeInstrument", this.removeInstrument, this);
 
-			this.$el.height(this.model.range * settings.instrumentHeight);
+			instrumentView.render();
 
-			this.resizeNewInstrumentArea();
+			this.$el.append(instrumentView.$el);
+
+			if (!preventResizeEvent)
+				this.trigger("resize");
 		},
 
 		removeInstrument: function (instrument) {
 			this.eventBus.trigger("removeInstrument", this.model, instrument);
 		},
-
-		resizeNewInstrumentArea: function () {
-			var remainingHeight = this.$el.outerHeight(true) - this.instrumentContainer.outerHeight(true);
-
-			this.newInstrumentArea.height(remainingHeight);
-		}
 	});
 
 	return InstrumentManagerView;
