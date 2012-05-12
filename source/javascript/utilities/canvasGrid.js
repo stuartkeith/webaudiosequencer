@@ -70,7 +70,7 @@ define([
 		this._context.drawImage(canvas, x * this.columnWidth, y * this.rowHeight);
 	};
 
-	CanvasGrid.prototype.drawGrid = function () {
+	CanvasGrid.prototype.drawGrid = function (redrawCanvas) {
 		if (this._redrawAll) {
 			this.subCanvasses = {};
 
@@ -80,7 +80,7 @@ define([
 			}, this);
 		}
 
-		if (this._redrawAll || this._redrawCanvas) {
+		if (redrawCanvas || this._redrawAll || this._redrawCanvas) {
 			var subCanvas;
 
 			this._canvas.width = this.columns * this.columnWidth;
