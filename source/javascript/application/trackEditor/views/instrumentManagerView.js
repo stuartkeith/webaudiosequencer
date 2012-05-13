@@ -9,10 +9,6 @@ define([
 		modelEvents: {
 			"instrumentAdded": function (instrument) {
 				this.addInstrumentView(instrument);
-			},
-
-			"instrumentRemoved": function (instrument) {
-				this.resizeNewInstrumentArea();
 			}
 		},
 
