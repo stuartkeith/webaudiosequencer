@@ -35,6 +35,7 @@ define([
 					var location = this.canvasGrid.mouseEventToColumnAndRow(this.$el, event);
 					this.isMouseDown = true;
 					this.isAddingNotes = this.model.toggleNoteAt(location, true);
+					this.mouseDownRow = location.y;
 
 					event.preventDefault();
 
@@ -44,6 +45,7 @@ define([
 
 			"mousemove": function (event) {
 				var location = this.canvasGrid.mouseEventToColumnAndRow(this.$el, event);
+				location.y = this.mouseDownRow;
 
 				if (!this.previousLocation || (location.x !== this.previousLocation.x || location.y !== this.previousLocation.y)) {
 					this.previousLocation = location;
