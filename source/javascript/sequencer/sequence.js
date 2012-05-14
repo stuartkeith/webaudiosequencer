@@ -3,7 +3,7 @@ define([
 	"utilities/array2d"
 ], function(Backbone, Array2d) {
 	var Sequence = function (length) {
-		this.length = length;
+		this._length = length;
 		this.notes = new Array2d();
 		this.position = 0;
 	};
@@ -14,17 +14,29 @@ define([
 		},
 
 		update: function () {
-			if (this.position >= this.length)
-				this.position = 0;
-
-			this.trigger("update", this.position);
-
 			if (this.instrumentManager) {
-				var notes = this.notes._columns[this.position++];
+				var notes = this.notes._columns[this.position];
 
 				if (notes)
 					this.instrumentManager.receiveNotes(notes);
 			}
+
+			this.trigger("update", this.position);
+
+			var nextPosition = this.position + 1;
+
+			this.position = nextPosition < this._length ? nextPosition : 0;
+		},
+
+		getLength: function () {
+			return this._length;
+		},
+
+		setLength: function (length) {
+			this._length = length;
+
+			if (this.position >= this._length)
+				this.position = 0;
 		},
 
 		addNoteAt: function (location, data) {

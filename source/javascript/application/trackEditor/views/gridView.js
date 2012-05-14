@@ -75,7 +75,7 @@ define([
 		},
 
 		render: function () {
-			this.canvasGrid.setColumns(this.model.length);
+			this.canvasGrid.setColumns(this.model.getLength());
 			this.canvasGrid.drawGrid(true);
 
 			this.model.notes.each(function (x, y, value) {

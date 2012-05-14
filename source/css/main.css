@@ -136,6 +136,20 @@ body {
     background-position: -90px 0px;
     position: absolute; }
 
+.sequence-progress {
+  height: 24px;
+  margin-left: 256px;
+  overflow: hidden; }
+
+.progress {
+  background-color: #ff00ff;
+  border: 4px solid #ab00ab;
+  float: left;
+  height: 100%; }
+
+.active {
+  background-color: #00ff23; }
+
 .track-controls {
   overflow: hidden; }
 
