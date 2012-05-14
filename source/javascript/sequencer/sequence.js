@@ -17,6 +17,8 @@ define([
 			if (this.position >= this.length)
 				this.position = 0;
 
+			this.trigger("update", this.position);
+
 			if (this.instrumentManager) {
 				var notes = this.notes._columns[this.position++];
 
