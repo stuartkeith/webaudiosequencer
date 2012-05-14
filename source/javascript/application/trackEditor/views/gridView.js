@@ -13,7 +13,7 @@ define([
 			this.canvasGrid = new CanvasGrid(this.el);
 
 			this.canvasGrid.setRows(settings.maxNotes);
-			this.canvasGrid.setColumnWidth(32);
+			this.canvasGrid.setColumnWidth(settings.gridWidth);
 			this.canvasGrid.setRowHeight(settings.instrumentHeight);
 			this.canvasGrid.setSubCanvasses(canvasGridConfiguration.subCanvasses);
 			this.canvasGrid.setCanvasSelector(canvasGridConfiguration.canvasSelector);
