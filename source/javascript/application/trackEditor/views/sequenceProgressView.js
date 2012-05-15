@@ -45,7 +45,7 @@ define([
 					this.progressElements.push(progressElement);
 				}
 			} else if (length < existingLength) {
-				// removeProgressElements
+				// remove progressElements
 				for (var i = existingLength - 1; i >= length; i--) {
 					this.progressElements[i].remove();
 				}
