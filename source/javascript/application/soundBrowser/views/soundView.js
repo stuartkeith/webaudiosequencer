@@ -8,6 +8,7 @@ define([
 ], function($, _, Backbone, BaseView, DraggableView, soundTemplateString) {
 	var SoundView = BaseView.extend({
 		className: "sound",
+		mouseDownTime: 500,
 
 		soundTemplate: _.template(soundTemplateString),
 
@@ -50,8 +51,39 @@ define([
 				return false;
 			},
 
+			"mousedown .add": function (event) {
+				this.timeout = setTimeout(_.bind(function () {
+					this.ignoreClick = true;
+
+					this.triggerAddTrack("melodic");
+				}, this), this.mouseDownTime);
+			},
+
+			"mouseleave .add": function (event) {
+				this.ignoreClick = false;
+
+				this.stopTimeout();
+			},
+
 			"click .add": function (event) {
-				this.eventBus.trigger("addTrack", "percussive", this.model.attributes);
+				this.stopTimeout();
+
+				if (this.ignoreClick)
+					this.ignoreClick = false;
+				else
+					this.triggerAddTrack("percussive");
+			}
+		},
+
+		triggerAddTrack: function (instrumentManagerType) {
+			this.eventBus.trigger("addTrack", instrumentManagerType, this.model.attributes);
+		},
+
+		stopTimeout: function () {
+			if (this.timeout) {
+				clearTimeout(this.timeout);
+
+				delete this.timeout;
 			}
 		},
 
