@@ -38,6 +38,12 @@ define([
 		},
 
 		stop: function () {
+			if (this.timeout) {
+				clearTimeout(this.timeout);
+
+				this.timeout = null;
+			}
+
 			this.isPlaying = false;
 		},
 
@@ -51,7 +57,7 @@ define([
 			this.position = newPosition < this._length ? newPosition : 0;
 
 			if (this.isPlaying)
-				setTimeout(_.bind(this.update, this), this._timeout);
+				this.timeout = setTimeout(_.bind(this.update, this), this._timeout);
 		},
 
 		addSequence: function (sequence) {
