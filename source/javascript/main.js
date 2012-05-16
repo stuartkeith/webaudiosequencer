@@ -47,8 +47,6 @@ require([
 		eventBus.on(event, fn, commandObject);
 	});
 
-	commandObject.sequencer.play();
-
 	var keyboardShortcuts = keyboardShortcuts(eventBus);
 
 	var applicationView = new ApplicationView({
