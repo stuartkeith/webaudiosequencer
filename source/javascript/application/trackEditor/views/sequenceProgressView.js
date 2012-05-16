@@ -13,6 +13,8 @@ define([
 		events: {
 			"click .progress": function (event) {
 				var progressIndex = $(event.target).data('progressIndex');
+
+				this.eventBus.trigger("setSequencePosition", progressIndex);
 			}
 		},
 
