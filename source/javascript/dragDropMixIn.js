@@ -13,11 +13,12 @@ define([
 			draggedData.dragSource = this.dragSource;
 			draggedData.model = this.model;
 
-			if (this.dragEffect) {
-				var dataTransfer = event.originalEvent.dataTransfer;
+			var dataTransfer = event.originalEvent.dataTransfer;
+			// required for Chrome on Mac as of 17/05/12.
+			dataTransfer.setData("text/html", "dummy");
 
+			if (this.dragEffect)
 				dataTransfer.effectAllowed = this.dragEffect;
-			}
 
 			if (_dragstart)
 				_dragstart.call(this, event);
