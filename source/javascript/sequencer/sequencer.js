@@ -29,7 +29,10 @@ define([
 			this._timeout = Math.floor(60.0 / this.bpm * 1000);
 		},
 
-		play: function () {
+		play: function (forceRestart) {
+			if (forceRestart)
+				this.stop();
+
 			if (!this.isPlaying) {
 				this.isPlaying = true;
 
@@ -37,7 +40,7 @@ define([
 			}
 		},
 
-		stop: function () {
+		stop: function (resetPosition) {
 			if (this.timeout) {
 				clearTimeout(this.timeout);
 
@@ -45,6 +48,9 @@ define([
 			}
 
 			this.isPlaying = false;
+
+			if (resetPosition)
+				this.position = 0;
 		},
 
 		update: function () {
