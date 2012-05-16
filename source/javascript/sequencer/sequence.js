@@ -5,7 +5,6 @@ define([
 	var Sequence = function (length) {
 		this._length = length;
 		this.notes = new Array2d();
-		this.position = 0;
 	};
 
 	_.extend(Sequence.prototype, Backbone.Events, {
@@ -13,19 +12,18 @@ define([
 			return this.notes.get(location);
 		},
 
-		update: function () {
+		update: function (position) {
+			if (position >= this._length)
+				position %= this._length;
+
 			if (this.instrumentManager) {
-				var notes = this.notes._columns[this.position];
+				var notes = this.notes._columns[position];
 
 				if (notes)
 					this.instrumentManager.receiveNotes(notes);
 			}
 
-			this.trigger("update", this.position);
-
-			var nextPosition = this.position + 1;
-
-			this.position = nextPosition < this._length ? nextPosition : 0;
+			this.trigger("update", position);
 		},
 
 		getLength: function () {
@@ -34,9 +32,6 @@ define([
 
 		setLength: function (length) {
 			this._length = length;
-
-			if (this.position >= this._length)
-				this.position = 0;
 		},
 
 		addNoteAt: function (location, data) {

@@ -38,7 +38,7 @@ require([
 	var commandObject = {
 		eventBus: eventBus,
 		selectedTrackModel: null,
-		sequencer: new Sequencer(),
+		sequencer: new Sequencer(16),
 		soundOutput: new SoundOutput(),
 		trackCollection: new TrackCollection()
 	};
