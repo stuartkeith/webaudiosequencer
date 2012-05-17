@@ -1,6 +1,7 @@
 define([
 	"commands/addInstrument",
 	"commands/addTrack",
+	"commands/createTrack",
 	"commands/initialize",
 	"commands/playSoundAttributes",
 	"commands/restartSequencer",
@@ -9,10 +10,11 @@ define([
 	"commands/selectTrack",
 	"commands/setSequencePosition",
 	"commands/updateInstrument"
-], function (addInstrument, addTrack, initialize, playSoundAttributes, restartSequencer, removeInstrument, removeTrack, selectTrack, setSequencePosition, updateInstrument) {
+], function (addInstrument, addTrack, createTrack, initialize, playSoundAttributes, restartSequencer, removeInstrument, removeTrack, selectTrack, setSequencePosition, updateInstrument) {
 	return {
 		addInstrument: addInstrument,
 		addTrack: addTrack,
+		createTrack: createTrack,
 		initialize: initialize,
 		playSoundAttributes: playSoundAttributes,
 		removeInstrument: removeInstrument,
@@ -20,6 +22,7 @@ define([
 		selectTrack: selectTrack,
 		sequencePositionSet: restartSequencer,
 		setSequencePosition: setSequencePosition,
+		trackAdded: selectTrack,
 		updateInstrument: updateInstrument
 	};
 });

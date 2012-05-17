@@ -55,7 +55,7 @@ define([
 				this.timeout = setTimeout(_.bind(function () {
 					this.ignoreClick = true;
 
-					this.triggerAddTrack("melodic");
+					this.triggerCreateTrack("melodic");
 				}, this), this.mouseDownTime);
 			},
 
@@ -71,12 +71,12 @@ define([
 				if (this.ignoreClick)
 					this.ignoreClick = false;
 				else
-					this.triggerAddTrack("percussive");
+					this.triggerCreateTrack("percussive");
 			}
 		},
 
-		triggerAddTrack: function (instrumentManagerType) {
-			this.eventBus.trigger("addTrack", instrumentManagerType, this.model.attributes);
+		triggerCreateTrack: function (instrumentManagerType) {
+			this.eventBus.trigger("createTrack", instrumentManagerType, this.model.attributes);
 		},
 
 		stopTimeout: function () {
