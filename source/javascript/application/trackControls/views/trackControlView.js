@@ -14,7 +14,9 @@ define([
 			},
 
 			"click .close": function (event) {
-				this.eventBus.trigger("removeTrack", this.model);
+				this.eventBus.trigger("removeTrack", {
+					trackModel: this.model
+				});
 			}
 		},
 

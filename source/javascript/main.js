@@ -31,8 +31,9 @@ require([
 	"tracks/trackCollection",
 	"commandMap",
 	"application/applicationView",
-	"./keyboardShortcuts"
-], function (_, Backbone, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts) {
+	"./keyboardShortcuts",
+	"utilities/functionChain"
+], function (_, Backbone, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, functionChain) {
 	var eventBus = _.clone(Backbone.Events);
 
 	var commandObject = {
@@ -44,7 +45,13 @@ require([
 	};
 
 	_.each(commandMap, function (fn, event) {
-		eventBus.on(event, fn, commandObject);
+		if (_.isArray(fn)) {
+			eventBus.on(event, function () {
+				functionChain(fn[0], commandObject, arguments, fn[1], fn[2]);
+			});
+		} else {
+			eventBus.on(event, fn, commandObject);
+		}
 	});
 
 	var keyboardShortcuts = keyboardShortcuts(eventBus);
