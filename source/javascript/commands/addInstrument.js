@@ -1,9 +1,12 @@
 define(function () {
-	var addInstrument = function (instrumentManager, soundAttributes) {
-		var instrument = instrumentManager.addInstrument();
+	var addInstrument = function (args) {
+		var instrument = args.instrumentManager.addInstrument();
 
-		if (instrument)
-			this.eventBus.trigger("updateInstrument", instrument, soundAttributes);
+		if (instrument) {
+			args.instrument = instrument;
+
+			this.eventBus.trigger("updateInstrument", args);
+		}
 	};
 
 	return addInstrument;

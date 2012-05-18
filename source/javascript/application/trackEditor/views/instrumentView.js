@@ -28,7 +28,10 @@ define([
 			"drop": function (model, event) {
 				this.$el.removeClass("drag-over");
 
-				this.eventBus.trigger("updateInstrument", this.model, model);
+				this.eventBus.trigger("updateInstrument", {
+					instrument: this.model,
+					soundAttributes: model
+				});
 			},
 
 			"click .remove-instrument": function (event) {

@@ -10,7 +10,9 @@ define([
 
 		events: {
 			"click .select": function (event) {
-				this.eventBus.trigger("selectTrack", this.model);
+				this.eventBus.trigger("selectTrack", {
+					trackModel: this.model
+				});
 			},
 
 			"click .close": function (event) {

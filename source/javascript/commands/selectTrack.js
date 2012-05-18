@@ -1,12 +1,12 @@
 define(function () {
-	var selectTrack = function (trackModelOrIndex) {
-		var trackModel;
-		var trackModelIndex = parseInt(trackModelOrIndex, 10);
+	var selectTrack = function (args) {
+		var trackModel = args.trackModel;
+		var trackIndex = args.trackIndex;
 
-		if (trackModelOrIndex === trackModelIndex) {
-			trackModel = this.trackCollection.at(trackModelIndex);
-		} else {
-			trackModel = trackModelOrIndex;
+		if (trackIndex != null) {
+			trackModel = this.trackCollection.at(trackIndex);
+
+			args.trackModel = trackModel;
 		}
 
 		if (trackModel) {

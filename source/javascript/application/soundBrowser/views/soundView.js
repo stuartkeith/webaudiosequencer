@@ -46,7 +46,10 @@ define([
 					buttonElement.addClass("error");
 				});
 
-				this.eventBus.trigger("playSoundAttributes", this.model.attributes, deferred);
+				this.eventBus.trigger("playSoundAttributes", {
+					deferred: deferred,
+					soundAttributes: this.model.attributes
+				});
 
 				return false;
 			},
@@ -76,7 +79,10 @@ define([
 		},
 
 		triggerCreateTrack: function (instrumentManagerType) {
-			this.eventBus.trigger("createTrack", instrumentManagerType, this.model.attributes);
+			this.eventBus.trigger("createTrack", {
+				instrumentManagerType: instrumentManagerType,
+				soundAttributes: this.model.attributes
+			});
 		},
 
 		stopTimeout: function () {

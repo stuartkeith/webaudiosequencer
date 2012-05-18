@@ -1,5 +1,8 @@
 define(function () {
-	var playSoundAttributes = function (soundAttributes, deferred) {
+	var playSoundAttributes = function (args) {
+		var soundAttributes = args.soundAttributes;
+		var deferred = args.deferred;
+
 		deferred.notify("loading");
 
 		var loadDeferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);

@@ -6,7 +6,9 @@ define([
 			var index = event.which - 49;
 
 			if (index >= 0 && index <= 10)
-				eventBus.trigger("selectTrack", index);
+				eventBus.trigger("selectTrack", {
+					trackIndex: index
+				});
 		});
 	};
 

@@ -1,8 +1,8 @@
 define(function () {
-	var setSequencePosition = function (position) {
-		this.sequencer.position = position;
+	var setSequencePosition = function (args) {
+		this.sequencer.position = args.progressIndex;
 
-		this.eventBus.trigger("sequencePositionSet", position);
+		this.eventBus.trigger("sequencePositionSet", args);
 	};
 
 	return setSequencePosition;

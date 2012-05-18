@@ -4,7 +4,9 @@ define([
 	"sequencer/sequence",
 	"tracks/trackModel"
 ], function (createMelodicInstrumentManager, createPercussiveInstrumentManager, Sequence, TrackModel) {
-	var addTrack = function (instrumentManagerType, soundAttributes) {
+	var createTrack = function (args) {
+		var instrumentManagerType = args.instrumentManagerType;
+
 		var sequence = new Sequence(this.sequencer.getLength());
 
 		var instrumentManager;
@@ -20,11 +22,14 @@ define([
 		trackModel.set("instrumentManager", instrumentManager);
 		trackModel.set("sequence", sequence);
 
-		this.eventBus.trigger("addTrack", trackModel, soundAttributes);
+		args.instrumentManager = instrumentManager;
+		args.trackModel = trackModel;
 
-		this.eventBus.trigger("addInstrument", instrumentManager, soundAttributes);
+		this.eventBus.trigger("addTrack", args);
+
+		this.eventBus.trigger("addInstrument", args);
 	};
 
-	return addTrack;
+	return createTrack;
 });
 

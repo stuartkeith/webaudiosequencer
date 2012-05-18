@@ -1,6 +1,9 @@
 define([
 ], function () {
-	var updateInstrument = function (instrument, soundAttributes) {
+	var updateInstrument = function (args) {
+		var instrument = args.instrument;
+		var soundAttributes = args.soundAttributes;
+
 		instrument.buffer = null;
 
 		if (instrument.soundAttributes)

@@ -40,7 +40,10 @@ define([
 		},
 
 		removeInstrument: function (instrument) {
-			this.eventBus.trigger("removeInstrument", this.model, instrument);
+			this.eventBus.trigger("removeInstrument", {
+				instrument: instrument,
+				instrumentManager: this.model
+			});
 		},
 	});
 
