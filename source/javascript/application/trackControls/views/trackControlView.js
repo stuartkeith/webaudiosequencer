@@ -10,15 +10,11 @@ define([
 
 		events: {
 			"click .select": function (event) {
-				this.eventBus.trigger("selectTrack", {
-					trackModel: this.model
-				});
+				this.trigger("selectTrack", this.model);
 			},
 
 			"click .close": function (event) {
-				this.eventBus.trigger("removeTrack", {
-					trackModel: this.model
-				});
+				this.trigger("removeTrack", this.model);
 			}
 		},
 
@@ -30,7 +26,7 @@ define([
 
 		modelEvents: {
 			"remove": function () {
-				this.remove();
+				this.trigger("removeTrackControl", this);
 			}
 		},
 

@@ -23,7 +23,27 @@ define([
 				model: trackModel
 			});
 
+			trackControlView.on("selectTrack", this.selectTrack, this);
+			trackControlView.on("removeTrack", this.removeTrack, this);
+			trackControlView.on("removeTrackControl", this.removeTrackControl, this);
+
 			this.$el.append(trackControlView.render().$el);
+		},
+
+		selectTrack: function (trackModel) {
+			this.eventBus.trigger("selectTrack", {
+				trackModel: trackModel
+			});
+		},
+
+		removeTrack: function (trackModel) {
+			this.eventBus.trigger("removeTrack", {
+				trackModel: trackModel
+			});
+		},
+
+		removeTrackControl: function (trackControl) {
+			this.removeChildView(trackControl);
 		}
 	});
 
