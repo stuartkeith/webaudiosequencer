@@ -55,6 +55,8 @@ define([
 
 				this.progressElements.length = length;
 			}
+
+			this.$el.width(length * settings.gridWidth);
 		},
 
 		addActiveClass: function () {
