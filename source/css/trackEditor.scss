@@ -63,3 +63,8 @@ $instrument-controls-height: 24px;
 		font-style: italic;
 	}
 }
+
+.grid-canvas {
+	margin-left: $instrument-view-width;
+	position: absolute;
+}

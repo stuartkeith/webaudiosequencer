@@ -181,3 +181,7 @@ body {
       position: relative; }
   .instrument-panel .is-loading {
     font-style: italic; }
+
+.grid-canvas {
+  margin-left: 256px;
+  position: absolute; }
