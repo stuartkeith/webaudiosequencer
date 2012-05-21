@@ -44,15 +44,19 @@ require([
 		trackCollection: new TrackCollection()
 	};
 
-	_.each(commandMap, function (fn, event) {
-		if (_.isArray(fn)) {
-			eventBus.on(event, function () {
-				functionChain(fn[0], commandObject, arguments, fn[1], fn[2]);
-			});
-		} else {
-			eventBus.on(event, fn, commandObject);
-		}
+	_.each(commandMap, function (mappings, event) {
+		_.each(mappings, function (map) {
+			if (map.guards) {
+				eventBus.on(event, function () {
+					functionChain(map.guards, commandObject, arguments, map.successCommand, map.failureCommand);
+				});
+			} else {
+				eventBus.on(event, map.successCommand, commandObject);
+			}
+		});
 	});
+
+	delete commandMap;
 
 	var keyboardShortcuts = keyboardShortcuts(eventBus);
 
