@@ -2,6 +2,13 @@ define([
 	"use!underscore",
 	"use!backbone"
 ], function(_, Backbone) {
+	var getProperty = function (obj, property) {
+		if (_.isFunction(property))
+			return property;
+		else if (_.isString(property))
+			return obj[property];
+	};
+
 	var ExtendedView = function (options) {
 		this.childViews = [];
 		this.eventBus = options.eventBus;
@@ -17,20 +24,20 @@ define([
 	_.extend(ExtendedView.prototype, Backbone.View.prototype, {
 		delegateEventBusEvents: function () {
 			_.each(this.eventBusEvents, function (fn, event) {
-				this.eventBus.on(event, fn, this);
+				this.eventBus.on(event, getProperty(this, fn), this);
 			}, this);
 		},
 
 		undelegateEventBusEvents: function () {
 			_.each(this.eventBusEvents, function (fn, event) {
-				this.eventBus.off(event, fn, this);
+				this.eventBus.off(event, getProperty(this, fn), this);
 			}, this);
 		},
 
 		delegateModelEvents: function () {
 			if (this.model) {
 				_.each(this.modelEvents, function (fn, event) {
-					this.model.on(event, fn, this);
+					this.model.on(event, getProperty(this, fn), this);
 				}, this);
 			}
 		},
@@ -38,7 +45,7 @@ define([
 		undelegateModelEvents: function () {
 			if (this.model) {
 				_.each(this.modelEvents, function (fn, event) {
-					this.model.off(event, fn, this);
+					this.model.off(event, getProperty(this, fn), this);
 				}, this);
 			}
 		},
