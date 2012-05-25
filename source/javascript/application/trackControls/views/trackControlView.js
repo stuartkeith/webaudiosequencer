@@ -18,13 +18,9 @@ define([
 			}
 		},
 
-		eventBusEvents: {
-			"trackSelected": function (trackModel) {
-				this.select.toggleClass("selected", trackModel === this.model);
-			}
-		},
-
 		modelEvents: {
+			"change:selected": "updateSelect",
+
 			"remove": function () {
 				this.trigger("removeTrackControl", this);
 			}
@@ -35,7 +31,13 @@ define([
 
 			this.select = this.$el.find(".select:first");
 
+			this.updateSelect();
+
 			return this;
+		},
+
+		updateSelect: function () {
+			this.select.toggleClass("selected", this.model.get('selected'));
 		}
 	});
 

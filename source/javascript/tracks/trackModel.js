@@ -6,6 +6,7 @@ define([
 		initialize: function () {
 			this.attributes.instrumentManager = null;
 			this.attributes.sequence = null;
+			this.attributes.selected = false;
 		}
 	});
 

@@ -3,6 +3,9 @@ define(function () {
 		var trackModel = args.trackModel;
 		var trackIndex = args.trackIndex;
 
+		if (this.selectedTrackModel)
+			this.selectedTrackModel.set('selected', false);
+
 		if (trackIndex != null) {
 			trackModel = this.trackCollection.at(trackIndex);
 
@@ -11,6 +14,7 @@ define(function () {
 
 		if (trackModel) {
 			this.selectedTrackModel = trackModel;
+			this.selectedTrackModel.set('selected', true);
 
 			this.eventBus.trigger("trackSelected", trackModel);
 		}
