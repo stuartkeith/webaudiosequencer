@@ -25,8 +25,12 @@ define([
 		},
 
 		setBPM: function (value) {
-			this.bpm = value;
-			this._timeout = Math.floor(60.0 / this.bpm * 1000);
+			if (this.bpm !== value) {
+				this.bpm = value;
+				this._timeout = Math.floor(60.0 / this.bpm * 1000);
+
+				this.trigger("bpm", value);
+			}
 		},
 
 		play: function (forceRestart) {
@@ -38,6 +42,8 @@ define([
 
 				this.update();
 			}
+
+			this.trigger("play");
 		},
 
 		stop: function (resetPosition) {
@@ -51,6 +57,8 @@ define([
 
 			if (resetPosition)
 				this.position = 0;
+
+			this.trigger("stop");
 		},
 
 		update: function () {
