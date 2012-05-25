@@ -63,7 +63,10 @@ require([
 	var applicationView = new ApplicationView({
 		eventBus: eventBus,
 		el: "#container",
-		model: commandObject.trackCollection
+		model: {
+			sequencer: commandObject.sequencer,
+			trackCollection: commandObject.trackCollection
+		}
 	});
 
 	applicationView.render();

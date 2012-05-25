@@ -17,12 +17,12 @@ define([
 
 			this.addChildView(TrackControlsView, {
 				el: this.$el.find(".track-controls"),
-				model: this.model
+				model: this.model.trackCollection
 			}).render();
 
 			this.addChildView(TrackEditorView, {
 				el: this.$el.find(".track-editor"),
-				model: this.model.models[0]
+				model: this.model.trackCollection.models[0]
 			}).render();
 
 			return this;

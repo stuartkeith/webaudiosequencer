@@ -9,19 +9,19 @@ define([
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
 
-		modelEvents: {
-			"add": function (trackModel, trackCollection) {
-				if (trackCollection.length === 1) {
+		eventBusEvents: {
+			"trackAdded": function () {
+				if (this.model.trackCollection.length === 1) {
 					this.trackPanelView = this.addChildView(TrackPanelView, {
-						model: trackCollection
+						model: this.model
 					}).render();
 
 					this.trackPanelContainer.append(this.trackPanelView.$el);
 				}
 			},
 
-			"remove": function (trackModel, trackCollection) {
-				if (trackCollection.length === 0) {
+			"trackRemoved": function () {
+				if (this.model.trackCollection.length === 0) {
 					this.removeChildView(this.trackPanelView);
 
 					this.trackPanelView = null;

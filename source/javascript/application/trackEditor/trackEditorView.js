@@ -12,16 +12,7 @@ define([
 		trackEditorTemplate: _.template(TrackEditorTemplateString),
 
 		eventBusEvents: {
-			"trackSelected": function (trackModel) {
-				this.sequenceProgressView.setModel(trackModel.get("sequence"));
-				this.sequenceProgressView.render();
-
-				this.gridView.setModel(trackModel.get("sequence"));
-				this.gridView.render();
-
-				this.instrumentPanelView.setInstrumentManager(trackModel.get("instrumentManager"));
-				this.instrumentPanelView.render();
-			}
+			"trackSelected": "updateTrackModel"
 		},
 
 		render: function () {
@@ -39,7 +30,23 @@ define([
 				el: this.$el.find(".grid-canvas:first")
 			});
 
+			if (this.model)
+				this.updateTrackModel(this.model);
+
 			return this;
+		},
+
+		updateTrackModel: function (trackModel) {
+			this.setModel(trackModel);
+
+			this.sequenceProgressView.setModel(trackModel.get("sequence"));
+			this.sequenceProgressView.render();
+
+			this.gridView.setModel(trackModel.get("sequence"));
+			this.gridView.render();
+
+			this.instrumentPanelView.setInstrumentManager(trackModel.get("instrumentManager"));
+			this.instrumentPanelView.render();
 		}
 	});
 
