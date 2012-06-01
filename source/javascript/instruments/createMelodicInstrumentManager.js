@@ -28,7 +28,7 @@ define([
 
 			if (notes && instrument && instrument.buffer) {
 				_.each(notes, function (data, note) {
-					this.soundOutput.playBuffer(instrument.buffer, parseInt(note) + instrument.transpose);
+					this.soundOutput.playBuffer(instrument.buffer, parseInt(note) + instrument.transpose, instrument.getVolume());
 				}, this);
 			}
 		}

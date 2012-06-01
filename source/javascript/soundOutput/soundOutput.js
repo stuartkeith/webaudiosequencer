@@ -30,7 +30,8 @@ define([
 			this.trigger("volume", volume);
 		},
 
-		playBuffer: function (buffer, note, delay, callback) {
+		playBuffer: function (buffer, note, volume, delay, callback) {
+			var volume = volume || 1;
 			var delay = delay || 0;
 			var playbackRate;
 
@@ -39,9 +40,13 @@ define([
 			else
 				playbackRate = 1;
 
+			var gainNode = this._context.createGainNode();
+			gainNode.gain.value = volume;
+			gainNode.connect(this._gainNode);
+
 			var bufferSource = this._context.createBufferSource();
 			bufferSource.buffer = buffer;
-			bufferSource.connect(this._gainNode);
+			bufferSource.connect(gainNode);
 			bufferSource.playbackRate.value = playbackRate;
 			bufferSource.noteOn(delay ? this._context.currentTime + delay : 0);
 
