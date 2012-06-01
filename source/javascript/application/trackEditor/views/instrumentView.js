@@ -4,8 +4,9 @@ define([
 	"baseView",
 	"settings",
 	"dragDropMixIn",
+	"application/volumeView",
 	"text!templates/trackEditor/instrument.html"
-], function(_, Backbone, BaseView, settings, dragDropMixIn, instrumentTemplateString) {
+], function(_, Backbone, BaseView, settings, dragDropMixIn, VolumeView, instrumentTemplateString) {
 	var InstrumentView = BaseView.extend({
 		className: "instrument drag-target",
 		instrumentTemplate: _.template(instrumentTemplateString),
@@ -62,11 +63,25 @@ define([
 		render: function () {
 			this.$el.html(this.instrumentTemplate(this.model));
 
+			var volumeView = this.addChildView(VolumeView, {
+				el: this.$el.find(".instrument-volume:first"),
+				model: this.model
+			}).render();
+
+			volumeView.on("change", this.volumeViewChange, this);
+
 			this.$el.toggleClass("is-loading", this.model.isLoading);
 
 			this.$el.height(this.model.range * settings.instrumentHeight);
 
 			return this;
+		},
+
+		volumeViewChange: function (event) {
+			this.eventBus.trigger("setInstrumentVolume", {
+				instrumentModel: this.model,
+				volume: event.target.value
+			});
 		}
 	});
 
