@@ -65,6 +65,7 @@ require([
 		el: "#container",
 		model: {
 			sequencer: commandObject.sequencer,
+			soundOutput: commandObject.soundOutput,
 			trackCollection: commandObject.trackCollection
 		}
 	});

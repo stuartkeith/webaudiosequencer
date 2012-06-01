@@ -2,11 +2,12 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
+	"./volumeView",
 	"./instructionsPanel/instructionsPanelView",
 	"./soundBrowser/soundBrowserView",
 	"./trackPanelView",
 	"text!templates/application.html"
-], function(_, Backbone, BaseView, InstructionsPanelView, SoundBrowserView, TrackPanelView, applicationTemplateString) {
+], function(_, Backbone, BaseView, VolumeView, InstructionsPanelView, SoundBrowserView, TrackPanelView, applicationTemplateString) {
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
 
@@ -32,6 +33,13 @@ define([
 			this.removeAllChildViews();
 
 			this.$el.html(this.applicationTemplate());
+
+			var volumeView = this.addChildView(VolumeView, {
+				el: this.$el.find(".master-volume:first"),
+				model: this.model.soundOutput
+			}).render();
+
+			volumeView.on("change", this.volumeViewChange, this);
 
 			var soundBrowserView = this.addChildView(SoundBrowserView, {
 				el: this.$el.find(".sound-browser:first")
@@ -75,6 +83,12 @@ define([
 
 				this.trackPanelView = null;
 			}
+		},
+
+		volumeViewChange: function (event) {
+			this.eventBus.trigger("setSoundOutputVolume", {
+				volume: event.target.value
+			});
 		}
 	});
 
