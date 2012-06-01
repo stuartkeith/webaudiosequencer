@@ -25,9 +25,11 @@ define([
 		},
 
 		setVolume: function (volume) {
-			this._gainNode.gain.value = volume;
+			if (volume !== this._gainNode.gain.value) {
+				this._gainNode.gain.value = volume;
 
-			this.trigger("volume", volume);
+				this.trigger("volume", volume);
+			}
 		},
 
 		playBuffer: function (buffer, note, volume, delay, callback) {
