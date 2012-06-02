@@ -31,16 +31,11 @@ define([
 
 		events: {
 			"mousedown": function (event) {
-				if (event.button === 0) {
-					var location = this.canvasGrid.mouseEventToColumnAndRow(this.$el, event);
-					this.isMouseDown = true;
-					this.isAddingNotes = this.model.toggleNoteAt(location, true);
-					this.mouseDownRow = location.y;
+				this.handleMouseNoteEvent(event, true);
+			},
 
-					event.preventDefault();
-
-					return false
-				}
+			"mouseup": function (event) {
+				this.stopHandling();
 			},
 
 			"mousemove": function (event) {
@@ -59,14 +54,8 @@ define([
 				}
 			},
 
-			"mouseleave": function (event) {
-				this.isMouseDown = false;
-			},
-
-			"mouseup": function (event) {
-				if (event.button === 0) {
-					this.isMouseDown = false;
-				}
+			"mouseenter": function (event) {
+				this.handleMouseNoteEvent(event, false);
 			}
 		},
 
@@ -83,6 +72,30 @@ define([
 			}, this);
 
 			return this;
+		},
+
+		handleMouseNoteEvent: function (event, determineContext) {
+			if (event.which === 1) {
+				this.isMouseDown = true;
+
+				var location = this.canvasGrid.mouseEventToColumnAndRow(this.$el, event);
+
+				this.mouseDownRow = location.y;
+
+				if (this.isAddingNotes == null || determineContext)
+					this.isAddingNotes = this.model.toggleNoteAt(location, true);
+
+				event.preventDefault();
+
+				return false;
+			} else {
+				this.stopHandling();
+			}
+		},
+
+		stopHandling: function () {
+			this.isAddingNotes = null;
+			this.isMouseDown = false;
 		}
 	});
 
