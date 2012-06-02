@@ -5,6 +5,8 @@ define([
 	"text!templates/sequencerControls/sequencerControls.html"
 ], function(_, Backbone, BaseView, sequencerControlsTemplateString) {
 	var SequencerControlsView = BaseView.extend({
+		bpmMinimum: 30,
+		bpmMaximum: 300,
 		sequencerControlsTemplate: _.template(sequencerControlsTemplateString),
 
 		events: {
@@ -31,8 +33,11 @@ define([
 		render: function () {
 			this.$el.html(this.sequencerControlsTemplate());
 
-			this.playStopInput = this.$el.find(".play-stop");
-			this.bpmInput = this.$el.find(".bpm");
+			this.playStopInput = this.$el.find(".play-stop")[0];
+
+			this.bpmInput = this.$el.find(".bpm")[0];
+			this.bpmInput.min = this.bpmMinimum;
+			this.bpmInput.max = this.bpmMaximum;
 
 			this.updatePlayStopInput();
 			this.updateBPMInput();
@@ -41,11 +46,11 @@ define([
 		},
 
 		updatePlayStopInput: function () {
-			this.playStopInput.prop("checked", this.model.isPlaying);
+			this.playStopInput.checked = this.model.isPlaying;
 		},
 
 		updateBPMInput: function () {
-			this.bpmInput.val(this.model.bpm);
+			this.bpmInput.value = this.model.bpm;
 		}
 	});
 
