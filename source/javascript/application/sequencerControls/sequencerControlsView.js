@@ -17,17 +17,20 @@ define([
 					this.eventBus.trigger("stopSequencer");
 			},
 
-			"change .bpm": function (event) {
-				this.eventBus.trigger("updateBPM", {
-					bpm: event.target.value
-				});
-			}
+			"change .bpm-number": "changeBPMInput",
+			"change .bpm-slider": "changeBPMInput"
+		},
+
+		changeBPMInput: function (event) {
+			this.eventBus.trigger("updateBPM", {
+				bpm: event.target.value
+			});
 		},
 
 		modelEvents: {
 			"play": "updatePlayStopInput",
 			"stop": "updatePlayStopInput",
-			"bpm": "updateBPMInput"
+			"bpm": "updateBPMInputs"
 		},
 
 		render: function () {
@@ -35,12 +38,16 @@ define([
 
 			this.playStopInput = this.$el.find(".play-stop")[0];
 
-			this.bpmInput = this.$el.find(".bpm")[0];
-			this.bpmInput.min = this.bpmMinimum;
-			this.bpmInput.max = this.bpmMaximum;
+			this.bpmNumber = this.$el.find(".bpm-number")[0];
+			this.bpmNumber.min = this.bpmMinimum;
+			this.bpmNumber.max = this.bpmMaximum;
+
+			this.bpmSlider = this.$el.find(".bpm-slider")[0];
+			this.bpmSlider.min = this.bpmMinimum;
+			this.bpmSlider.max = this.bpmMaximum;
 
 			this.updatePlayStopInput();
-			this.updateBPMInput();
+			this.updateBPMInputs();
 
 			return this;
 		},
@@ -49,8 +56,9 @@ define([
 			this.playStopInput.checked = this.model.isPlaying;
 		},
 
-		updateBPMInput: function () {
-			this.bpmInput.value = this.model.bpm;
+		updateBPMInputs: function () {
+			this.bpmNumber.value = this.model.bpm;
+			this.bpmSlider.value = this.model.bpm;
 		}
 	});
 
