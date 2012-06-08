@@ -23,18 +23,24 @@ define([
 			}
 		},
 
-		removeInstrument: function (instrument) {
-			var index = this.instruments.indexOf(instrument);
-
+		removeInstrumentAtIndex: function (index) {
 			if (index >= 0) {
-				this.instruments.splice(index, 1);
+				var instrument = this.instruments.splice(index, 1)[0];
 
 				instrument.remove();
 
 				this.trigger("instrumentRemoved", instrument);
+
+				return true;
 			} else {
 				return false;
 			}
+		},
+
+		removeInstrument: function (instrument) {
+			var index = this.instruments.indexOf(instrument);
+
+			return this.removeInstrumentAtIndex(index);
 		},
 
 		createInstrument: function () {

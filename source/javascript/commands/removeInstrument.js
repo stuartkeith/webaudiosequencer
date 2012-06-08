@@ -3,7 +3,9 @@ define(function () {
 		var instrumentManager = args.instrumentManager;
 		var instrument = args.instrument;
 
-		instrumentManager.removeInstrument(instrument);
+		var row = instrumentManager.instruments.indexOf(instrument);
+
+		instrumentManager.removeInstrumentAtIndex(row);
 	};
 
 	return removeInstrument;
