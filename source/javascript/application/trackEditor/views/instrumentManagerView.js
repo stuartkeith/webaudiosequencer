@@ -7,8 +7,9 @@ define([
 ], function(_, Backbone, BaseView, settings, InstrumentView) {
 	var InstrumentManagerView = BaseView.extend({
 		modelEvents: {
-			"instrumentAdded": function (instrument) {
-				this.addInstrumentView(instrument);
+			"instrumentAdded": "addInstrumentView",
+			"instrumentRemoved": function () {
+				this.trigger("resize");
 			}
 		},
 
@@ -44,7 +45,7 @@ define([
 				instrument: instrument,
 				instrumentManager: this.model
 			});
-		},
+		}
 	});
 
 	return InstrumentManagerView;
