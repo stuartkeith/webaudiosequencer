@@ -6,6 +6,10 @@ define(function () {
 		var row = instrumentManager.instruments.indexOf(instrument);
 
 		instrumentManager.removeInstrumentAtIndex(row);
+
+		args.instrumentRow = row;
+
+		this.eventBus.trigger("instrumentRemoved", args);
 	};
 
 	return removeInstrument;

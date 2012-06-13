@@ -43,6 +43,23 @@ define([
 				this.trigger("note:removed", location);
 		},
 
+		removeNotesAt: function (options) {
+			this.notes.each(function (location) {
+				this.removeNoteAt(location);
+			}, this, options);
+		},
+
+		shiftNotesAt: function (x, y, options) {
+			this.notes.each(function (location) {
+				this.removeNoteAt(location);
+
+				location.x += x;
+				location.y += y;
+
+				this.addNoteAt(location, true);
+			}, this, options);
+		},
+
 		toggleNoteAt: function (location, data) {
 			if (this.getNoteAt(location)) {
 				this.removeNoteAt(location);

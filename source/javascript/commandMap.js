@@ -12,12 +12,13 @@ define([
 	"commands/setInstrumentVolume",
 	"commands/setSequencePosition",
 	"commands/setSoundOutputVolume",
+	"commands/shiftNotesUp",
 	"commands/stopSequencer",
 	"commands/updateBPM",
 	"commands/updateInstrument",
 	"guards/isSelectedTrack",
 	"guards/isTrackCount"
-], function (addInstrument, addTrack, createTrack, initialize, playSoundAttributes, restartSequencer, removeInstrument, removeTrack, selectPreviousTrack, selectTrack, setInstrumentVolume, setSequencePosition, setSoundOutputVolume, stopSequencer, updateBPM, updateInstrument, isSelectedTrack, isTrackCount) {
+], function (addInstrument, addTrack, createTrack, initialize, playSoundAttributes, restartSequencer, removeInstrument, removeTrack, selectPreviousTrack, selectTrack, setInstrumentVolume, setSequencePosition, setSoundOutputVolume, shiftNotesUp, stopSequencer, updateBPM, updateInstrument, isSelectedTrack, isTrackCount) {
 	var commandMap = {};
 
 	var add = function (event, guards, successCommand, failureCommand) {
@@ -34,6 +35,7 @@ define([
 	add('addTrack', null, addTrack),
 	add('createTrack', null, createTrack),
 	add('initialize', null, initialize),
+	add('instrumentRemoved', null, shiftNotesUp),
 	add('playSequencer', null, restartSequencer),
 	add('playSoundAttributes', null, playSoundAttributes),
 	add('removeInstrument', null, removeInstrument),
