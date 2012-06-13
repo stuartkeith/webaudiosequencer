@@ -67,8 +67,8 @@ define([
 			this.canvasGrid.setColumns(this.model.getLength());
 			this.canvasGrid.drawGrid(true);
 
-			this.model.notes.each(function (x, y, value) {
-				this.drawNoteAt(x, y);
+			this.model.notes.each(function (location, value) {
+				this.drawNoteAt(location.x, location.y);
 			}, this);
 
 			return this;

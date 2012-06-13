@@ -1,4 +1,6 @@
-define(function() {
+define([
+	"use!underscore"
+], function() {
 	var Array2d = function () {
 		this._columns = {};
 	};
@@ -21,17 +23,33 @@ define(function() {
 		return true;
 	};
 
-	Array2d.prototype.each = function (callback, context) {
+	Array2d.prototype.each = function (callback, context, options) {
 		var context = context || this;
-		var columns;
+		var options = options || {};
 
-		Object.keys(this._columns).forEach(function (outerKey) {
-			columns = this._columns[outerKey];
+		var location = {};
 
-			Object.keys(columns).forEach(function (innerKey) {
-				callback.call(context, outerKey, innerKey, columns[innerKey]);
-			}, this);
-		}, this);
+		_.each(this._columns, function (data, outerKey) {
+			location.x = parseInt(outerKey, 10);
+
+			if (options.left != null && location.x < options.left)
+				return;
+
+			if (options.right != null && location.x > options.right)
+				return;
+
+			_.each(data, function (data, innerKey) {
+				location.y = parseInt(innerKey, 10);
+
+				if (options.top != null && location.y < options.top)
+					return;
+
+				if (options.bottom != null && location.y > options.bottom)
+					return;
+
+				callback.call(context, location, data);
+			});
+		});
 	};
 
 	Array2d.prototype.clear = function (location) {
