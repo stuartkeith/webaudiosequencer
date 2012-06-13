@@ -23,7 +23,7 @@ define([
 			}
 		},
 
-		receiveNotes: function (notes) {
+		receiveNotes: function (position, notes) {
 			var instrument = this.instruments[0];
 
 			if (notes && instrument && instrument.buffer) {

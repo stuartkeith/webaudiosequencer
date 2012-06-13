@@ -22,7 +22,7 @@ define([
 			}
 		},
 
-		receiveNotes: function (notes) {
+		receiveNotes: function (position, notes) {
 			var instrument, note;
 
 			_.each(notes, function (data, note) {

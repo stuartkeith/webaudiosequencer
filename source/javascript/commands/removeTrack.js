@@ -2,7 +2,12 @@ define(function () {
 	var removeTrack = function (args) {
 		var trackModel = args.trackModel;
 
-		this.sequencer.removeSequence(trackModel.get("sequence"));
+		var instrumentManager = trackModel.get("instrumentManager");
+		var sequence = trackModel.get("sequence");
+
+		instrumentManager.removeSequence(sequence);
+
+		this.sequencer.removeSequence(sequence);
 
 		var index = this.trackCollection.models.indexOf(trackModel);
 

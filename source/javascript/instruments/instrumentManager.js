@@ -6,6 +6,7 @@ define([
 	var InstrumentManager = function () {
 		this.instruments = [];
 		this.range = settings.maxNotes;
+		this.sequences = [];
 	};
 
 	_.extend(InstrumentManager.prototype, Backbone.Events, {
@@ -43,11 +44,24 @@ define([
 			return this.removeInstrumentAtIndex(index);
 		},
 
+		addSequence: function (sequence) {
+			sequence.on("update", this.receiveNotes, this);
+
+			this.sequences.push(sequence);
+		},
+
+		removeSequence: function (sequence) {
+			sequence.off("update", this.receiveNotes, this);
+
+			var index = this.sequences.indexOf(sequence);
+			this.sequences.splice(index, 1);
+		},
+
 		createInstrument: function () {
 			// override this.
 		},
 
-		receiveNotes: function (notes) {
+		receiveNotes: function (position, notes) {
 			// override this.
 		}
 	});

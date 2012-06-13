@@ -16,7 +16,7 @@ define([
 		else if (instrumentManagerType === "percussive")
 			instrumentManager = createPercussiveInstrumentManager();
 
-		sequence.instrumentManager = instrumentManager;
+		instrumentManager.addSequence(sequence);
 
 		var trackModel = new TrackModel();
 		trackModel.set("instrumentManager", instrumentManager);

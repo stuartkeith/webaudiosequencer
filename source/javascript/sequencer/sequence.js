@@ -16,14 +16,9 @@ define([
 			if (position >= this._length)
 				position %= this._length;
 
-			if (this.instrumentManager) {
-				var notes = this.notes._columns[position];
+			var notes = this.notes._columns[position];
 
-				if (notes)
-					this.instrumentManager.receiveNotes(notes);
-			}
-
-			this.trigger("update", position);
+			this.trigger("update", position, notes);
 		},
 
 		getLength: function () {
