@@ -60,13 +60,12 @@ define([
 
 		var value = row[location.y];
 
-		if (value) {
-			delete row[location.y];
+		if (!value)
+			return false;
 
-			return value;
-		}
+		delete row[location.y];
 
-		return false;
+		return value;
 	};
 
 	return Array2d;
