@@ -4,8 +4,7 @@ require.config({
 		underscore: "libraries/underscore/underscore-1.3.3",
 		backbone: "libraries/backbone/backbone-0.9.2",
 		templates: "../templates",
-		text: "libraries/require/text-1.0.8",
-		order: "libraries/require/order-1.0.5",
+		text: "libraries/require/text-2.0.0",
 		use: "libraries/require/use-0.3.0"
 	},
 
