@@ -1,1 +1,1 @@
-sass main.scss > ../css/main.css
+sass main.scss | cleancss -o ../css/main.css
