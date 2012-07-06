@@ -2,6 +2,10 @@ $button-image: url('images/buttons.png');
 $button-width: 18px;
 $button-height: 18px;
 
+body {
+	background: $button-image no-repeat -1000px -1000px;
+}
+
 .button {
 	background-image: $button-image;
 	cursor: pointer;
