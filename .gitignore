@@ -1,3 +1,4 @@
-build/output
+*.pyc
+_build/
 source/css/main.css
-source/scss/.sass-cache/*
+.sass-cache/
