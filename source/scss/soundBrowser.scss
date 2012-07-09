@@ -4,7 +4,7 @@ $sound-border: 2px;
 
 $inner-height: $sound-height - ($sound-border * 2);
 
-$button-offset: ($inner-height - $button-height) / 2;
+$button-offset: 5px;
 $title-left: $inner-height;
 $title-width: $sound-width - ($sound-border * 2) - ($inner-height * 2);
 
@@ -57,35 +57,15 @@ $title-width: $sound-width - ($sound-border * 2) - ($inner-height * 2);
 		width: $title-width;
 	}
 
-
 	.sound-play {
 		left: $button-offset;
 		position: absolute;
 		top: $button-offset;
 	}
 
-	.play {
-		@include button-sprite(0, 0);
-	}
-
 	.add {
-		@include button-sprite(4, 0);
 		right: $button-offset;
 		position: absolute;
 		top: $button-offset;
-	}
-
-	.loading {
-		@include button-sprite(1, 0);
-		cursor: wait;
-	}
-
-	.playing {
-		@include button-sprite(2, 0);
-		cursor: wait;
-	}
-
-	.error {
-		@include button-sprite(3, 0);
 	}
 }

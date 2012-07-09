@@ -13,7 +13,7 @@ define([
 			if (this.currentClass)
 				this.$el.removeClass(this.currentClass);
 
-			this.currentClass = newClass;
+			this.currentClass = "sprite-buttons-" + newClass;
 
 			this.$el.addClass(this.currentClass);
 		},
@@ -31,10 +31,12 @@ define([
 				var deferred = new $.Deferred();
 
 				deferred.progress(function (type) {
+					that.$el.css("cursor", "wait");
 					that.setClass(type);
 				});
 
 				deferred.always(function () {
+					that.$el.css("cursor", "");
 					that.playIsDisabled = false;
 				});
 

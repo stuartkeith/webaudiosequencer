@@ -29,8 +29,7 @@
 		}
 	}
 
-	.close {
-		@include button-sprite(5, 0);
+	.sprite-buttons-remove {
 		position: absolute;
 	}
 }

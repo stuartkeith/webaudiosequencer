@@ -13,7 +13,7 @@ define([
 				this.trigger("selectTrack", this.model);
 			},
 
-			"click .close": function (event) {
+			"click .remove-track": function (event) {
 				this.trigger("removeTrack", this.model);
 			}
 		},

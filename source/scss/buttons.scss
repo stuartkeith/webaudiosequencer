@@ -1,0 +1,12 @@
+.sprite-buttons-remove,
+.sprite-buttons-playing,
+.sprite-buttons-play,
+.sprite-buttons-loading,
+.sprite-buttons-error,
+.sprite-buttons-add{background-image:url(images/buttons.png);background-repeat:no-repeat}
+.sprite-buttons-remove{background-position:0px 0px;width:18px;height:18px;}
+.sprite-buttons-playing{background-position:-18px 0px;width:18px;height:18px;}
+.sprite-buttons-play{background-position:0px -18px;width:18px;height:18px;}
+.sprite-buttons-loading{background-position:-18px -18px;width:18px;height:18px;}
+.sprite-buttons-error{background-position:-36px 0px;width:18px;height:18px;}
+.sprite-buttons-add{background-position:-36px -18px;width:18px;height:18px;}

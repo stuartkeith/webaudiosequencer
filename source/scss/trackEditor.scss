@@ -51,8 +51,7 @@ $instrument-controls-height: 24px;
 		position: relative;
 		width: $instrument-view-width;
 
-		.remove-instrument {
-			@include button-sprite(5, 0);
+		.sprite-buttons-remove {
 			float: left;
 			position: relative;
 		}
