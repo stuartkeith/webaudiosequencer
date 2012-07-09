@@ -3,9 +3,10 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
+	"application/soundPlayView",
 	"./draggableView",
 	"text!templates/soundBrowser/sound.html"
-], function($, _, Backbone, BaseView, DraggableView, soundTemplateString) {
+], function($, _, Backbone, BaseView, SoundPlayView, DraggableView, soundTemplateString) {
 	var SoundView = BaseView.extend({
 		className: "sound",
 		mouseDownTime: 500,
@@ -13,47 +14,6 @@ define([
 		soundTemplate: _.template(soundTemplateString),
 
 		events: {
-			"click .play": function (event) {
-				if (this.playIsDisabled)
-					return;
-
-				this.playIsDisabled = true;
-
-				event.preventDefault();
-
-				var that = this;
-				var buttonElement = $(event.target);
-				var deferred = new $.Deferred();
-
-				buttonElement.removeClass("error");
-
-				deferred.progress(function (type) {
-					if (type === "loading") {
-						buttonElement.addClass("loading");
-					} else if (type === "playing") {
-						buttonElement.removeClass("loading");
-						buttonElement.addClass("playing");
-					}
-				});
-
-				deferred.always(function () {
-					buttonElement.removeClass("loading playing");
-
-					that.playIsDisabled = false;
-				});
-
-				deferred.fail(function () {
-					buttonElement.addClass("error");
-				});
-
-				this.eventBus.trigger("playSoundAttributes", {
-					deferred: deferred,
-					soundAttributes: this.model.attributes
-				});
-
-				return false;
-			},
-
 			"mousedown .add": function (event) {
 				this.timeout = setTimeout(_.bind(function () {
 					this.ignoreClick = true;
@@ -97,9 +57,18 @@ define([
 			if (this.model) {
 				this.$el.html(this.soundTemplate(this.model.toJSON()));
 
+				var soundPlay = this.$el.find(".sound-play:first");
 				var draggable = this.$el.find(".draggable:first");
 
-				this.addChildView(DraggableView, { el: draggable, model: this.model.attributes });
+				this.addChildView(SoundPlayView, {
+					el: soundPlay,
+					model: this.model
+				});
+
+				this.addChildView(DraggableView, {
+					el: draggable,
+					model: this.model.attributes
+				});
 			}
 
 			return this;

@@ -58,11 +58,14 @@ $title-width: $sound-width - ($sound-border * 2) - ($inner-height * 2);
 	}
 
 
-	.play {
-		@include button-sprite(0, 0);
+	.sound-play {
 		left: $button-offset;
 		position: absolute;
 		top: $button-offset;
+	}
+
+	.play {
+		@include button-sprite(0, 0);
 	}
 
 	.add {
