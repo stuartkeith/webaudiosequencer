@@ -12,12 +12,12 @@ define(function () {
 
 	return {
 		subCanvasses: {
-			off: squareFunctionFactory("#aaaaaa", "#777777"),
-			on: squareFunctionFactory("#bbbbbb", "#888888"),
+			off: squareFunctionFactory("#E0EADC", "#C5C6CD"),
+			on: squareFunctionFactory("#EDFCE5", "#D3D4DF"),
 			note: function (context, width, height) {
-				context.fillStyle = "#eeee88";
+				context.fillStyle = "#AE192B";
 				context.fillRect(0, 0, width, height);
-				context.fillStyle = "#ffffbb";
+				context.fillStyle = "#FF3D5C";
 				context.fillRect(1, 1, width - 2, height - 2);
 			}
 		},

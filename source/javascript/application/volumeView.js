@@ -6,7 +6,7 @@ define([
 	var VolumeView = BaseView.extend({
 		events: {
 			"change": function (event) {
-				this.trigger("change", event);
+				this.trigger("change", event.target.value);
 			}
 		},
 

@@ -14,9 +14,6 @@ define([
 		dragTarget: "SoundExtended",
 		dropEffect: "copy",
 
-		initialize: function () {
-		},
-
 		events: {
 			"dragenter": function (model, event) {
 				this.$el.addClass("drag-over");
@@ -63,6 +60,10 @@ define([
 		render: function () {
 			this.$el.html(this.instrumentTemplate(this.model));
 
+			var heightDifference = this.$el.outerHeight(true) - this.$el.height();
+
+			this.$el.height((this.model.range * settings.instrumentHeight) - heightDifference);
+
 			var volumeView = this.addChildView(VolumeView, {
 				el: this.$el.find(".instrument-volume:first"),
 				model: this.model
@@ -72,15 +73,21 @@ define([
 
 			this.$el.toggleClass("is-loading", this.model.isLoading);
 
-			this.$el.height(this.model.range * settings.instrumentHeight);
+			this.$el.find(".remove-instrument:first").button({
+				icons: {
+					primary: "sprite-buttons-remove"
+				},
+
+				text: false
+			});
 
 			return this;
 		},
 
-		volumeViewChange: function (event) {
+		volumeViewChange: function (value) {
 			this.eventBus.trigger("setInstrumentVolume", {
 				instrumentModel: this.model,
-				volume: event.target.value
+				volume: value
 			});
 		}
 	});

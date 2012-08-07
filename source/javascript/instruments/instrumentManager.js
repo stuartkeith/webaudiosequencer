@@ -6,6 +6,8 @@ define([
 	var InstrumentManager = function () {
 		this.instruments = [];
 		this.range = settings.maxNotes;
+		this.instrumentRange = 0;
+		this.instrumentRangeRemaining = this.range;
 		this.sequences = [];
 	};
 
@@ -15,6 +17,9 @@ define([
 
 			if (instrument) {
 				this.instruments.push(instrument);
+
+				this.instrumentRange += instrument.range;
+				this.instrumentRangeRemaining -= instrument.range;
 
 				this.trigger("instrumentAdded", instrument);
 
@@ -27,6 +32,9 @@ define([
 		removeInstrumentAtIndex: function (index) {
 			if (index >= 0) {
 				var instrument = this.instruments.splice(index, 1)[0];
+
+				this.instrumentRange -= instrument.range;
+				this.instrumentRangeRemaining += instrument.range;
 
 				instrument.remove();
 

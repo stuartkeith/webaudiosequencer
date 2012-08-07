@@ -1,3 +1,10 @@
+Icons
+-----
+
+The icons used are part of the [Default Icon](http://www.defaulticon.com/)
+set by [interactivemania](http://www.interactivemania.com/).
+
+
 Required Server Configuration
 -----------------------------
 

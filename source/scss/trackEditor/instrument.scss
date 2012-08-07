@@ -1,0 +1,50 @@
+$drag-target-border: 2px;
+
+.drag-target {
+	background: $dragdrop-foreground;
+	border: $drag-target-border solid $dragdrop-background;
+}
+
+.drag-available {
+	background: $dragdrop-active-foreground;
+	border-color: $dragdrop-active-background;
+}
+
+.drag-over {
+	background: $dragdrop-accepted-foreground;
+	border-color: $dragdrop-accepted-background;
+}
+
+.instrument {
+	overflow: hidden;
+	position: relative;
+}
+
+.instrument-controls {
+	height: 28px;
+	line-height: 28px;
+}
+
+.remove-instrument {
+	@include center($sprite-buttons-remove-height + ($button-border * 2));
+	float: left;
+	height: 16px;
+	margin-left: $drag-target-border * 2;
+	margin-right: $drag-target-border * 2;
+	width: 16px;
+}
+
+.instrument-volume {
+	@include input-range(64px, 16px);
+	@include center(16px);
+	float: left;
+	margin-left: $drag-target-border * 2;
+	margin-right: $drag-target-border * 2;
+}
+
+.instrument-title {
+	display: block;
+	font-size: 10px;
+	padding-left: $drag-target-border * 2;
+	overflow: hidden;
+}

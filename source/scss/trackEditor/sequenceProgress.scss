@@ -1,0 +1,9 @@
+.sequence-progress {
+	height: 24px;
+	margin-left: $instrument-view-width;
+	overflow: hidden;
+
+	& button {
+		height: 100%;
+	}
+}

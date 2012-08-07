@@ -3,10 +3,15 @@ define([
 	"use!backbone",
 	"baseView",
 	"dragDropMixIn",
-], function(_, Backbone, BaseView, dragDropMixIn) {
+	"settings"
+], function(_, Backbone, BaseView, dragDropMixIn, settings) {
 	var NewInstrumentAreaView = BaseView.extend({
 		dragTarget: "SoundExtended",
 		dropEffect: "copy",
+
+		initialize: function () {
+			this.heightDifference = this.$el.outerHeight(true) - this.$el.height();
+		},
 
 		events: {
 			"dragenter": function (model, event) {
@@ -34,6 +39,20 @@ define([
 
 			"outSoundExtended": function () {
 				this.$el.removeClass("drag-available");
+			}
+		},
+
+		modelEvents: {
+			"instrumentAdded": "render",
+			"instrumentRemoved": "render"
+		},
+
+		render: function () {
+			if (this.model.instrumentRangeRemaining === 0) {
+				this.$el.hide();
+			} else {
+				this.$el.show();
+				this.$el.height((this.model.instrumentRangeRemaining * settings.instrumentHeight) - this.heightDifference);
 			}
 		}
 	});

@@ -1,0 +1,36 @@
+$button-border: 1px;
+$button-border-radius: 4px;
+$button-border-width: 1px;
+
+$background: #FFFFFF;
+
+$background-darken: 25%;
+
+// action - buttons, etc.
+$action-foreground: #EB7583;
+$action-background: darken($action-foreground, $background-darken);
+$action-text: #FFFFFF;
+$action-foreground-hover: lighten($action-foreground, 5%);
+$action-background-hover: lighten($action-background, 5%);
+$action-foreground-active: darken($action-foreground, 20%);
+$action-background-active: darken($action-background, 20%);
+$disabled-foreground: grayscale($action-foreground);
+$disabled-background: grayscale($action-background);
+
+// panel - contains elements.
+$panel-foreground: #FBFBFB;
+$panel-background: #FFFFFF;
+
+// chrome - contains panels.
+$chrome-foreground: #45B9B9;
+$chrome-foreground-alternate: #5BD3D3;
+$chrome-background: #CDE5FF;
+
+// dragdrop - elements that can be dragged or dropped.
+// active is element being dragged or highlighted.
+$dragdrop-foreground: #F0F0F0;
+$dragdrop-background: #E8E8E8;
+$dragdrop-active-foreground: $dragdrop-foreground;
+$dragdrop-active-background: $action-background;
+$dragdrop-accepted-foreground: $dragdrop-foreground;
+$dragdrop-accepted-background: $action-background-hover;

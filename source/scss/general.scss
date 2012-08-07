@@ -1,5 +1,4 @@
 * {
-	box-sizing: border-box;
 	-webkit-user-select: none;
 }
 
@@ -7,11 +6,43 @@ input {
 	-webkit-user-select: auto;
 }
 
+html {
+	overflow-y: scroll;
+}
+
 body {
 	background-color: $background;
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 }
 
-.button {
+input[type=range] {
+	-webkit-appearance: none;
+	background-color: $panel-foreground;
+	box-sizing: border-box;
 	cursor: pointer;
+
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		background-color: $action-foreground;
+		border: $button-border-width solid $action-background;
+		border-radius: $button-border-radius;
+
+		&:hover {
+			background-color: $action-foreground-hover;
+			border-color: $action-background-hover;
+		}
+
+		&:active {
+			background-color: $action-foreground-active;
+			border-color: $action-background-active;
+		}
+	}
+}
+
+.master-volume {
+	@include input-range(64px, 16px);
+}
+
+.contains-floats {
+	overflow: hidden;
 }

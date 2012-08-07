@@ -8,19 +8,13 @@ define([
 		className: "sounds",
 
 		initialize: function (options) {
-			// check the width of a child view to set the width
-			// of the element.
-
-			var view, viewWidth;
+			var view;
 
 			view = this.addChildView(SoundView);
-			this.$el.append(view.render().$el);
-
-			viewWidth = view.$el.outerWidth(true);
+			this.$el.append(view.$el);
+			view.render();
 
 			this.removeChildView(view);
-
-			this.$el.width(viewWidth * options.limit);
 		},
 
 		render: function (collection) {

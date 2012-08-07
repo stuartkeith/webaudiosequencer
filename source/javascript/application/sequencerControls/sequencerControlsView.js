@@ -36,13 +36,17 @@ define([
 		render: function () {
 			this.$el.html(this.sequencerControlsTemplate());
 
-			this.playStopInput = this.$el.find(".play-stop")[0];
+			this.playStop = this.$el.find(".play-stop:first");
 
-			this.bpmNumber = this.$el.find(".bpm-number")[0];
+			this.playStop.button({
+				text: false
+			});
+
+			this.bpmNumber = this.$el.find(".bpm-number:first")[0];
 			this.bpmNumber.min = this.bpmMinimum;
 			this.bpmNumber.max = this.bpmMaximum;
 
-			this.bpmSlider = this.$el.find(".bpm-slider")[0];
+			this.bpmSlider = this.$el.find(".bpm-slider:first")[0];
 			this.bpmSlider.min = this.bpmMinimum;
 			this.bpmSlider.max = this.bpmMaximum;
 
@@ -53,7 +57,17 @@ define([
 		},
 
 		updatePlayStopInput: function () {
-			this.playStopInput.checked = this.model.isPlaying;
+			var iconName = "sprite-buttons-";
+			iconName += this.model.isPlaying ? "stop" : "play";
+			iconName += "-large";
+
+			this.playStop.prop("checked", this.model.isPlaying);
+
+			this.playStop.button("option", "icons", {
+				primary: iconName
+			});
+
+			this.playStop.button("refresh");
 		},
 
 		updateBPMInputs: function () {

@@ -1,0 +1,26 @@
+@mixin center($height) {
+	margin-top: -$height / 2;
+	position: relative;
+	top: 50%;
+}
+
+@mixin set-width($width, $border-right: 0, $border-left: 0) {
+	width: $width - $border-right - $border-left;
+}
+
+@mixin set-height($height, $border-top: 0, $border-bottom: 0) {
+	$fixed-height: $height - $border-top - $border-bottom;
+
+	height: $fixed-height;
+	line-height: $fixed-height;
+}
+
+@mixin input-range($width, $height) {
+	width: $width;
+	height: $height;
+
+	&::-webkit-slider-thumb {
+		height: $height;
+		width: $height;
+	}
+}

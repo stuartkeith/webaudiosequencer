@@ -15,26 +15,26 @@ define([
 		collectionOptions: {
 			defaultFetchOptions: {
 				duration: 3,
-				limit: 10
+				limit: 30
 			}
 		},
 
 		initialize: function () {
+			this.enabled = true;
+
 			this.collections = [
 				new FreeSoundCollection(this.collectionOptions),
 				new SoundCloudCollection(this.collectionOptions)
 			];
-
-			this.collectionSelectOptions = "";
-
-			_.each(this.collections, function (collection) {
-				this.collectionSelectOptions += "<option>" + collection.name + "</option>";
-			}, this);
 		},
 
 		events: {
 			"change .collection-select": function (event) {
-				this.changeCollection(this.collections[event.target.selectedIndex]);
+				var collection = _.find(this.collections, function (collection) {
+					return collection.className === event.target.value;
+				});
+
+				this.changeCollection(collection);
 			},
 
 			"click .refresh": "fetch",
@@ -47,21 +47,27 @@ define([
 		},
 
 		fetch: function () {
-			this.page = 1;
+			if (this.enabled) {
+				this.page = 1;
 
-			this._fetch();
+				this._fetch();
+			}
 		},
 
 		fetchNext: function () {
-			this.page++;
+			if (this.nextEnabled) {
+				this.page++;
 
-			this._fetch();
+				this._fetch();
+			}
 		},
 
 		fetchPrevious: function () {
-			this.page--;
+			if (this.previousEnabled) {
+				this.page--;
 
-			this._fetch();
+				this._fetch();
+			}
 		},
 
 		_fetch: function () {
@@ -90,14 +96,36 @@ define([
 		render: function () {
 			this.removeAllChildViews();
 
-			this.$el.html(this.soundBrowserTemplate());
+			this.$el.html(this.soundBrowserTemplate({
+				collections: this.collections,
+				_: _
+			}));
 
-			this.collectionSelect = this.$el.find(".collection-select:first");
-			this.collectionSelect.html(this.collectionSelectOptions);
+			this.collectionSelect = this.$el.find(".collection-select:first").buttonset();
 
-			this.refreshButton = this.$el.find(".refresh:first");
-			this.nextButton = this.$el.find(".next:first");
-			this.previousButton = this.$el.find(".previous:first");
+			this.refreshButton = this.$el.find(".refresh:first").button({
+				icons: {
+					primary: "sprite-buttons-refresh-large"
+				},
+
+				text: false
+			});
+
+			this.nextButton = this.$el.find(".next:first").button({
+				icons: {
+					primary: "sprite-buttons-next-large"
+				},
+
+				text: false
+			});
+
+			this.previousButton = this.$el.find(".previous:first").button({
+				icons: {
+					primary: "sprite-buttons-previous-large"
+				},
+
+				text: false
+			});
 
 			this.searchInput = this.$el.find(".search-input:first");
 
@@ -121,21 +149,23 @@ define([
 
 			this.$el.addClass(this.collection.className);
 
-			this.collectionSelect.val(this.collection.name);
+			// refresh must be called afterwards.
+			this.collectionSelect.find("input:radio[value=" + this.collection.className + "]").prop("checked", true).button("refresh");
 
 			this.fetch();
 		},
 
 		setEnabled: function (value) {
 			var limit = this.collectionOptions.defaultFetchOptions.limit;
-			var previousEnabled = this.page > 1;
-			var nextEnabled = this.collection.length >= limit;
+			this.enabled = value;
+			this.previousEnabled = this.page > 1;
+			this.nextEnabled = this.collection.length >= limit;
 
-			this.collectionSelect.attr('disabled', !value);
+			this.collectionSelect.buttonset('option', 'disabled', !value);
 			this.searchInput.attr('disabled', !value);
-			this.refreshButton.attr('disabled', !value);
-			this.previousButton.attr('disabled', !(value && previousEnabled));
-			this.nextButton.attr('disabled', !(value && nextEnabled));
+			this.refreshButton.button('option', 'disabled', !value);
+			this.previousButton.button('option', 'disabled', !(value && this.previousEnabled));
+			this.nextButton.button('option', 'disabled', !(value && this.nextEnabled));
 		}
 	});
 

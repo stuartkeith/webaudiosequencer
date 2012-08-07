@@ -1,0 +1,43 @@
+$track-control-height: 32px;
+$remove-track-gap: ($track-control-height / 2) - (($sprite-buttons-remove-height + $button-border) / 2);
+
+.track-control {
+	float: left;
+	height: $track-control-height;
+	margin-right: 8px;
+	position: relative;
+	width: 128px;
+}
+
+.track-control-select {
+	background-color: $chrome-background;
+	border-radius: 0 8px 0 0;
+	cursor: pointer;
+	height: 100%;
+	position: absolute;
+	width: 100%;
+
+	&:hover {
+		background-color: $action-foreground-hover;
+	}
+
+	&:active {
+		background-color: $action-foreground-active;
+	}
+}
+
+.track-control-selected {
+	background-color: $chrome-foreground-alternate;
+	cursor: default;
+
+	&:hover {
+		background-color: $chrome-foreground-alternate;
+	}
+}
+
+.remove-track {
+	height: 16px;
+	margin: $remove-track-gap;
+	position: relative;
+	width: 16px;
+}

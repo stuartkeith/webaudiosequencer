@@ -1,0 +1,27 @@
+.collection-select {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.play-stop-label {
+	width: 32px;
+	height: 32px;
+	vertical-align: middle;
+}
+
+.sequencer-controls {
+	margin: 16px;
+}
+
+.bpm-slider {
+	@include input-range(128px, 24px);
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.bpm-slider, .bpm-number {
+	margin-left: 8px;
+	margin-right: 8px;
+	display: inline-block;
+	vertical-align: middle;
+}

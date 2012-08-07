@@ -1,12 +1,131 @@
+.sprite-buttons-stop-large,
+.sprite-buttons-refresh-large,
+.sprite-buttons-previous-large,
+.sprite-buttons-play-large,
+.sprite-buttons-next-large,
 .sprite-buttons-remove,
 .sprite-buttons-playing,
 .sprite-buttons-play,
 .sprite-buttons-loading,
 .sprite-buttons-error,
-.sprite-buttons-add{background-image:url(images/buttons.png);background-repeat:no-repeat}
-.sprite-buttons-remove{background-position:0px 0px;width:18px;height:18px;}
-.sprite-buttons-playing{background-position:-18px 0px;width:18px;height:18px;}
-.sprite-buttons-play{background-position:0px -18px;width:18px;height:18px;}
-.sprite-buttons-loading{background-position:-18px -18px;width:18px;height:18px;}
-.sprite-buttons-error{background-position:-36px 0px;width:18px;height:18px;}
-.sprite-buttons-add{background-position:-36px -18px;width:18px;height:18px;}
+.sprite-buttons-add { background-image: url(images/buttons.png);background-repeat: no-repeat }
+.sprite-buttons-stop-large {
+    background-position: 0px 0px;
+    height: 32px;
+    width: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+$sprite-buttons-stop-large-width: 32px;
+$sprite-buttons-stop-large-height: 32px;
+
+.sprite-buttons-refresh-large {
+    background-position: -32px 0px;
+    height: 32px;
+    width: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+$sprite-buttons-refresh-large-width: 32px;
+$sprite-buttons-refresh-large-height: 32px;
+
+.sprite-buttons-previous-large {
+    background-position: 0px -32px;
+    height: 32px;
+    width: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+$sprite-buttons-previous-large-width: 32px;
+$sprite-buttons-previous-large-height: 32px;
+
+.sprite-buttons-play-large {
+    background-position: -32px -32px;
+    height: 32px;
+    width: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+$sprite-buttons-play-large-width: 32px;
+$sprite-buttons-play-large-height: 32px;
+
+.sprite-buttons-next-large {
+    background-position: -64px 0px;
+    height: 32px;
+    width: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+$sprite-buttons-next-large-width: 32px;
+$sprite-buttons-next-large-height: 32px;
+
+.sprite-buttons-remove {
+    background-position: -64px -32px;
+    height: 16px;
+    width: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+}
+
+$sprite-buttons-remove-width: 16px;
+$sprite-buttons-remove-height: 16px;
+
+.sprite-buttons-playing {
+    background-position: -80px -32px;
+    height: 16px;
+    width: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+}
+
+$sprite-buttons-playing-width: 16px;
+$sprite-buttons-playing-height: 16px;
+
+.sprite-buttons-play {
+    background-position: -64px -48px;
+    height: 16px;
+    width: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+}
+
+$sprite-buttons-play-width: 16px;
+$sprite-buttons-play-height: 16px;
+
+.sprite-buttons-loading {
+    background-position: -80px -48px;
+    height: 16px;
+    width: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+}
+
+$sprite-buttons-loading-width: 16px;
+$sprite-buttons-loading-height: 16px;
+
+.sprite-buttons-error {
+    background-position: 0px -64px;
+    height: 16px;
+    width: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+}
+
+$sprite-buttons-error-width: 16px;
+$sprite-buttons-error-height: 16px;
+
+.sprite-buttons-add {
+    background-position: -16px -64px;
+    height: 16px;
+    width: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+}
+
+$sprite-buttons-add-width: 16px;
+$sprite-buttons-add-height: 16px;

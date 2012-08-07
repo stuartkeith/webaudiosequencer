@@ -9,7 +9,7 @@ define([
 		trackControlTemplate: _.template(trackControlTemplateString),
 
 		events: {
-			"click .select": function (event) {
+			"click .track-control-select": function (event) {
 				this.trigger("selectTrack", this.model);
 			},
 
@@ -29,15 +29,23 @@ define([
 		render: function () {
 			this.$el.html(this.trackControlTemplate());
 
-			this.select = this.$el.find(".select:first");
+			this.select = this.$el.find(".track-control-select:first");
 
 			this.updateSelect();
+
+			this.$el.find(".remove-track:first").button({
+				icons: {
+					primary: "sprite-buttons-remove"
+				},
+
+				text: false
+			});
 
 			return this;
 		},
 
 		updateSelect: function () {
-			this.select.toggleClass("selected", this.model.get('selected'));
+			this.select.toggleClass("track-control-selected", this.model.get('selected'));
 		}
 	});
 

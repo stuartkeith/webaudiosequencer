@@ -71,9 +71,11 @@ define([
 			if (!this.trackPanelView) {
 				this.trackPanelView = this.addChildView(TrackPanelView, {
 					model: this.model
-				}).render();
+				});
 
 				this.trackPanelContainer.append(this.trackPanelView.$el);
+
+				this.trackPanelView.render();
 			}
 		},
 
@@ -85,9 +87,9 @@ define([
 			}
 		},
 
-		volumeViewChange: function (event) {
+		volumeViewChange: function (value) {
 			this.eventBus.trigger("setSoundOutputVolume", {
-				volume: event.target.value
+				volume: value
 			});
 		}
 	});

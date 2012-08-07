@@ -57,6 +57,14 @@ define([
 			if (this.model) {
 				this.$el.html(this.soundTemplate(this.model.toJSON()));
 
+				this.$el.find(".add:first").button({
+					icons: {
+						primary: "sprite-buttons-add"
+					},
+
+					text: false
+				});
+
 				var soundPlay = this.$el.find(".sound-play:first");
 				var draggable = this.$el.find(".draggable:first");
 

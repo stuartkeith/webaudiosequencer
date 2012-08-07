@@ -1,5 +1,5 @@
 define({
 	gridWidth: 48,
-	instrumentHeight: 24,
-	maxNotes: 24
+	instrumentHeight: 32,
+	maxNotes: 12
 });

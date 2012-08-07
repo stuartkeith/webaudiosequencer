@@ -6,24 +6,22 @@ define([
 ], function($, _, Backbone, BaseView) {
 	var SoundButtonView = BaseView.extend({
 		initialize: function () {
-			this.setClass("play");
+			this.$el.button({
+				text: false
+			});
+
+			this.setIcon("play");
 		},
 
-		setClass: function (newClass) {
-			if (this.currentClass)
-				this.$el.removeClass(this.currentClass);
-
-			this.currentClass = "sprite-buttons-" + newClass;
-
-			this.$el.addClass(this.currentClass);
+		setIcon: function (newIcon) {
+			this.$el.button("option", "icons", {
+				primary: "sprite-buttons-" + newIcon
+			});
 		},
 
 		events: {
 			"click": function (event) {
-				if (this.playIsDisabled)
-					return;
-
-				this.playIsDisabled = true;
+				this.$el.button("disable");
 
 				event.preventDefault();
 
@@ -32,20 +30,21 @@ define([
 
 				deferred.progress(function (type) {
 					that.$el.css("cursor", "wait");
-					that.setClass(type);
+					that.setIcon(type);
 				});
 
 				deferred.always(function () {
 					that.$el.css("cursor", "");
-					that.playIsDisabled = false;
+
+					that.$el.button("enable");
 				});
 
 				deferred.done(function () {
-					that.setClass("play");
+					that.setIcon("play");
 				});
 
 				deferred.fail(function () {
-					that.setClass("error");
+					that.setIcon("error");
 				});
 
 				this.eventBus.trigger("playSoundAttributes", {

@@ -11,8 +11,8 @@ define([
 		},
 
 		events: {
-			"click .progress": function (event) {
-				var progressIndex = $(event.target).data('progressIndex');
+			"click button": function (event) {
+				var progressIndex = $(event.currentTarget).data('progressIndex');
 
 				this.eventBus.trigger("setSequencePosition", {
 					progressIndex: progressIndex
@@ -32,6 +32,13 @@ define([
 			return this;
 		},
 
+		getButtonLabel: function (index) {
+			var quarterNote = Math.floor(index / 4) + 1;
+			var sixteenthNote = (index % 4) + 1;
+
+			return quarterNote + "." + sixteenthNote;
+		},
+
 		setLength: function (length) {
 			var existingLength = this.progressElements.length;
 			var progressElement;
@@ -39,9 +46,11 @@ define([
 			if (length > existingLength) {
 				// add progressElements
 				for (var i = existingLength; i < length; i++) {
-					progressElement = $("<div class='progress'></div>");
+					progressElement = $("<button>" + this.getButtonLabel(i) + "</button>");
 					progressElement.data("progressIndex", i);
 					progressElement.width(settings.gridWidth);
+
+					progressElement.button();
 
 					this.$el.append(progressElement);
 

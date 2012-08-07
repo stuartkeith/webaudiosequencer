@@ -2,42 +2,34 @@ define([
 	"use!underscore",
 	"use!backbone",
 	"baseView",
-	"settings",
 	"./instrumentView",
-], function(_, Backbone, BaseView, settings, InstrumentView) {
+], function(_, Backbone, BaseView, InstrumentView) {
 	var InstrumentManagerView = BaseView.extend({
 		modelEvents: {
-			"instrumentAdded": "addInstrumentView",
-			"instrumentRemoved": function () {
-				this.trigger("resize");
-			}
+			"instrumentAdded": "addInstrumentView"
 		},
 
 		render: function () {
 			this.removeAllChildViews();
 
 			_.each(this.model.instruments, function (instrument) {
-				this.addInstrumentView(instrument, true);
+				this.addInstrumentView(instrument);
 			}, this);
-
-			this.trigger("resize");
 
 			return this;
 		},
 
-		addInstrumentView: function (instrument, preventResizeEvent) {
+		addInstrumentView: function (instrument) {
 			var instrumentView = this.addChildView(InstrumentView, {
 				model: instrument
 			});
 
 			instrumentView.on("removeInstrument", this.removeInstrument, this);
 
-			instrumentView.render();
-
+			// add the element before rendering so styles will be accessible.
 			this.$el.append(instrumentView.$el);
 
-			if (!preventResizeEvent)
-				this.trigger("resize");
+			instrumentView.render();
 		},
 
 		removeInstrument: function (instrument) {
