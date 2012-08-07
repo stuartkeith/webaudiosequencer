@@ -1,9 +1,9 @@
-define([
-	"baseView",
-	"settings"
-], function (BaseView, settings) {
+define(function (require) {
+	var BaseView = require("baseView"),
+	    settings = require("settings");
+
 	var SequenceProgressView = BaseView.extend({
-		activeClassName: "active",
+		activeClassName: "ui-state-active",
 
 		initialize: function () {
 			this.progressElements = [];
@@ -50,8 +50,6 @@ define([
 					progressElement.data("progressIndex", i);
 					progressElement.width(settings.gridWidth);
 
-					progressElement.button();
-
 					this.$el.append(progressElement);
 
 					this.progressElements.push(progressElement);
@@ -66,6 +64,8 @@ define([
 			}
 
 			this.$el.width(length * settings.gridWidth);
+
+			this.$el.buttonset();
 		},
 
 		addActiveClass: function () {
