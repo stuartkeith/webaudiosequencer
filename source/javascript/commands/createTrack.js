@@ -1,10 +1,10 @@
-define([
-	"instruments/createMelodicInstrumentManager",
-	"instruments/createPercussiveInstrumentManager",
-	"sequencer/sequence",
-	"tracks/trackModel"
-], function (createMelodicInstrumentManager, createPercussiveInstrumentManager, Sequence, TrackModel) {
+define(function (require) {
 	var createTrack = function (args) {
+		var createMelodicInstrumentManager = require("instruments/createMelodicInstrumentManager"),
+		    createPercussiveInstrumentManager = require("instruments/createPercussiveInstrumentManager"),
+		    Sequence = require("sequencer/sequence"),
+		    TrackModel = require("tracks/trackModel");
+
 		var instrumentManagerType = args.instrumentManagerType;
 
 		var sequence = new Sequence(this.sequencer.getLength());
