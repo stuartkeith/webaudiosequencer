@@ -1,5 +1,5 @@
 define([
-	"use!underscore"
+	"underscore"
 ], function() {
 	var Array2d = function () {
 		this._columns = {};

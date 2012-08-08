@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone"
+	"underscore",
+	"backbone"
 ], function(_, Backbone) {
 	var FreeSoundCollection = Backbone.Collection.extend({
 		name: "FreeSound",

@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone",
+	"underscore",
+	"backbone",
 	"./sequence"
 ], function(_, Backbone, Sequence) {
 	var Sequencer = function (length) {

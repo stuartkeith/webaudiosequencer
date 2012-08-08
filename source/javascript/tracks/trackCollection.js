@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone"
+	"underscore",
+	"backbone"
 ], function (_, Backbone) {
 	var TrackCollection = Backbone.Collection.extend({
 	});

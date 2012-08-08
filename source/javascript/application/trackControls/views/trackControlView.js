@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone",
+	"underscore",
+	"backbone",
 	"baseView",
 	"text!templates/trackControls/trackControl.html"
 ], function(_, Backbone, BaseView, trackControlTemplateString) {

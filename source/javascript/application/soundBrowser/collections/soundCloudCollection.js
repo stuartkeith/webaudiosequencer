@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone"
+	"underscore",
+	"backbone"
 ], function(_, Backbone) {
 	var SoundCloudCollection = Backbone.Collection.extend({
 		name: "SoundCloud",

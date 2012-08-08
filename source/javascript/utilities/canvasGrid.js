@@ -1,5 +1,5 @@
 define([
-	"use!underscore"
+	"underscore"
 ], function(_) {
 	var CanvasGrid = function (canvas) {
 		this._canvas = canvas;

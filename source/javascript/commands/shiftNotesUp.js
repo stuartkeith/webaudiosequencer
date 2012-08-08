@@ -1,5 +1,5 @@
 define([
-	"use!underscore"
+	"underscore"
 ], function (_) {
 	var ShiftNotesUp = function (args) {
 		var instrumentManager = args.instrumentManager;

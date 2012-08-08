@@ -1,5 +1,5 @@
 define([
-	"use!backbone",
+	"backbone",
 	"utilities/array2d"
 ], function(Backbone, Array2d) {
 	var Sequence = function (length) {

@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone"
+	"underscore",
+	"backbone"
 ], function (_, Backbone) {
 	var Instrument = function () {
 		this.buffer = null;

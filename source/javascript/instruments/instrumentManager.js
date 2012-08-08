@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone",
+	"underscore",
+	"backbone",
 	"settings"
 ], function (_, Backbone, settings) {
 	var InstrumentManager = function () {

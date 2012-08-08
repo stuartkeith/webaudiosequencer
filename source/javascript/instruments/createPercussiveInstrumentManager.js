@@ -1,5 +1,5 @@
 define([
-	"use!underscore",
+	"underscore",
 	"./instrumentManager",
 	"./instrument"
 ], function (_, InstrumentManager, Instrument) {

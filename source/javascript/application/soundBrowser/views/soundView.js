@@ -1,7 +1,7 @@
 define([
 	"jquery",
-	"use!underscore",
-	"use!backbone",
+	"underscore",
+	"backbone",
 	"baseView",
 	"application/soundPlayView",
 	"./draggableView",

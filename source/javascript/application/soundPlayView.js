@@ -1,7 +1,7 @@
 define([
 	"jquery",
-	"use!underscore",
-	"use!backbone",
+	"underscore",
+	"backbone",
 	"baseView"
 ], function($, _, Backbone, BaseView) {
 	var SoundButtonView = BaseView.extend({

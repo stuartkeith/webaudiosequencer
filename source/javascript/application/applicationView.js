@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone",
+	"underscore",
+	"backbone",
 	"baseView",
 	"./volumeView",
 	"./instructionsPanel/instructionsPanelView",

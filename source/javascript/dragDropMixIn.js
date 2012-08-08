@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone"
+	"underscore",
+	"backbone"
 ], function (_, Backbone) {
 	// the model currently being dragged.
 	var draggedData = { dragSource: null, model: null };

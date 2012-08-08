@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone"
+	"underscore",
+	"backbone"
 ], function (_, Backbone) {
 	var TrackModel = Backbone.Model.extend({
 		initialize: function () {

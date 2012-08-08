@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone"
+	"underscore",
+	"backbone"
 ], function(_, Backbone) {
 	var getProperty = function (obj, property) {
 		if (_.isFunction(property))

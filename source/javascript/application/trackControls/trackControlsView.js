@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone",
+	"underscore",
+	"backbone",
 	"baseView",
 	"./views/trackControlView"
 ], function(_, Backbone, BaseView, TrackControlView) {

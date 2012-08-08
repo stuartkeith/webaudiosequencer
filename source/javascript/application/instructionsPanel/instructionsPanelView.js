@@ -1,6 +1,6 @@
 define([
-	"use!underscore",
-	"use!backbone",
+	"underscore",
+	"backbone",
 	"baseView",
 	"text!templates/instructions/instructions.html"
 ], function(_, Backbone, BaseView, instructionsString) {
