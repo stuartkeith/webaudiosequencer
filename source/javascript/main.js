@@ -5,7 +5,7 @@ require.config({
 		underscore: "libraries/underscore/underscore-1.3.3",
 		backbone: "libraries/backbone/backbone-0.9.2",
 		templates: "../templates",
-		text: "libraries/require/text-2.0.0"
+		text: "libraries/require/text-2.0.1"
 	},
 
 	shim: {
