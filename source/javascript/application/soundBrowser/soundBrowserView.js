@@ -149,6 +149,8 @@ define([
 
 			this.$el.addClass(this.collection.className);
 
+			this.searchInput.prop("placeholder", "Search " + this.collection.name);
+
 			// refresh must be called afterwards.
 			this.collectionSelect.find("input:radio[value=" + this.collection.className + "]").prop("checked", true).button("refresh");
 
