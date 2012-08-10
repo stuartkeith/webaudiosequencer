@@ -10,8 +10,8 @@ define([
 	for (var i = 0; i < noteRange; i++)
 		noteToPlaybackRate[i] = Math.pow(2, (i - noteRangeHalved) / 12);
 
-	var SoundOutput = function () {
-		this._context = new webkitAudioContext();
+	var SoundOutput = function (context) {
+		this._context = context;
 
 		this._gainNode = this._context.createGainNode();
 		this._gainNode.connect(this._context.destination);
@@ -50,11 +50,12 @@ define([
 			bufferSource.buffer = buffer;
 			bufferSource.connect(gainNode);
 			bufferSource.playbackRate.value = playbackRate;
-			bufferSource.noteOn(delay ? this._context.currentTime + delay : 0);
+			bufferSource.noteOn(delay);
 
 			if (callback) {
+				var relativeDelay = delay > 0 ? delay - this._context.currentTime : 0;
 				// calculate total time in seconds.
-				var time = delay + (buffer.duration / playbackRate);
+				var time = relativeDelay + (buffer.duration / playbackRate);
 				// convert to milliseconds for setTimeout.
 				setTimeout(callback, time * 1000);
 			}

@@ -22,7 +22,7 @@ define([
 			}
 		},
 
-		receiveNotes: function (position, notes) {
+		receiveNotes: function (position, notes, delay) {
 			var instrument, note;
 
 			_.each(notes, function (data, note) {
@@ -30,7 +30,7 @@ define([
 				instrument = this.instruments[note];
 
 				if (instrument && instrument.buffer)
-					this.soundOutput.playBuffer(instrument.buffer, instrument.transpose, instrument.getVolume());
+					this.soundOutput.playBuffer(instrument.buffer, instrument.transpose, instrument.getVolume(), delay);
 			}, this);
 		}
 	};

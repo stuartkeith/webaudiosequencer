@@ -12,13 +12,13 @@ define([
 			return this.notes.get(location);
 		},
 
-		update: function (position) {
+		update: function (position, delay) {
 			if (position >= this._length)
 				position %= this._length;
 
 			var notes = this.notes._columns[position];
 
-			this.trigger("update", position, notes);
+			this.trigger("update", position, notes, delay);
 		},
 
 		getLength: function () {

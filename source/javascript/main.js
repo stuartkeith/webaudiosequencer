@@ -36,11 +36,13 @@ require([
 ], function (_, Backbone, jqueryUI, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, functionChain) {
 	var eventBus = _.clone(Backbone.Events);
 
+	var context = new webkitAudioContext();
+
 	var commandObject = {
 		eventBus: eventBus,
 		selectedTrackModel: null,
-		sequencer: new Sequencer(16),
-		soundOutput: new SoundOutput(),
+		sequencer: new Sequencer(context, 16),
+		soundOutput: new SoundOutput(context),
 		trackCollection: new TrackCollection()
 	};
 

@@ -23,12 +23,12 @@ define([
 			}
 		},
 
-		receiveNotes: function (position, notes) {
+		receiveNotes: function (position, notes, delay) {
 			var instrument = this.instruments[0];
 
 			if (notes && instrument && instrument.buffer) {
 				_.each(notes, function (data, note) {
-					this.soundOutput.playBuffer(instrument.buffer, parseInt(note) + instrument.transpose, instrument.getVolume());
+					this.soundOutput.playBuffer(instrument.buffer, parseInt(note) + instrument.transpose, instrument.getVolume(), delay);
 				}, this);
 			}
 		}

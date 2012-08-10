@@ -3,7 +3,8 @@ define([
 	"backbone",
 	"./sequence"
 ], function(_, Backbone, Sequence) {
-	var Sequencer = function (length) {
+	var Sequencer = function (context, length) {
+		this._context = context;
 		this._length = length;
 
 		this.position = 0;
@@ -27,7 +28,7 @@ define([
 		setBPM: function (value) {
 			if (this.bpm !== value) {
 				this.bpm = value;
-				this._timeout = Math.floor(60.0 / this.bpm * 1000);
+				this._bpmSeconds = 60.0 / this.bpm;
 
 				this.trigger("bpm", value);
 			}
@@ -39,6 +40,8 @@ define([
 
 			if (!this.isPlaying) {
 				this.isPlaying = true;
+				this._noteTime = 0;
+				this._startTime = this._context.currentTime;
 
 				this.update();
 			}
@@ -62,16 +65,25 @@ define([
 		},
 
 		update: function () {
-			_.each(this.sequences, function (sequence) {
-				sequence.update(this.position);
-			}, this);
+			var currentTime = this._context.currentTime - this._startTime + 0.2;
+			var contextPlayTime;
 
-			var newPosition = this.position + 1;
+			while (this._noteTime < currentTime) {
+				contextPlayTime = this._startTime + this._noteTime;
 
-			this.position = newPosition < this._length ? newPosition : 0;
+				_.each(this.sequences, function (sequence) {
+					sequence.update(this.position, contextPlayTime);
+				}, this);
+
+				newPosition = this.position + 1;
+
+				this.position = newPosition < this._length ? newPosition : 0;
+
+				this._noteTime += this._bpmSeconds;
+			}
 
 			if (this.isPlaying)
-				this.timeout = setTimeout(_.bind(this.update, this), this._timeout);
+				this.timeout = setTimeout(_.bind(this.update, this), 100);
 		},
 
 		addSequence: function (sequence) {
