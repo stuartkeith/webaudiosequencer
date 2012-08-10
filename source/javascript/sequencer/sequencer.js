@@ -11,6 +11,8 @@ define([
 		this.isPlaying = false;
 		this.sequences = [];
 		this.setBPM(120);
+
+		this._updateBound = _.bind(this.update, this);
 	};
 
 	_.extend(Sequencer.prototype, Backbone.Events, {
@@ -83,7 +85,7 @@ define([
 			}
 
 			if (this.isPlaying)
-				this.timeout = setTimeout(_.bind(this.update, this), 100);
+				this.timeout = setTimeout(this._updateBound, 100);
 		},
 
 		addSequence: function (sequence) {
