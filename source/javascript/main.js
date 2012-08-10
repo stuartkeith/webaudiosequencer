@@ -32,8 +32,9 @@ require([
 	"commandMap",
 	"application/applicationView",
 	"./keyboardShortcuts",
+	"./windowListeners",
 	"utilities/functionChain"
-], function (_, Backbone, jqueryUI, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, functionChain) {
+], function (_, Backbone, jqueryUI, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, windowListeners, functionChain) {
 	var eventBus = _.clone(Backbone.Events);
 
 	var context = new webkitAudioContext();
@@ -60,7 +61,8 @@ require([
 
 	delete commandMap;
 
-	var keyboardShortcuts = keyboardShortcuts(eventBus);
+	keyboardShortcuts(eventBus);
+	windowListeners(eventBus);
 
 	var applicationView = new ApplicationView({
 		eventBus: eventBus,
