@@ -2,7 +2,7 @@ from fabric.api import env, hosts, local
 import fabric.contrib.project as project
 
 
-REQUIREJS = 'require-2.0.4.js'
+REQUIREJS = 'require-2.0.5.js'
 
 env.use_ssh_config = True
 
