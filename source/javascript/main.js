@@ -79,6 +79,11 @@ require([
 
 		eventBus.trigger("initialize");
 	} else {
-		$("#container").html(unsupportedTemplateString);
+		var unsupported = $(unsupportedTemplateString);
+
+		$("#description").append(unsupported);
+
+		unsupported.hide();
+		unsupported.fadeIn(1200);
 	}
 });

@@ -48,3 +48,16 @@ input[type=range] {
 .contains-floats {
 	overflow: hidden;
 }
+
+#description {
+	left: 50%;
+	margin-left: -16em;
+	position: absolute;
+	text-align: center;
+	top: 25%;
+	width: 32em;
+
+	& p {
+		margin-bottom: 1.5em;
+	}
+}
