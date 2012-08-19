@@ -48,3 +48,13 @@ $drag-target-border: 2px;
 	padding-left: $drag-target-border * 2;
 	overflow: hidden;
 }
+
+.instrument-state-loading {
+	font-style: italic;
+	opacity: 0.5;
+}
+
+.instrument-state-error {
+	font-weight: bold;
+	text-decoration: line-through;
+}

@@ -4,7 +4,7 @@ define([
 ], function (_, Backbone) {
 	var Instrument = function () {
 		this.buffer = null;
-		this.isLoading = false;
+		this.state = this.STATE_LOADED;
 		this.range = 0;
 		this.soundAttributes = null;
 		this.transpose = 0;
@@ -12,6 +12,10 @@ define([
 	};
 
 	_.extend(Instrument.prototype, Backbone.Events, {
+		STATE_LOADING: "stateLoading",
+		STATE_LOADED: "stateLoaded",
+		STATE_ERROR: "stateError",
+
 		changed: function () {
 			this.trigger("changed");
 		},

@@ -13,7 +13,7 @@ define([
 		if (!soundAttributes)
 			return;
 
-		instrument.isLoading = true;
+		instrument.state = instrument.STATE_LOADING;
 		instrument.soundAttributes = soundAttributes;
 
 		instrument.changed();
@@ -21,14 +21,14 @@ define([
 		var deferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);
 
 		deferred.fail(function () {
-			instrument.isLoading = false;
+			instrument.state = instrument.STATE_ERROR;
 
 			instrument.changed();
 		});
 
 		deferred.done(function (buffer) {
 			instrument.buffer = buffer;
-			instrument.isLoading = false;
+			instrument.state = instrument.STATE_LOADED;
 
 			instrument.changed();
 		});

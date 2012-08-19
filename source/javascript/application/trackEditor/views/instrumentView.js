@@ -48,17 +48,21 @@ define([
 		},
 
 		modelEvents: {
-			"changed": function () {
-				this.render();
-			},
-
-			"remove": function () {
-				this.remove();
-			}
+			"changed": "render",
+			"remove": "remove"
 		},
 
 		render: function () {
-			this.$el.html(this.instrumentTemplate(this.model));
+			var modelForTemplate = _.extend(this.model, {});
+
+			if (this.model.state === this.model.STATE_LOADING)
+				modelForTemplate.titleClass = "instrument-state-loading";
+			else if (this.model.state === this.model.STATE_ERROR)
+				modelForTemplate.titleClass = "instrument-state-error";
+			else
+				modelForTemplate.titleClass = "";
+
+			this.$el.html(this.instrumentTemplate(modelForTemplate));
 
 			var heightDifference = this.$el.outerHeight(true) - this.$el.height();
 
@@ -70,8 +74,6 @@ define([
 			}).render();
 
 			volumeView.on("change", this.volumeViewChange, this);
-
-			this.$el.toggleClass("is-loading", this.model.isLoading);
 
 			this.$el.find(".remove-instrument:first").button({
 				icons: {
