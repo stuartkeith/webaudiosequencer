@@ -33,18 +33,13 @@ require([
 	"application/applicationView",
 	"./keyboardShortcuts",
 	"./windowListeners",
-	"utilities/functionChain"
-], function (_, Backbone, jqueryUI, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, windowListeners, functionChain) {
+	"utilities/functionChain",
+	"text!templates/unsupported.html"
+], function (_, Backbone, jqueryUI, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, windowListeners, functionChain, unsupportedTemplateString) {
 	var eventBus = _.clone(Backbone.Events);
 
-	var context = new webkitAudioContext();
-
 	var commandObject = {
-		eventBus: eventBus,
-		selectedTrackModel: null,
-		sequencer: new Sequencer(context, 16),
-		soundOutput: new SoundOutput(context),
-		trackCollection: new TrackCollection()
+		eventBus: eventBus
 	};
 
 	_.each(commandMap, function (mappings, event) {
@@ -59,22 +54,31 @@ require([
 		});
 	});
 
-	delete commandMap;
+	if (window.webkitAudioContext) {
+		var context = new webkitAudioContext();
 
-	keyboardShortcuts(eventBus);
-	windowListeners(eventBus);
+		commandObject.selectedTrackModel = null;
+		commandObject.sequencer = new Sequencer(context, 16);
+		commandObject.soundOutput = new SoundOutput(context);
+		commandObject.trackCollection = new TrackCollection();
 
-	var applicationView = new ApplicationView({
-		eventBus: eventBus,
-		el: "#container",
-		model: {
-			sequencer: commandObject.sequencer,
-			soundOutput: commandObject.soundOutput,
-			trackCollection: commandObject.trackCollection
-		}
-	});
+		var applicationView = new ApplicationView({
+			eventBus: eventBus,
+			el: "#container",
+			model: {
+				sequencer: commandObject.sequencer,
+				soundOutput: commandObject.soundOutput,
+				trackCollection: commandObject.trackCollection
+			}
+		});
 
-	applicationView.render();
+		keyboardShortcuts(eventBus);
+		windowListeners(eventBus);
 
-	eventBus.trigger("initialize");
+		applicationView.render();
+
+		eventBus.trigger("initialize");
+	} else {
+		$("#container").html(unsupportedTemplateString);
+	}
 });
