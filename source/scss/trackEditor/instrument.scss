@@ -15,38 +15,32 @@ $drag-target-border: 2px;
 	border-color: $dragdrop-accepted-background;
 }
 
-.instrument {
-	overflow: hidden;
-	position: relative;
-}
-
 .instrument-controls {
-	height: 28px;
-	line-height: 28px;
+	font-size: 0; // remove gaps between inline-blocks
+	line-height: 32px - $drag-target-border * 2;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .remove-instrument {
-	@include center($sprite-buttons-remove-height + ($button-border * 2));
-	float: left;
 	height: 16px;
 	margin-left: $drag-target-border * 2;
 	margin-right: $drag-target-border * 2;
+	vertical-align: middle;
 	width: 16px;
 }
 
 .instrument-volume {
 	@include input-range(64px, 16px);
-	@include center(16px);
-	float: left;
 	margin-left: $drag-target-border * 2;
 	margin-right: $drag-target-border * 2;
+	vertical-align: middle;
 }
 
 .instrument-title {
-	display: block;
 	font-size: 10px;
 	padding-left: $drag-target-border * 2;
-	overflow: hidden;
+	vertical-align: middle;
 }
 
 .instrument-state-loading {
