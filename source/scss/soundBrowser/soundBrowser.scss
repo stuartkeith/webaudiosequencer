@@ -1,9 +1,27 @@
 .sound-browser-controls {
+	font-size: 0; // remove gaps between inline-blocks
 	margin: 16px 8px;
 }
 
 .previous, .refresh, .next {
 	height: 32px;
 	margin-right: 8px;
+	vertical-align: middle;
 	width: 32px;
+}
+
+.collection-select {
+	display: inline-block;
+	height: 32px - $button-border * 2;
+	line-height: 32px - $button-border * 2;
+	margin-right: 8px;
+
+	& label {
+		vertical-align: middle;
+	}
+}
+
+.search-input {
+	vertical-align: middle;
+	width: 24em;
 }
