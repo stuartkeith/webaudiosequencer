@@ -1,11 +1,12 @@
+.sequencer-controls {
+	font-size: 0; // remove gaps between inline-blocks
+	margin: 16px 8px;
+}
+
 .play-stop-label {
 	width: 32px;
 	height: 32px;
 	vertical-align: middle;
-}
-
-.sequencer-controls {
-	margin: 16px;
 }
 
 .bpm-slider {
@@ -16,7 +17,6 @@
 
 .bpm-slider, .bpm-number {
 	margin-left: 8px;
-	margin-right: 8px;
 	display: inline-block;
 	vertical-align: middle;
 }
