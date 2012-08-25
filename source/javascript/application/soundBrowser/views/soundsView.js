@@ -5,29 +5,43 @@ define([
 	"./soundView"
 ], function(_, Backbone, BaseView, SoundView) {
 	var SoundsView = BaseView.extend({
-		className: "sounds",
-
 		initialize: function (options) {
-			var view;
+			this.columns = 7;
+			this.rows = 4;
 
-			view = this.addChildView(SoundView);
-			this.$el.append(view.$el);
-			view.render();
+			this.table = $("<table></table>");
 
-			this.removeChildView(view);
+			this.$el.append(this.table);
 		},
 
 		render: function (collection) {
+			var column, row, rowElement, view, i = 0;
+
 			this.removeAllChildViews();
+			this.table.empty();
 
-			if (collection) {
-				var view;
+			var collectionIterator = _.bind(function () {
+				var model = collection && collection.models[i];
 
-				collection.each(function (model, counter) {
+				if (model) {
 					view = this.addChildView(SoundView, { model: model });
 
-					this.$el.append(view.render().$el);
-				}, this);
+					i++;
+
+					return view.render().$el;
+				} else {
+					return $("<td class='empty-sound'></td>");
+				}
+			}, this);
+
+			for (row = 0; row < this.rows; row++) {
+				rowElement = $("<tr></tr>");
+
+				this.table.append(rowElement);
+
+				for (column = 0; column < this.columns; column++) {
+					rowElement.append(collectionIterator());
+				}
 			}
 
 			return this;

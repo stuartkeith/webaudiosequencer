@@ -46,10 +46,6 @@ input[type=range] {
 	@include input-range(64px, 16px);
 }
 
-.contains-floats {
-	overflow: hidden;
-}
-
 #description {
 	left: 50%;
 	margin-left: -16em;

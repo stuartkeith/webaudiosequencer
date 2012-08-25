@@ -15,7 +15,7 @@ define([
 		collectionOptions: {
 			defaultFetchOptions: {
 				duration: 3,
-				limit: 30
+				limit: 28
 			}
 		},
 

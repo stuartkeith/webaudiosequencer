@@ -6,18 +6,20 @@ $sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height -
 
 .sound {
 	height: $sound-height;
-	float: left;
 	overflow: hidden;
 	position: relative; // needed for draggable's position: absolute
 	width: $sound-width;
 }
 
-.draggable {
+.empty-sound, .draggable {
 	@include set-width($sound-width, 0, $sound-border);
 	@include set-height($sound-height, $sound-border, 0);
 	background-color: $panel-foreground;
 	border-right: $sound-border solid $panel-background;
 	border-bottom: $sound-border solid $panel-background;
+}
+
+.draggable {
 	cursor: move;
 	position: absolute;
 	font-size: 10px;

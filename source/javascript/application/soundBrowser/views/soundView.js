@@ -9,6 +9,8 @@ define([
 ], function($, _, Backbone, BaseView, SoundPlayView, DraggableView, soundTemplateString) {
 	var SoundView = BaseView.extend({
 		className: "sound",
+		tagName: "td",
+
 		mouseDownTime: 500,
 
 		soundTemplate: _.template(soundTemplateString),
