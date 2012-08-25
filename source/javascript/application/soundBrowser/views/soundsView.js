@@ -10,14 +10,13 @@ define([
 			this.rows = 4;
 
 			this.table = $("<table></table>");
-
-			this.$el.append(this.table);
 		},
 
 		render: function (collection) {
 			var column, row, rowElement, view, i = 0;
 
 			this.removeAllChildViews();
+			this.table.detach();
 			this.table.empty();
 
 			var collectionIterator = _.bind(function () {
@@ -43,6 +42,8 @@ define([
 					rowElement.append(collectionIterator());
 				}
 			}
+
+			this.$el.append(this.table);
 
 			return this;
 		}
