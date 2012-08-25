@@ -10,6 +10,21 @@
 	width: 32px;
 }
 
+@-webkit-keyframes rotate-icon {
+	0% { -webkit-transform: rotate(0deg); }
+
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+.refresh .ui-icon {
+	-webkit-animation: rotate-icon 1.2s infinite linear;
+	-webkit-animation-play-state: paused;
+}
+
+.refresh:disabled .ui-icon {
+	-webkit-animation-play-state: running;
+}
+
 .collection-select {
 	display: inline-block;
 	height: 32px - $button-border * 2;
