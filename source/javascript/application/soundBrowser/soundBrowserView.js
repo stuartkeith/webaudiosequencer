@@ -85,7 +85,12 @@ define([
 				data: data,
 				success: function (collection, response) {
 					that.setEnabled(true);
-					that.soundsView.render(collection);
+
+					// rendering can be time-intensive.
+					// delay it so that the CSS animation can finish smoothly first.
+					setTimeout(function () {
+						that.soundsView.render(collection);
+					}, 100);
 				},
 				error: function () {
 					that.setEnabled(true);
