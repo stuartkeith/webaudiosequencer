@@ -43,9 +43,15 @@ $drag-target-border: 2px;
 	vertical-align: middle;
 }
 
+@-webkit-keyframes pulse {
+	0% { opacity: 0.2; }
+
+	100% { opacity: 0.8; }
+}
+
 .instrument-state-loading {
 	font-style: italic;
-	opacity: 0.5;
+	-webkit-animation: pulse 0.1s infinite linear alternate;
 }
 
 .instrument-state-error {
