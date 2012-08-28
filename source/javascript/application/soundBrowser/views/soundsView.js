@@ -6,8 +6,8 @@ define([
 ], function(_, Backbone, BaseView, SoundView) {
 	var SoundsView = BaseView.extend({
 		initialize: function (options) {
-			this.columns = 7;
-			this.rows = 4;
+			this.columns = options.columns;
+			this.rows = options.rows;
 
 			this.table = $("<table></table>");
 		},

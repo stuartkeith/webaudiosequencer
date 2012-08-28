@@ -7,6 +7,10 @@ define([
 	"./collections/soundCloudCollection",
 	"./views/soundsView"
 ], function(_, Backbone, BaseView, SoundBrowserTemplateString, FreeSoundCollection, SoundCloudCollection, SoundsView) {
+	var soundsViewColumns = 7;
+	var soundsViewRows = 4;
+	var soundsViewTotal = soundsViewColumns * soundsViewRows;
+
 	var SoundBrowserView = BaseView.extend({
 		className: "sound-browser",
 		soundBrowserTemplate: _.template(SoundBrowserTemplateString),
@@ -15,7 +19,7 @@ define([
 		collectionOptions: {
 			defaultFetchOptions: {
 				duration: 3,
-				limit: 28
+				limit: soundsViewTotal
 			}
 		},
 
@@ -138,7 +142,8 @@ define([
 
 			this.soundsView = this.addChildView(SoundsView, {
 				el: sounds,
-				limit: this.collectionOptions.defaultFetchOptions.limit
+				columns: soundsViewColumns,
+				rows: soundsViewRows
 			});
 
 			this.changeCollection(this.collections[0]);
