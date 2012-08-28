@@ -32,10 +32,10 @@ require([
 	"commandMap",
 	"application/applicationView",
 	"./keyboardShortcuts",
-	"./windowListeners",
+	"./documentListeners",
 	"utilities/functionChain",
 	"text!templates/unsupported.html"
-], function (_, Backbone, jqueryUI, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, windowListeners, functionChain, unsupportedTemplateString) {
+], function (_, Backbone, jqueryUI, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, documentListeners, functionChain, unsupportedTemplateString) {
 	var eventBus = _.clone(Backbone.Events);
 
 	var commandObject = {
@@ -73,7 +73,7 @@ require([
 		});
 
 		keyboardShortcuts(eventBus);
-		windowListeners(eventBus);
+		documentListeners(eventBus);
 
 		applicationView.render();
 
