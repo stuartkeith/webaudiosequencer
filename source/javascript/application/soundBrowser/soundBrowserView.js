@@ -3,10 +3,11 @@ define([
 	"backbone",
 	"baseView",
 	"text!templates/soundBrowser/soundBrowser.html",
+	"text!templates/soundBrowser/errorDescription.txt",
 	"./collections/freeSoundCollection",
 	"./collections/soundCloudCollection",
 	"./views/soundsView"
-], function(_, Backbone, BaseView, SoundBrowserTemplateString, FreeSoundCollection, SoundCloudCollection, SoundsView) {
+], function(_, Backbone, BaseView, SoundBrowserTemplateString, ErrorDescriptionTemplateString, FreeSoundCollection, SoundCloudCollection, SoundsView) {
 	var soundsViewColumns = 7;
 	var soundsViewRows = 4;
 	var soundsViewTotal = soundsViewColumns * soundsViewRows;
@@ -14,6 +15,9 @@ define([
 	var SoundBrowserView = BaseView.extend({
 		className: "sound-browser",
 		soundBrowserTemplate: _.template(SoundBrowserTemplateString),
+		errorDescriptionTemplate: _.template(ErrorDescriptionTemplateString),
+		refreshIconClass: "sprite-buttons-refresh-large",
+		refreshErrorIconClass: "sprite-buttons-error-large",
 		page: 1,
 
 		collectionOptions: {
@@ -75,7 +79,11 @@ define([
 		},
 
 		_fetch: function () {
-			var that = this;
+			var self = this;
+
+			this.refreshButton.button("option", "icons", {
+				primary: this.refreshIconClass
+			});
 
 			this.setEnabled(false);
 			this.soundsView.render();
@@ -88,16 +96,28 @@ define([
 			this.collection.fetch({
 				data: data,
 				success: function (collection, response) {
-					that.setEnabled(true);
+					self.setEnabled(true);
 
 					// rendering can be time-intensive.
 					// delay it so that the CSS animation can finish smoothly first.
 					setTimeout(function () {
-						that.soundsView.render(collection);
+						self.soundsView.render(collection);
 					}, 100);
 				},
-				error: function () {
-					that.setEnabled(true);
+				error: function (collection, response) {
+					var errorContext = {
+						name: self.collection.name,
+						statusCode: response.status,
+						statusText: response.statusText
+					};
+
+					self.refreshButton.button("option", "icons", {
+						primary: self.refreshErrorIconClass
+					});
+
+					self.refreshButton.prop("title", self.errorDescriptionTemplate(errorContext));
+
+					self.setEnabled(true);
 				}
 			});
 		},
@@ -114,7 +134,7 @@ define([
 
 			this.refreshButton = this.$el.find(".refresh:first").button({
 				icons: {
-					primary: "sprite-buttons-refresh-large"
+					primary: this.refreshIconClass
 				},
 
 				text: false

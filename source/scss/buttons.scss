@@ -3,6 +3,7 @@
 .sprite-buttons-previous-large,
 .sprite-buttons-play-large,
 .sprite-buttons-next-large,
+.sprite-buttons-error-large,
 .sprite-buttons-remove,
 .sprite-buttons-playing,
 .sprite-buttons-play,
@@ -64,8 +65,19 @@ $sprite-buttons-play-large-height: 32px;
 $sprite-buttons-next-large-width: 32px;
 $sprite-buttons-next-large-height: 32px;
 
-.sprite-buttons-remove {
+.sprite-buttons-error-large {
     background-position: -64px -32px;
+    height: 32px;
+    width: 32px;
+    margin-left: -16px;
+    margin-top: -16px;
+}
+
+$sprite-buttons-error-large-width: 32px;
+$sprite-buttons-error-large-height: 32px;
+
+.sprite-buttons-remove {
+    background-position: 0px -64px;
     height: 16px;
     width: 16px;
     margin-left: -8px;
@@ -76,7 +88,7 @@ $sprite-buttons-remove-width: 16px;
 $sprite-buttons-remove-height: 16px;
 
 .sprite-buttons-playing {
-    background-position: -80px -32px;
+    background-position: -16px -64px;
     height: 16px;
     width: 16px;
     margin-left: -8px;
@@ -87,7 +99,7 @@ $sprite-buttons-playing-width: 16px;
 $sprite-buttons-playing-height: 16px;
 
 .sprite-buttons-play {
-    background-position: -64px -48px;
+    background-position: -32px -64px;
     height: 16px;
     width: 16px;
     margin-left: -8px;
@@ -98,7 +110,7 @@ $sprite-buttons-play-width: 16px;
 $sprite-buttons-play-height: 16px;
 
 .sprite-buttons-loading {
-    background-position: -80px -48px;
+    background-position: -48px -64px;
     height: 16px;
     width: 16px;
     margin-left: -8px;
@@ -109,7 +121,7 @@ $sprite-buttons-loading-width: 16px;
 $sprite-buttons-loading-height: 16px;
 
 .sprite-buttons-error {
-    background-position: 0px -64px;
+    background-position: -64px -64px;
     height: 16px;
     width: 16px;
     margin-left: -8px;
@@ -120,7 +132,7 @@ $sprite-buttons-error-width: 16px;
 $sprite-buttons-error-height: 16px;
 
 .sprite-buttons-add {
-    background-position: -16px -64px;
+    background-position: -80px -64px;
     height: 16px;
     width: 16px;
     margin-left: -8px;
