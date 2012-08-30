@@ -1,4 +1,5 @@
 *.pyc
 _build/
 source/css/main.css
+source/css/images/buttons.png
 .sass-cache/
