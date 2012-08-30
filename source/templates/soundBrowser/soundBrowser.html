@@ -4,7 +4,8 @@
 	<button class="next">Next</button>
 	<div class="collection-select">
 		<% _.each(collections, function (collection) { %>
-		<input id="<%= collection.className %>" type="radio" value="<%= collection.className %>" name="sound-collection"><label for="<%= collection.className %>"><%= collection.name %></label>
+		<input id="<%= collection.className %>" type="radio" value="<%= collection.className %>" name="sound-collection">
+		<label for="<%= collection.className %>" title="<%= collection.description %>"><%= collection.name %></label>
 		<% }); %>
 	</div>
 	<input class="search-input" placeholder="Search"></input>

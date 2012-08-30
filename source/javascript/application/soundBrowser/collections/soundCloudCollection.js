@@ -4,6 +4,7 @@ define([
 ], function(_, Backbone) {
 	var SoundCloudCollection = Backbone.Collection.extend({
 		name: "SoundCloud",
+		description: "SoundCloud is the world's largest community of sound creators.",
 		className: "soundcloud",
 		url: "http://api.soundcloud.com/tracks.json",
 		clientID: "92a7894544c99bb2ba74e6ded0f3945a",
