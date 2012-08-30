@@ -54,3 +54,8 @@ $sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height -
 	overflow: hidden;
 	white-space: nowrap;
 }
+
+.sound-play-view-loading {
+	cursor: busy;
+	-webkit-animation: pulse 0.1s infinite linear alternate;
+}

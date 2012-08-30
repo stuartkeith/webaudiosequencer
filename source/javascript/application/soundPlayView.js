@@ -29,12 +29,13 @@ define([
 				var deferred = new $.Deferred();
 
 				deferred.progress(function (type) {
-					that.$el.css("cursor", "wait");
+					that.$el.addClass("sound-play-view-loading");
+
 					that.setIcon(type);
 				});
 
 				deferred.always(function () {
-					that.$el.css("cursor", "");
+					that.$el.removeClass("sound-play-view-loading");
 
 					that.$el.button("enable");
 				});
