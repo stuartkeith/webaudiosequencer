@@ -11,10 +11,7 @@ define([
 
 		events: {
 			"change .play-stop": function (event) {
-				if (event.target.checked)
-					this.eventBus.trigger("playSequencer");
-				else
-					this.eventBus.trigger("stopSequencer");
+				this.eventBus.trigger("toggleSequencer");
 			},
 
 			"change .bpm-number": "changeBPMInput",
