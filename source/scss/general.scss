@@ -58,3 +58,13 @@ input[type=range] {
 		margin-bottom: 1.5em;
 	}
 }
+
+.pop-up {
+	background: $panel-foreground;
+	border: 4px solid $chrome-foreground;
+	border-radius: 4px;
+	box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.25);
+	display: inline-block;
+	padding: 4px;
+	z-index: 999999;
+}

@@ -11,47 +11,15 @@ define([
 		className: "sound",
 		tagName: "td",
 
-		mouseDownTime: 500,
-
 		soundTemplate: _.template(soundTemplateString),
 
 		events: {
-			"mousedown .add": function (event) {
-				this.timeout = setTimeout(_.bind(function () {
-					this.ignoreClick = true;
-
-					this.triggerCreateTrack("melodic");
-				}, this), this.mouseDownTime);
-			},
-
-			"mouseleave .add": function (event) {
-				this.ignoreClick = false;
-
-				this.stopTimeout();
-			},
-
 			"click .add": function (event) {
-				this.stopTimeout();
-
-				if (this.ignoreClick)
-					this.ignoreClick = false;
-				else
-					this.triggerCreateTrack("percussive");
-			}
-		},
-
-		triggerCreateTrack: function (instrumentManagerType) {
-			this.eventBus.trigger("createTrack", {
-				instrumentManagerType: instrumentManagerType,
-				soundAttributes: this.model.attributes
-			});
-		},
-
-		stopTimeout: function () {
-			if (this.timeout) {
-				clearTimeout(this.timeout);
-
-				delete this.timeout;
+				this.eventBus.trigger("requestTrack", {
+					pageX: event.pageX,
+					pageY: event.pageY,
+					soundModel: this.model
+				});
 			}
 		},
 

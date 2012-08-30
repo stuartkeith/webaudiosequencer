@@ -6,8 +6,9 @@ define([
 	"./instructionsPanel/instructionsPanelView",
 	"./soundBrowser/soundBrowserView",
 	"./trackPanelView",
+	"./soundPopUpView",
 	"text!templates/application.html"
-], function(_, Backbone, BaseView, VolumeView, InstructionsPanelView, SoundBrowserView, TrackPanelView, applicationTemplateString) {
+], function(_, Backbone, BaseView, VolumeView, InstructionsPanelView, SoundBrowserView, TrackPanelView, SoundPopUpView, applicationTemplateString) {
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
 
@@ -48,6 +49,10 @@ define([
 			this.trackPanelContainer = this.$el.find(".track-panel-container:first");
 
 			this.addInstructionsPanel();
+
+			this.addChildView(SoundPopUpView, {
+				el: this.$el
+			}).render();
 
 			return this;
 		},
