@@ -106,10 +106,13 @@ define([
 				},
 				error: function (collection, response) {
 					var errorContext = {
-						name: self.collection.name,
-						statusCode: response.status,
-						statusText: response.statusText
+						name: self.collection.name
 					};
+
+					if (response.status === 0)
+						errorContext.error = "Network error - the host is unreachable or returning an incorrect response";
+					else
+						errorContext.error = "Error " + response.status + " - " + response.statusText;
 
 					self.refreshButton.button("option", "icons", {
 						primary: self.refreshErrorIconClass
