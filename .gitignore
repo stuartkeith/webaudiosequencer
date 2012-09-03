@@ -2,4 +2,5 @@
 _build/
 source/css/main.css
 source/css/images/buttons.png
+source/scss/buttons.scss
 .sass-cache/
