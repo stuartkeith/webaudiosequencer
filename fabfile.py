@@ -8,12 +8,21 @@ env.use_ssh_config = True
 
 
 glue_each_template = """
-.{{ class_name }} {
+span.{{ class_name }}, .{{ class_name }}::-webkit-slider-thumb {
+    background-image: url({{ sprite_url }});
+    background-repeat: no-repeat;
+}
+
+span.{{ class_name }} {
     background-position: {{ x }}px {{ y }}px;
     height: {{ height }}px;
     width: {{ width }}px;
     margin-left: {{ (-width / 2)|int }}px;
     margin-top: {{ (-height / 2)|int }}px;
+}
+
+.{{ class_name }}::-webkit-slider-thumb {
+    background-position: ({{ x }}px - $button-border) ({{ y }}px - $button-border);
 }
 
 ${{ class_name }}-width: {{ width }}px;
@@ -31,7 +40,8 @@ def scss():
 def glue():
     local('glue ./source/sprites/buttons --img=./source/css/images \
            --css=./source/scss --extension=scss -u images/ \
-          --each-template=\'%s\'' % glue_each_template)
+           --global-template='' \
+           --each-template=\'%s\'' % glue_each_template)
     scss()
 
 def build():
