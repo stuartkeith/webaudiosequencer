@@ -6,7 +6,6 @@ $sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height -
 
 .sound {
 	height: $sound-height;
-	overflow: hidden;
 	position: relative; // needed for draggable's position: absolute
 	min-width: $sound-width;
 }

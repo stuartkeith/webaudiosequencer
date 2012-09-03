@@ -13,7 +13,7 @@ html {
 }
 
 body {
-	background-color: $background;
+	background: $background fixed url(images/subtle-dots.png);
 	color: #3F3F3F;
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 }
@@ -43,7 +43,15 @@ input[type=range] {
 }
 
 .master-volume {
-	@include input-range(64px, 16px);
+	@include input-range(128px, 16px);
+	position: absolute;
+	right: 8px;
+	top: 8px;
+}
+
+#container {
+	text-align: center;
+	margin: 16px 0 32px;
 }
 
 #description {

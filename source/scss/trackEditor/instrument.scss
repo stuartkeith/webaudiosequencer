@@ -24,7 +24,7 @@ $drag-target-border: 2px;
 
 .remove-instrument {
 	height: 16px;
-	margin-left: $drag-target-border * 2;
+	margin-left: ($sprite-buttons-remove-height / 2) - $drag-target-border;
 	margin-right: $drag-target-border * 2;
 	vertical-align: middle;
 	width: 16px;

@@ -1,16 +1,18 @@
 .sequencer-controls {
 	font-size: 0; // remove gaps between inline-blocks
-	margin: 16px 8px;
+	margin: 32px 0;
+	text-align: center;
 }
 
 .play-stop-label {
-	width: 32px;
 	height: 32px;
+	margin-right: 8px;
 	vertical-align: middle;
+	width: 32px;
 }
 
 .bpm-slider {
-	@include input-range(128px, 24px);
+	@include input-range(192px, 24px);
 	display: inline-block;
 	vertical-align: middle;
 }

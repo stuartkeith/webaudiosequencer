@@ -1,9 +1,9 @@
 $track-control-height: 32px;
-$remove-track-gap: ($track-control-height / 2) - (($sprite-buttons-remove-height + $button-border) / 2);
 
 .track-control {
-	float: left;
+	display: inline-block;
 	height: $track-control-height;
+	line-height: $track-control-height;
 	margin-right: 8px;
 	position: relative;
 	width: 128px;
@@ -37,7 +37,7 @@ $remove-track-gap: ($track-control-height / 2) - (($sprite-buttons-remove-height
 
 .remove-track {
 	height: 16px;
-	margin: $remove-track-gap;
-	position: relative;
+	margin: 0 8px;
+	vertical-align: middle;
 	width: 16px;
 }
