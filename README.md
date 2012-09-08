@@ -1,8 +1,12 @@
-Icons
------
+Credits
+-------
 
 The icons used are part of the [Default Icon](http://www.defaulticon.com/)
 set by [interactivemania](http://www.interactivemania.com/).
+
+The tiled background is the 'Subtle Dots' pattern by
+[Designova](http://www.designova.net/) (downloaded via
+[Subtle Patterns](http://subtlepatterns.com/subtle-dots/)).
 
 
 Required Server Configuration
