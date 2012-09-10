@@ -1,17 +1,19 @@
 define(function (require) {
-	var createTrack = function (args) {
-		var createMelodicInstrumentManager = require("instruments/createMelodicInstrumentManager"),
-		    createPercussiveInstrumentManager = require("instruments/createPercussiveInstrumentManager"),
-		    Sequence = require("sequencer/sequence"),
-		    TrackModel = require("tracks/trackModel"),
-		    settings = require("settings");
+	var createMelodicInstrumentManager = require("instruments/createMelodicInstrumentManager"),
+	    createPercussiveInstrumentManager = require("instruments/createPercussiveInstrumentManager"),
+	    Sequence = require("sequencer/sequence"),
+	    Sequencer = require("sequencer/sequencer"),
+	    TrackModel = require("tracks/trackModel"),
+	    settings = require("settings");
 
+	var createTrack = function (args) {
 		if (this.trackCollection.length >= settings.maxTracks)
 			return;
 
 		var instrumentManagerType = args.instrumentManagerType;
 
-		var sequence = new Sequence(this.sequencer.getLength());
+		var sequence = new Sequence(this.sequenceLength);
+		var sequencer = new Sequencer(sequence, this.sequencePosition);
 
 		var instrumentManager;
 
@@ -20,11 +22,10 @@ define(function (require) {
 		else if (instrumentManagerType === "percussive")
 			instrumentManager = createPercussiveInstrumentManager();
 
-		instrumentManager.addSequence(sequence);
-
 		var trackModel = new TrackModel();
 		trackModel.set("instrumentManager", instrumentManager);
 		trackModel.set("sequence", sequence);
+		trackModel.set("sequencer", sequencer);
 
 		args.instrumentManager = instrumentManager;
 		args.trackModel = trackModel;
@@ -36,4 +37,3 @@ define(function (require) {
 
 	return createTrack;
 });
-

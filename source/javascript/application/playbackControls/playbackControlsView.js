@@ -1,17 +1,17 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"text!templates/sequencerControls/sequencerControls.html"
-], function(_, Backbone, BaseView, sequencerControlsTemplateString) {
-	var SequencerControlsView = BaseView.extend({
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone"),
+	    BaseView = require("baseView"),
+		playbackControlsTemplateString = require("text!templates/playbackControls/playbackControls.html");
+
+	var PlaybackControlsView = BaseView.extend({
 		bpmMinimum: 30,
 		bpmMaximum: 300,
-		sequencerControlsTemplate: _.template(sequencerControlsTemplateString),
+		playbackControlsTemplate: _.template(playbackControlsTemplateString),
 
 		events: {
 			"change .play-stop": function (event) {
-				this.eventBus.trigger("toggleSequencer");
+				this.eventBus.trigger("togglePlayback");
 			},
 
 			"change .bpm-number": "changeBPMInput",
@@ -31,7 +31,7 @@ define([
 		},
 
 		render: function () {
-			this.$el.html(this.sequencerControlsTemplate());
+			this.$el.html(this.playbackControlsTemplate());
 
 			this.playStop = this.$el.find(".play-stop:first");
 
@@ -73,5 +73,5 @@ define([
 		}
 	});
 
-	return SequencerControlsView;
+	return PlaybackControlsView;
 });

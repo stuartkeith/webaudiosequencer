@@ -14,8 +14,8 @@ define(function (require) {
 			"click button": function (event) {
 				var progressIndex = $(event.currentTarget).data('progressIndex');
 
-				this.eventBus.trigger("setSequencePosition", {
-					progressIndex: progressIndex
+				this.eventBus.trigger("setPlaybackPosition", {
+					playbackPosition: progressIndex
 				});
 			}
 		},

@@ -39,7 +39,7 @@ define([
 		updateTrackModel: function (trackModel) {
 			this.setModel(trackModel);
 
-			this.sequenceProgressView.setModel(trackModel.get("sequence"));
+			this.sequenceProgressView.setModel(trackModel.get("sequencer"));
 			this.sequenceProgressView.render();
 
 			this.gridView.setModel(trackModel.get("sequence"));

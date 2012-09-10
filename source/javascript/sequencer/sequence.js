@@ -1,7 +1,7 @@
-define([
-	"backbone",
-	"utilities/array2d"
-], function(Backbone, Array2d) {
+define(function(require) {
+	var Backbone = require("backbone"),
+	    Array2d = require("utilities/array2d");
+
 	var Sequence = function (length) {
 		this._length = length;
 		this.notes = new Array2d();
@@ -12,13 +12,8 @@ define([
 			return this.notes.get(location);
 		},
 
-		update: function (position, delay) {
-			if (position >= this._length)
-				position %= this._length;
-
-			var notes = this.notes._columns[position];
-
-			this.trigger("update", position, notes, delay);
+		getNotesAt: function (position) {
+			return this.notes._columns[position];
 		},
 
 		getLength: function () {
@@ -30,6 +25,8 @@ define([
 		},
 
 		addNoteAt: function (location, data) {
+			var data = data || true;
+
 			if (this.getNoteAt(location))
 				this.trigger("note:removed", location);
 
@@ -39,8 +36,12 @@ define([
 		},
 
 		removeNoteAt: function (location) {
-			if (this.notes.clear(location))
+			var existingData = this.notes.clear(location);
+
+			if (existingData)
 				this.trigger("note:removed", location);
+
+			return existingData;
 		},
 
 		removeNotesAt: function (options) {
@@ -50,13 +51,15 @@ define([
 		},
 
 		shiftNotesAt: function (x, y, options) {
+			var existingData;
+
 			this.notes.each(function (location) {
-				this.removeNoteAt(location);
+				existingData = this.removeNoteAt(location);
 
 				location.x += x;
 				location.y += y;
 
-				this.addNoteAt(location, true);
+				this.addNoteAt(location, existingData);
 			}, this, options);
 		},
 

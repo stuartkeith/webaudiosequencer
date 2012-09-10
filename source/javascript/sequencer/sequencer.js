@@ -1,114 +1,27 @@
-define([
-	"underscore",
-	"backbone",
-	"./sequence"
-], function(_, Backbone, Sequence) {
-	var Sequencer = function (context, length) {
-		this._context = context;
-		this._length = length;
+define(function() {
+	var _ = require("underscore"),
+	    Backbone = require("backbone");
 
-		this.position = 0;
-		this.isPlaying = false;
-		this.sequences = [];
-		this.setBPM(120);
+	var Sequencer = function (sequence, position) {
+		this.sequence = sequence;
 
-		this._updateBound = _.bind(this.update, this);
+		this.position = position || 0;
 	};
 
 	_.extend(Sequencer.prototype, Backbone.Events, {
-		setLength: function (value) {
-			this._length = value;
-
-			if (this.position >= this._length)
-				this.position = 0;
-		},
-
 		getLength: function () {
-			return this._length;
+			return this.sequence.getLength();
 		},
 
-		setBPM: function (value) {
-			if (this.bpm !== value) {
-				this.bpm = value;
-				this._bpmSeconds = 60.0 / this.bpm;
+		next: function () {
+			var notes = this.sequence.getNotesAt(this.position),
+			    newPosition = this.position + 1;
 
-				this.trigger("bpm", value);
-			}
-		},
+			this.trigger("update", this.position);
 
-		play: function (forceRestart) {
-			if (forceRestart)
-				this.stop();
+			this.position = newPosition < this.sequence.getLength() ? newPosition : 0;
 
-			if (!this.isPlaying) {
-				this.isPlaying = true;
-				this._noteTime = 0;
-				this._startTime = this._context.currentTime;
-
-				this.update();
-			}
-
-			this.trigger("play");
-		},
-
-		stop: function (resetPosition) {
-			if (this.timeout) {
-				clearTimeout(this.timeout);
-
-				this.timeout = null;
-			}
-
-			this.isPlaying = false;
-
-			if (resetPosition)
-				this.position = 0;
-
-			this.trigger("stop");
-		},
-
-		update: function () {
-			var currentTime = this._context.currentTime - this._startTime + 0.2;
-			var contextPlayTime;
-
-			while (this._noteTime < currentTime) {
-				contextPlayTime = this._startTime + this._noteTime;
-
-				_.each(this.sequences, function (sequence) {
-					sequence.update(this.position, contextPlayTime);
-				}, this);
-
-				newPosition = this.position + 1;
-
-				this.position = newPosition < this._length ? newPosition : 0;
-
-				this._noteTime += this._bpmSeconds;
-			}
-
-			if (this.isPlaying)
-				this.timeout = setTimeout(this._updateBound, 100);
-		},
-
-		addSequence: function (sequence) {
-			this.sequences.push(sequence);
-
-			this.trigger("sequenceAdded", sequence);
-
-			return sequence;
-		},
-
-		removeSequence: function (sequence) {
-			var index = this.sequences.indexOf(sequence);
-
-			if (index >= 0) {
-				this.sequences.splice(index, 1);
-
-				sequence.trigger("removed");
-				this.trigger("sequenceRemoved", sequence);
-
-				return true;
-			} else {
-				return false;
-			}
+			return notes;
 		}
 	});
 

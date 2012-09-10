@@ -1,12 +1,12 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"./sequencerControls/sequencerControlsView",
-	"./trackControls/trackControlsView",
-	"./trackEditor/trackEditorView",
-	"text!templates/trackPanel.html"
-], function(_, Backbone, BaseView, SequencerControlsView, TrackControlsView, TrackEditorView, trackPanelTemplateString) {
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone"),
+	    BaseView = require("baseView"),
+	    PlaybackControlsView = require("./playbackControls/playbackControlsView"),
+	    TrackControlsView = require("./trackControls/trackControlsView"),
+	    TrackEditorView = require("./trackEditor/trackEditorView"),
+	    trackPanelTemplateString = require("text!templates/trackPanel.html");
+
 	var TrackPanelView = BaseView.extend({
 		className: "track-panel-view",
 		trackPanelTemplate: _.template(trackPanelTemplateString),
@@ -16,9 +16,9 @@ define([
 
 			this.$el.html(this.trackPanelTemplate());
 
-			this.addChildView(SequencerControlsView, {
-				el: this.$el.find(".sequencer-controls"),
-				model: this.model.sequencer
+			this.addChildView(PlaybackControlsView, {
+				el: this.$el.find(".playback-controls"),
+				model: this.model.scheduler
 			}).render();
 
 			this.addChildView(TrackControlsView, {

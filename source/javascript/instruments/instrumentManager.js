@@ -1,14 +1,13 @@
-define([
-	"underscore",
-	"backbone",
-	"settings"
-], function (_, Backbone, settings) {
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone"),
+	    settings = require("settings");
+
 	var InstrumentManager = function () {
 		this.instruments = [];
 		this.range = settings.maxNotes;
 		this.instrumentRange = 0;
 		this.instrumentRangeRemaining = this.range;
-		this.sequences = [];
 	};
 
 	_.extend(InstrumentManager.prototype, Backbone.Events, {
@@ -52,24 +51,18 @@ define([
 			return this.removeInstrumentAtIndex(index);
 		},
 
-		addSequence: function (sequence) {
-			sequence.on("update", this.receiveNotes, this);
-
-			this.sequences.push(sequence);
-		},
-
-		removeSequence: function (sequence) {
-			sequence.off("update", this.receiveNotes, this);
-
-			var index = this.sequences.indexOf(sequence);
-			this.sequences.splice(index, 1);
+		processNotes: function (notes, fn) {
+			_.each(notes, function (data, note) {
+				if (note != null)
+					this.processNote(parseInt(note, 10), fn);
+			}, this);
 		},
 
 		createInstrument: function () {
 			// override this.
 		},
 
-		receiveNotes: function (position, notes) {
+		processNote: function (note, fn) {
 			// override this.
 		}
 	});

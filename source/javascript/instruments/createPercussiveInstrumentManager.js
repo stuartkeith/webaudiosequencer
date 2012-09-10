@@ -1,8 +1,8 @@
-define([
-	"underscore",
-	"./instrumentManager",
-	"./instrument"
-], function (_, InstrumentManager, Instrument) {
+define(function (require) {
+	var _ = require("underscore"),
+	    InstrumentManager = require("./instrumentManager"),
+	    Instrument = require("./instrument");
+
 	var createPercussiveInstrumentManager = function () {
 		var instrumentManager = new InstrumentManager();
 
@@ -22,16 +22,11 @@ define([
 			}
 		},
 
-		receiveNotes: function (position, notes, delay) {
-			var instrument, note;
+		processNote: function (note, fn) {
+			var instrument = this.instruments[note];
 
-			_.each(notes, function (data, note) {
-				note = parseInt(note);
-				instrument = this.instruments[note];
-
-				if (instrument && instrument.buffer)
-					this.soundOutput.playBuffer(instrument.buffer, instrument.transpose, instrument.getVolume(), delay);
-			}, this);
+			if (instrument)
+				fn.call(this, instrument.buffer, instrument.transpose, instrument.getVolume());
 		}
 	};
 

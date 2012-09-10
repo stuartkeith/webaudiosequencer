@@ -27,7 +27,7 @@ require([
 	"backbone",
 	"jqueryUI",
 	"soundOutput/soundOutput",
-	"sequencer/sequencer",
+	"sequencer/scheduler",
 	"tracks/trackCollection",
 	"commandMap",
 	"application/applicationView",
@@ -35,10 +35,10 @@ require([
 	"./documentListeners",
 	"utilities/functionChain",
 	"text!templates/unsupported.html"
-], function (_, Backbone, jqueryUI, SoundOutput, Sequencer, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, documentListeners, functionChain, unsupportedTemplateString) {
+], function (_, Backbone, jqueryUI, SoundOutput, Scheduler, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, documentListeners, functionChain, unsupportedTemplateString) {
 	var eventBus = _.clone(Backbone.Events);
 
-	var commandObject = {
+	var commandContext = {
 		eventBus: eventBus
 	};
 
@@ -46,10 +46,10 @@ require([
 		_.each(mappings, function (map) {
 			if (map.guards) {
 				eventBus.on(event, function () {
-					functionChain(map.guards, commandObject, arguments, map.successCommand, map.failureCommand);
+					functionChain(map.guards, commandContext, arguments, map.successCommand, map.failureCommand);
 				});
 			} else {
-				eventBus.on(event, map.successCommand, commandObject);
+				eventBus.on(event, map.successCommand, commandContext);
 			}
 		});
 	});
@@ -57,18 +57,37 @@ require([
 	if (window.webkitAudioContext) {
 		var context = new webkitAudioContext();
 
-		commandObject.selectedTrackModel = null;
-		commandObject.sequencer = new Sequencer(context, 16);
-		commandObject.soundOutput = new SoundOutput(context);
-		commandObject.trackCollection = new TrackCollection();
+		commandContext.scheduler = new Scheduler(context);
+		commandContext.selectedTrackModel = null;
+		commandContext.sequenceLength = 16;
+		commandContext.sequencePosition = 0;
+		commandContext.soundOutput = new SoundOutput(context);
+		commandContext.trackCollection = new TrackCollection();
+
+		var notes;
+
+		commandContext.scheduler.on("update", function (delaySeconds) {
+			commandContext.trackCollection.each(function (trackModel) {
+				notes = trackModel.get("sequencer").next();
+
+				trackModel.get("instrumentManager").processNotes(notes, function (buffer, note, volume) {
+					commandContext.soundOutput.playBuffer(buffer, note, volume, delaySeconds);
+				});
+			});
+
+			commandContext.sequencePosition++;
+
+			if (commandContext.sequencePosition >= commandContext.sequenceLength)
+				commandContext.sequencePosition = 0;
+		});
 
 		var applicationView = new ApplicationView({
 			eventBus: eventBus,
 			el: "#container",
 			model: {
-				sequencer: commandObject.sequencer,
-				soundOutput: commandObject.soundOutput,
-				trackCollection: commandObject.trackCollection
+				scheduler: commandContext.scheduler,
+				soundOutput: commandContext.soundOutput,
+				trackCollection: commandContext.trackCollection
 			}
 		});
 
