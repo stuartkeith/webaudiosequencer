@@ -35,7 +35,7 @@ define([
 		},
 
 		delegateModelEvents: function () {
-			if (this.model) {
+			if (this.model && this.model.on) {
 				_.each(this.modelEvents, function (fn, event) {
 					this.model.on(event, getProperty(this, fn), this);
 				}, this);
@@ -43,7 +43,7 @@ define([
 		},
 
 		undelegateModelEvents: function () {
-			if (this.model) {
+			if (this.model && this.model.off) {
 				_.each(this.modelEvents, function (fn, event) {
 					this.model.off(event, getProperty(this, fn), this);
 				}, this);
