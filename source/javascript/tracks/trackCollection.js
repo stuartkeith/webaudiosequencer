@@ -1,7 +1,6 @@
-define([
-	"underscore",
-	"backbone"
-], function (_, Backbone) {
+define(function (require) {
+	var Backbone = require("backbone");
+
 	var TrackCollection = Backbone.Collection.extend({
 	});
 
