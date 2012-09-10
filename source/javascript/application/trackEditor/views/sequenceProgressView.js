@@ -29,6 +29,8 @@ define(function (require) {
 		render: function () {
 			this.setLength(this.model.getLength());
 
+			this.setProgressIndex(this.model.position);
+
 			return this;
 		},
 
