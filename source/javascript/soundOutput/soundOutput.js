@@ -33,7 +33,7 @@ define([
 		},
 
 		playBuffer: function (buffer, note, volume, delay, callback) {
-			var volume = volume || 1;
+			var volume = volume != null ? volume : 1;
 			var delay = delay || 0;
 			var playbackRate;
 
