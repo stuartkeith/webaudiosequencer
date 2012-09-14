@@ -1,28 +1,24 @@
 define(function (require) {
-	var $ = require("jquery");
+	var documentKeyboardHandler = require("utilities/documentKeyboardHandler");
 
 	var keyboardShortcuts = function (eventBus) {
-		$(document.documentElement).keydown(function (event) {
+		documentKeyboardHandler(function (event, isDown, isRepeated) {
 			// spacebar
-			if (event.which === 32) {
-				eventBus.trigger("toggleSequencer");
+			if (isDown && event.which === 32) {
+				if (!isRepeated)
+					eventBus.trigger("togglePlayback");
 
-				event.preventDefault();
-
-				return;
+				return false;
 			}
 
-			// number keys 1 to 0
-			var index = event.which - 49;
+			// number keys 1 to 9
+			if (isDown && event.which >= 49 && event.which <= 57) {
+				if (!isRepeated)
+					eventBus.trigger("selectTrack", {
+						trackIndex: event.which - 49
+					});
 
-			if (index >= 0 && index <= 10) {
-				eventBus.trigger("selectTrack", {
-					trackIndex: index
-				});
-
-				event.preventDefault();
-
-				return;
+				return false;
 			}
 		});
 	};
