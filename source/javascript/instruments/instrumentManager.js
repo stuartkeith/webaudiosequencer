@@ -53,8 +53,7 @@ define(function (require) {
 
 		processNotes: function (notes, fn) {
 			_.each(notes, function (data, note) {
-				if (note != null)
-					this.processNote(parseInt(note, 10), fn);
+				this.processNote(parseInt(note, 10), fn);
 			}, this);
 		},
 
