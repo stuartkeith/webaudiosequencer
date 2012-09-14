@@ -17,6 +17,7 @@ define(function (require) {
 	    togglePlayback = require("commands/togglePlayback"),
 	    updateBPM = require("commands/updateBPM"),
 	    updateInstrument = require("commands/updateInstrument"),
+	    areTracksRemaining = require("guards/areTracksRemaining"),
 	    isSelectedTrack = require("guards/isSelectedTrack"),
 	    isTrackCount = require("guards/isTrackCount");
 
@@ -33,8 +34,8 @@ define(function (require) {
 	};
 
 	add('addInstrument', null, addInstrument);
-	add('addTrack', null, addTrack);
-	add('createTrack', null, createTrack);
+	add('addTrack', [areTracksRemaining], addTrack);
+	add('createTrack', [areTracksRemaining], createTrack);
 	add('initialize', null, initialize);
 	add('instrumentRemoved', null, shiftNotesUp);
 	add('playSoundAttributes', null, playSoundAttributes);

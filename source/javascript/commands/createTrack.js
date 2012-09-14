@@ -3,13 +3,9 @@ define(function (require) {
 	    createPercussiveInstrumentManager = require("instruments/createPercussiveInstrumentManager"),
 	    Sequence = require("sequencer/sequence"),
 	    Sequencer = require("sequencer/sequencer"),
-	    TrackModel = require("tracks/trackModel"),
-	    settings = require("settings");
+	    TrackModel = require("tracks/trackModel");
 
 	var createTrack = function (args) {
-		if (this.trackCollection.length >= settings.maxTracks)
-			return;
-
 		var instrumentManagerType = args.instrumentManagerType;
 
 		var sequence = new Sequence(this.sequenceLength);
