@@ -18,6 +18,14 @@ body {
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 }
 
+a {
+	color: $action-foreground;
+
+	&:hover {
+		color: $action-foreground-hover;
+	}
+}
+
 input[type=range] {
 	-webkit-appearance: none;
 	background-color: $range-background;

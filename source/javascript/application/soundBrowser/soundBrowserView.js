@@ -169,6 +169,8 @@ define([
 				rows: soundsViewRows
 			});
 
+			this.collectionLink = this.$el.find(".collection-link:first");
+
 			this.changeCollection(this.collections[0]);
 
 			return this;
@@ -186,6 +188,9 @@ define([
 
 			// refresh must be called afterwards.
 			this.collectionSelect.find("input:radio[value=" + this.collection.className + "]").prop("checked", true).button("refresh");
+
+			this.collectionLink.attr("href", this.collection.siteURL);
+			this.collectionLink.text(this.collection.name);
 
 			this.fetch();
 		},
