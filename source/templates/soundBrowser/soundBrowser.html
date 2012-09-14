@@ -1,11 +1,11 @@
 <div class="sound-browser-controls">
-	<button class="previous">Previous</button>
-	<button class="refresh">Refresh</button>
-	<button class="next">Next</button>
+	<button class="previous">Go to the previous page of the sound list</button>
+	<button class="refresh">Refresh the sound list</button>
+	<button class="next">View the next page of the sound list</button>
 	<div class="collection-select">
 		<% _.each(collections, function (collection) { %>
 		<input id="<%= collection.className %>" type="radio" value="<%= collection.className %>" name="sound-collection">
-		<label for="<%= collection.className %>" title="<%= collection.description %>"><%= collection.name %></label>
+		<label for="<%= collection.className %>" title="Source sounds from <%= collection.name %>: <%= collection.description %>"><%= collection.name %></label>
 		<% }); %>
 	</div>
 	<input class="search-input" placeholder="Search" title="Search for a sound - e.g. 'piano', 'snare'"></input>

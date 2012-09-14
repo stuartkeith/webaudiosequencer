@@ -31,6 +31,9 @@ define([
 
 			this.select = this.$el.find(".track-control-select:first");
 
+			// store the title so it can added and removed later
+			this.selectTitle = this.select.attr("title");
+
 			this.updateSelect();
 
 			this.$el.find(".remove-track:first").button({
@@ -45,7 +48,10 @@ define([
 		},
 
 		updateSelect: function () {
-			this.select.toggleClass("track-control-selected", this.model.get('selected'));
+			var modelSelected = this.model.get('selected');
+
+			this.select.attr("title", modelSelected ? "" : this.selectTitle);
+			this.select.toggleClass("track-control-selected", modelSelected);
 		}
 	});
 
