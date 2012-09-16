@@ -1,12 +1,12 @@
-define([
-	"jquery",
-	"underscore",
-	"backbone",
-	"baseView",
-	"application/soundPlayView",
-	"./draggableView",
-	"text!templates/soundBrowser/sound.html"
-], function($, _, Backbone, BaseView, SoundPlayView, DraggableView, soundTemplateString) {
+define(function (require) {
+	var $ = require("jquery"),
+	    _ = require("underscore"),
+	    Backbone = require("backbone"),
+	    BaseView = require("baseView"),
+	    SoundButtonView = require("application/soundButtonView"),
+	    DraggableView = require("./draggableView"),
+	    soundTemplateString = require("text!templates/soundBrowser/sound.html");
+
 	var SoundView = BaseView.extend({
 		className: "sound",
 		tagName: "td",
@@ -35,11 +35,11 @@ define([
 					text: false
 				});
 
-				var soundPlay = this.$el.find(".sound-play:first");
+				var soundButton = this.$el.find(".sound-button:first");
 				var draggable = this.$el.find(".draggable:first");
 
-				this.addChildView(SoundPlayView, {
-					el: soundPlay,
+				this.addChildView(SoundButtonView, {
+					el: soundButton,
 					model: this.model
 				});
 

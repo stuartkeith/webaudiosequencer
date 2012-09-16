@@ -1,21 +1,21 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"text!templates/soundBrowser/soundBrowser.html",
-	"text!templates/soundBrowser/errorDescription.txt",
-	"./collections/freeSoundCollection",
-	"./collections/soundCloudCollection",
-	"./views/soundsView"
-], function(_, Backbone, BaseView, SoundBrowserTemplateString, ErrorDescriptionTemplateString, FreeSoundCollection, SoundCloudCollection, SoundsView) {
-	var soundsViewColumns = 7;
-	var soundsViewRows = 4;
-	var soundsViewTotal = soundsViewColumns * soundsViewRows;
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone"),
+	    BaseView = require("baseView"),
+	    SoundBrowserTemplateString = require("text!templates/soundBrowser/soundBrowser.html"),
+	    soundBrowserError = require("text!templates/soundBrowser/soundBrowserError.txt"),
+	    FreeSoundCollection = require("./collections/freeSoundCollection"),
+	    SoundCloudCollection = require("./collections/soundCloudCollection"),
+	    SoundsView = require("./views/soundsView");
+
+	var soundsViewColumns = 7,
+	    soundsViewRows = 4,
+	    soundsViewTotal = soundsViewColumns * soundsViewRows;
 
 	var SoundBrowserView = BaseView.extend({
 		className: "sound-browser",
 		soundBrowserTemplate: _.template(SoundBrowserTemplateString),
-		errorDescriptionTemplate: _.template(ErrorDescriptionTemplateString),
+		soundBrowserErrorTemplate: _.template(soundBrowserError),
 		refreshIconClass: "sprite-buttons-refresh-large",
 		refreshErrorIconClass: "sprite-buttons-error-large",
 		page: 1,
@@ -118,7 +118,7 @@ define([
 						primary: self.refreshErrorIconClass
 					});
 
-					self.refreshButton.prop("title", self.errorDescriptionTemplate(errorContext));
+					self.refreshButton.prop("title", self.soundBrowserErrorTemplate(errorContext));
 
 					self.setEnabled(true);
 				}

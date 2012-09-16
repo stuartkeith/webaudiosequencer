@@ -1,11 +1,10 @@
-define([
-	"backbone",
-	"jquery"
-], function(Backbone, $) {
-	var noteToPlaybackRate = [];
+define(function(require) {
+	var $ = require("jquery"),
+	    Backbone = require("backbone");
 
-	var noteRange = 48;
-	var noteRangeHalved = noteRange / 2;
+	var noteToPlaybackRate = [],
+	    noteRange = 48,
+	    noteRangeHalved = noteRange / 2;
 
 	for (var i = 0; i < noteRange; i++)
 		noteToPlaybackRate[i] = Math.pow(2, (i - noteRangeHalved) / 12);
@@ -89,6 +88,7 @@ define([
 				var request = new XMLHttpRequest();
 				request.open("GET", url, true);
 				request.responseType = "arraybuffer";
+
 				request.onloadend = function (event) {
 					if (request.status === 200) {
 						this._context.decodeAudioData(request.response,

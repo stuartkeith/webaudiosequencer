@@ -1,21 +1,18 @@
 define(function () {
 	var playSoundAttributes = function (args) {
-		var soundAttributes = args.soundAttributes;
-		var deferred = args.deferred;
-		var note = args.note || 0;
-		var volume = args.volume == null ? 1 : args.volume;
-		var delay = args.delay || 0;
+		var soundAttributes = args.soundAttributes,
+		    deferred = args.deferred;
+		    note = args.note || 0,
+		    volume = args.volume == null ? 1 : args.volume,
+		    delay = args.delay || 0;
 
 		if (deferred)
 			deferred.notify("loading");
 
 		var loadDeferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);
 
-		if (deferred) {
-			loadDeferred.fail(function (error, data) {
-				deferred.reject(error, data);
-			});
-		}
+		if (deferred)
+			loadDeferred.fail(deferred.reject);
 
 		loadDeferred.done(function (buffer) {
 			if (deferred)
