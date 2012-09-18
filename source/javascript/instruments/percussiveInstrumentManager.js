@@ -3,15 +3,11 @@ define(function (require) {
 	    InstrumentManager = require("./instrumentManager"),
 	    Instrument = require("./instrument");
 
-	var createPercussiveInstrumentManager = function () {
-		var instrumentManager = new InstrumentManager();
-
-		_.extend(instrumentManager, percussiveInstrumentManager);
-
-		return instrumentManager;
+	var PercussiveInstrumentManager = function () {
+		InstrumentManager.call(this);
 	};
 
-	var percussiveInstrumentManager = {
+	_.extend(PercussiveInstrumentManager.prototype, InstrumentManager.prototype, {
 		createInstrument: function () {
 			if (this.instruments.length < this.range) {
 				var instrument = new Instrument();
@@ -25,10 +21,10 @@ define(function (require) {
 		processNote: function (note, fn) {
 			var instrument = this.instruments[note];
 
-			if (instrument)
+			if (instrument && instrument.buffer)
 				fn.call(this, instrument.buffer, instrument.transpose, instrument.getVolume());
 		}
-	};
+	});
 
-	return createPercussiveInstrumentManager;
+	return PercussiveInstrumentManager;
 });

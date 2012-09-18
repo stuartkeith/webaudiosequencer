@@ -1,6 +1,6 @@
 define(function (require) {
-	var createMelodicInstrumentManager = require("instruments/createMelodicInstrumentManager"),
-	    createPercussiveInstrumentManager = require("instruments/createPercussiveInstrumentManager"),
+	var MelodicInstrumentManager = require("instruments/melodicInstrumentManager"),
+	    PercussiveInstrumentManager = require("instruments/percussiveInstrumentManager"),
 	    Sequence = require("sequencer/sequence"),
 	    Sequencer = require("sequencer/sequencer"),
 	    TrackModel = require("tracks/trackModel");
@@ -14,9 +14,9 @@ define(function (require) {
 		var instrumentManager;
 
 		if (instrumentManagerType === "melodic")
-			instrumentManager = createMelodicInstrumentManager();
+			instrumentManager = new MelodicInstrumentManager();
 		else if (instrumentManagerType === "percussive")
-			instrumentManager = createPercussiveInstrumentManager();
+			instrumentManager = new PercussiveInstrumentManager();
 
 		var trackModel = new TrackModel();
 		trackModel.set("instrumentManager", instrumentManager);
