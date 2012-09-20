@@ -1,15 +1,115 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"settings",
-	"utilities/canvasGrid",
-	"templates/trackEditor/gridView/canvasGridConfiguration"
-], function(_, Backbone, BaseView, settings, CanvasGrid, canvasGridConfiguration) {
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone"),
+	    BaseView = require("baseView"),
+	    CanvasGrid = require("utilities/canvasGrid"),
+	    canvasGridConfiguration = require("templates/trackEditor/gridView/canvasGridConfiguration"),
+	    generateHSM = require("utilities/generateHSM"),
+	    settings = require("settings");
+
 	var GridView = BaseView.extend({
 		className: "grid-view",
 
+		HSM: generateHSM(["mousedown", "mouseup", "cellmove"], {
+			play: {
+				enter: function () {
+					this.view.$el.addClass("play-state");
+				},
+
+				exit: function () {
+					this.view.$el.removeClass("play-state");
+				},
+
+				mousedown: function (event) {
+					return this.rootState.play.playDown;
+				},
+
+				mouseup: function (event) {
+					return this.rootState.play;
+				},
+
+				playDown: {
+					cellmove: function () {
+						this.view.playNoteAtCurrentCell();
+					}
+				}
+			},
+
+			addOrRemove: {
+				cellmove: function () {
+					if (this.view.model.getNoteAt(this.view.currentCell)) {
+						return this.rootState.addOrRemove.remove;
+					} else {
+						return this.rootState.addOrRemove.add;
+					}
+				},
+
+				mouseup: function () {
+					return this.rootState.addOrRemove;
+				},
+
+				add: {
+					enter: function () {
+						this.view.$el.addClass("add-state");
+					},
+
+					exit: function () {
+						this.view.$el.removeClass("add-state");
+					},
+
+					mousedown: function () {
+						return this.rootState.addOrRemove.add.addDown;
+					},
+
+					addDown: {
+						enter: function () {
+							this.yPosition = this.view.currentCell.y;
+						},
+
+						exit: function () {
+							delete this.yPosition;
+						},
+
+						cellmove: function () {
+							this.view.addNoteAtCurrentCell({
+								y: this.yPosition
+							});
+						}
+					}
+				},
+
+				remove: {
+					enter: function () {
+						this.view.$el.addClass("remove-state");
+					},
+
+					exit: function () {
+						this.view.$el.removeClass("remove-state");
+					},
+
+					mousedown: function () {
+						return this.rootState.addOrRemove.remove.removeDown;
+					},
+
+					removeDown: {
+						cellmove: function () {
+							this.view.removeNoteAtCurrentCell();
+						}
+					}
+				}
+			}
+		}),
+
 		initialize: function () {
+			this.currentCell = {};
+			this.isMouseDown = false;
+
+			this.hsm = new this.HSM({
+				view: this
+			});
+
+			this.setState(this.hsm.rootState.addOrRemove);
+
 			this.canvasGrid = new CanvasGrid(this.el);
 
 			this.canvasGrid.setRows(settings.maxNotes);
@@ -17,6 +117,25 @@ define([
 			this.canvasGrid.setRowHeight(settings.instrumentHeight);
 			this.canvasGrid.setSubCanvasses(canvasGridConfiguration.subCanvasses);
 			this.canvasGrid.setCanvasSelector(canvasGridConfiguration.canvasSelector);
+		},
+
+		setState: function (newState) {
+			if (this.isMouseDown)
+				this.hsm.mouseup();
+
+			this.hsm.changeState(newState);
+
+			if (this.isMouseDown)
+				this.hsm.mousedown();
+
+			if (this.currentCell.x != null && this.currentCell.y != null)
+				this.hsm.cellmove();
+		},
+
+		eventBusEvents: {
+			"setGridViewState": function (args) {
+				this.setState(this.hsm.rootState[args.state]);
+			}
 		},
 
 		modelEvents: {
@@ -31,32 +150,64 @@ define([
 
 		events: {
 			"mousedown": function (event) {
-				this.handleMouseNoteEvent(event, true);
+				if (event.which === 1) {
+					this.isMouseDown = true;
+
+					this.hsm.mousedown();
+
+					this.hsm.cellmove();
+				}
 			},
 
 			"mouseup": function (event) {
-				this.stopHandling();
-			},
+				if (event.which === 1) {
+					this.isMouseDown = false;
 
-			"mousemove": function (event) {
-				var location = this.canvasGrid.mouseEventToColumnAndRow(this.$el, event);
-				location.y = this.mouseDownRow;
+					this.hsm.mouseup();
 
-				if (!this.previousLocation || (location.x !== this.previousLocation.x || location.y !== this.previousLocation.y)) {
-					this.previousLocation = location;
-
-					if (this.isMouseDown) {
-						if (this.isAddingNotes)
-							this.model.addNoteAt(location, true);
-						else
-							this.model.removeNoteAt(location);
-					}
+					this.hsm.cellmove();
 				}
 			},
 
 			"mouseenter": function (event) {
-				this.handleMouseNoteEvent(event, false);
+				this.updateCurrentCell(event);
+
+				this.events.mousedown.call(this, event);
+			},
+
+			"mouseleave": function (event) {
+				this.events.mouseup.call(this, event);
+
+				this.currentCell.x = this.currentCell.y = null;
+			},
+
+			"mousemove": function (event) {
+				this.updateCurrentCell(event);
 			}
+		},
+
+		updateCurrentCell: function (event) {
+			var currentCell = this.canvasGrid.mouseEventToColumnAndRow(this.$el, event);
+
+			if (currentCell.x !== this.currentCell.x || currentCell.y !== this.currentCell.y) {
+				this.currentCell = currentCell;
+
+				this.hsm.cellmove();
+			}
+		},
+
+		addNoteAtCurrentCell: function (override) {
+			this.model.addNoteAt(_.extend(this.currentCell, override));
+		},
+
+		removeNoteAtCurrentCell: function () {
+			this.model.removeNoteAt(this.currentCell);
+		},
+
+		playNoteAtCurrentCell: function () {
+			this.eventBus.trigger("playNote", {
+				note: this.currentCell.y
+			});
 		},
 
 		drawNoteAt: function (x, y) {
@@ -72,30 +223,6 @@ define([
 			}, this);
 
 			return this;
-		},
-
-		handleMouseNoteEvent: function (event, determineContext) {
-			if (event.which === 1) {
-				this.isMouseDown = true;
-
-				var location = this.canvasGrid.mouseEventToColumnAndRow(this.$el, event);
-
-				this.mouseDownRow = location.y;
-
-				if (this.isAddingNotes == null || determineContext)
-					this.isAddingNotes = this.model.toggleNoteAt(location, true);
-
-				event.preventDefault();
-
-				return false;
-			} else {
-				this.stopHandling();
-			}
-		},
-
-		stopHandling: function () {
-			this.isAddingNotes = null;
-			this.isMouseDown = false;
 		}
 	});
 

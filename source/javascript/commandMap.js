@@ -3,6 +3,7 @@ define(function (require) {
 	    addTrack = require("commands/addTrack"),
 	    createTrack = require("commands/createTrack"),
 	    initialize = require("commands/initialize"),
+	    playNoteThroughSelectedTrack = require("commands/playNoteThroughSelectedTrack"),
 	    playSoundAttributes = require("commands/playSoundAttributes"),
 	    restartPlayback = require("commands/restartPlayback"),
 	    removeInstrument = require("commands/removeInstrument"),
@@ -38,6 +39,7 @@ define(function (require) {
 	add('createTrack', [areTracksRemaining], createTrack);
 	add('initialize', null, initialize);
 	add('instrumentRemoved', null, shiftNotesUp);
+	add('playNote', null, playNoteThroughSelectedTrack);
 	add('playSoundAttributes', null, playSoundAttributes);
 	add('removeInstrument', null, removeInstrument);
 	add('removeTrack', null, removeTrack);

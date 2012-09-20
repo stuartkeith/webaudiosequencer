@@ -11,6 +11,17 @@ define(function (require) {
 				return false;
 			}
 
+			// shift
+			if (event.which === 16) {
+				if (!isRepeated) {
+					eventBus.trigger("setGridViewState", {
+						state: isDown ? "play" : "addOrRemove"
+					});
+				}
+
+				return false;
+			}
+
 			// number keys 1 to 9
 			if (isDown && event.which >= 49 && event.which <= 57) {
 				if (!isRepeated)
