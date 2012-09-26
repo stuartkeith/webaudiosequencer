@@ -109,7 +109,8 @@ require([
 
 		$("#description").append(unsupported);
 
-		unsupported.hide();
-		unsupported.fadeIn(1200);
+		// filter("*") required as of Firefox 15.0
+		// see http://bugs.jquery.com/ticket/12462
+		unsupported.filter("*").hide().fadeIn(1200);
 	}
 });
