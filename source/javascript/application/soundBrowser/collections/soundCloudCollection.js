@@ -24,6 +24,12 @@ define([
 			var convertedResponse = [];
 
 			_.each(response, function (sound) {
+				if (!sound.streamable) {
+					console.error("Skipping non-streamable SoundCloud sound:", sound);
+
+					return;
+				}
+
 				convertedResponse.push({
 					duration: sound.duration / 1000,
 					id: sound.id,
