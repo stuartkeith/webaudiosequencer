@@ -6,7 +6,7 @@ define(function (require) {
 	    soundError = require("text!templates/soundBrowser/soundError.txt")
 
 	var SoundButtonView = BaseView.extend({
-		soundErrorTemplate: _.template(soundError),
+		soundErrorTemplate: _.template(soundError.trim()),
 
 		initialize: function () {
 			this.originalLabel = this.$el.text();

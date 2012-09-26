@@ -15,7 +15,7 @@ define(function (require) {
 	var SoundBrowserView = BaseView.extend({
 		className: "sound-browser",
 		soundBrowserTemplate: _.template(SoundBrowserTemplateString),
-		soundBrowserErrorTemplate: _.template(soundBrowserError),
+		soundBrowserErrorTemplate: _.template(soundBrowserError.trim()),
 		refreshIconClass: "sprite-buttons-refresh-large",
 		refreshErrorIconClass: "sprite-buttons-error-large",
 		page: 1,
