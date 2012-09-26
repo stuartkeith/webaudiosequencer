@@ -2,6 +2,7 @@ require.config({
 	paths: {
 		jquery: "libraries/jquery/jquery-1.8.0",
 		jqueryUI: "libraries/jquery/jquery-ui-1.8.23",
+		jqueryPreloadCssImages: "libraries/jquery/preloadCssImages.jQuery_v5",
 		underscore: "libraries/underscore/underscore-1.3.3",
 		backbone: "libraries/backbone/backbone-0.9.2",
 		templates: "../templates",
@@ -18,14 +19,18 @@ require.config({
 			exports: "Backbone"
 		},
 
-		jqueryUI: ['jquery']
+		jqueryUI: ['jquery'],
+
+		jqueryPreloadCssImages: ['jquery']
 	}
 });
 
 require([
 	"underscore",
+	"jquery",
 	"backbone",
 	"jqueryUI",
+	"jqueryPreloadCssImages",
 	"soundOutput/soundOutput",
 	"sequencer/scheduler",
 	"tracks/trackCollection",
@@ -35,7 +40,9 @@ require([
 	"./documentListeners",
 	"utilities/functionChain",
 	"text!templates/unsupported.html"
-], function (_, Backbone, jqueryUI, SoundOutput, Scheduler, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, documentListeners, functionChain, unsupportedTemplateString) {
+], function (_, $, Backbone, jqueryUI, jqueryPreloadCssImages, SoundOutput, Scheduler, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, documentListeners, functionChain, unsupportedTemplateString) {
+	$.preloadCssImages();
+
 	var eventBus = _.clone(Backbone.Events);
 
 	var commandContext = {
