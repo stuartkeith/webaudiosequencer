@@ -26,7 +26,7 @@ define([
 			this.newInstrumentAreaView.render();
 
 			return this;
-		},
+		}
 	});
 
 	return InstrumentPanelView;

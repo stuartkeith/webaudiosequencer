@@ -14,7 +14,7 @@ define(function(require) {
 
 			"click #percussive-option": function () {
 				this.triggerCreateTrack("percussive");
-			},
+			}
 		},
 
 		triggerCreateTrack: function (instrumentManagerType) {
