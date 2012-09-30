@@ -1,0 +1,36 @@
+#instructions-panel {
+	display: inline-block;
+	line-height: 1.3em;
+	margin: 2em;
+	max-width: 36em;
+	text-align: left;
+
+	& * {
+		-webkit-user-select: text;
+	}
+
+	& p {
+		margin-bottom: 1em;
+	}
+
+	& ul {
+		margin-bottom: 1em;
+	}
+
+	& li {
+		margin-bottom: 1em;
+	}
+
+	& .feature {
+		color: $action-foreground;
+	}
+
+	& ul {
+		margin-left: 2em;
+	}
+
+	& footer {
+		font-size: 0.75em;
+		margin-top: 3em;
+	}
+}

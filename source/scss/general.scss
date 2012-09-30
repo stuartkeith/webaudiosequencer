@@ -26,6 +26,16 @@ a {
 	}
 }
 
+header {
+	font-size: 2em;
+	font-weight: bold;
+	margin-bottom: 1em;
+}
+
+strong {
+	font-weight: bold;
+}
+
 input[type=range] {
 	-webkit-appearance: none;
 	background-color: $range-background;
@@ -63,12 +73,10 @@ input[type=range] {
 }
 
 #description {
-	left: 50%;
-	margin-left: -16em;
 	position: absolute;
 	text-align: center;
 	top: 25%;
-	width: 32em;
+	width: 100%;
 
 	& p {
 		margin-bottom: 1.5em;
