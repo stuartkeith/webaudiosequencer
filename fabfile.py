@@ -4,8 +4,8 @@ import fabric.contrib.project as project
 
 env.use_ssh_config = True
 
-SOURCE_DIR = './source'
-BUILD_DIR = './_build'
+SOURCE_DIR = './source/'
+BUILD_DIR = './_build/'
 BUILD_JS_FILENAME = 'build.js'
 REQUIREJS_FILENAME = 'require-2.0.5.js'
 GOOGLE_ANALYTICS_FILENAME = 'google-analytics.txt'
@@ -48,31 +48,31 @@ def clean():
     local('rm %s -rf' % BUILD_DIR)
 
 def scss():
-    local('sass %s/scss/main.scss %s/css/main.css \
+    local('sass %sscss/main.scss %scss/main.css \
            --style compressed' % (SOURCE_DIR, SOURCE_DIR))
 
 def glue():
-    local('glue %(source_dir)s/sprites/buttons --img=%(source_dir)s/css/images \
-           --css=%(source_dir)s/scss --extension=scss -u images/ \
+    local('glue %(source_dir)ssprites/buttons --img=%(source_dir)scss/images \
+           --css=%(source_dir)sscss --extension=scss -u images/ \
            --global-template='' \
            --each-template=\'%(glue_each_template)s\'' % { 'source_dir': SOURCE_DIR, 'glue_each_template': GLUE_EACH_TEMPLATE })
 
 def build():
     local('mkdir -p %s' % BUILD_DIR)
     local('r.js -o %s' % BUILD_JS_FILENAME)
-    local('cp -r %s/css %s/css' % (SOURCE_DIR, BUILD_DIR))
-    local('mkdir -p %s/javascript/libraries/require' % BUILD_DIR)
-    local('uglifyjs -nc -o %s/javascript/libraries/require/%s \
-           %s/javascript/libraries/require/%s' % (BUILD_DIR, REQUIREJS_FILENAME, SOURCE_DIR, REQUIREJS_FILENAME))
+    local('cp -r %scss %scss' % (SOURCE_DIR, BUILD_DIR))
+    local('mkdir -p %sjavascript/libraries/require' % BUILD_DIR)
+    local('uglifyjs -nc -o %sjavascript/libraries/require/%s \
+           %sjavascript/libraries/require/%s' % (BUILD_DIR, REQUIREJS_FILENAME, SOURCE_DIR, REQUIREJS_FILENAME))
 
     ga_file_contents = _read_google_analytics_file_contents().strip()
 
-    with open('%s/index.html' % SOURCE_DIR) as index_file:
+    with open('%sindex.html' % SOURCE_DIR) as index_file:
         index_contents = index_file.read()
 
     index_contents = index_contents.replace('<!--- google analytics -->', ga_file_contents)
 
-    with open('%s/index.html' % BUILD_DIR, 'w') as index_output_file:
+    with open('%sindex.html' % BUILD_DIR, 'w') as index_output_file:
         index_output_file.write(index_contents)
 
 def rebuild():
