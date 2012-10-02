@@ -30,6 +30,15 @@ ${{ class_name }}-height: {{ height }}px;
 
 """
 
+def _read_google_analytics_file_contents():
+    try:
+        with open("google-analytics.txt") as ga_file:
+            contents = ga_file.read()
+    except IOError:
+            contents = ""
+
+    return contents
+
 def clean():
     local('rm _build -rf')
 
@@ -48,10 +57,20 @@ def build():
     local('mkdir -p _build')
     local('r.js -o build.js')
     local('cp -r ./source/css ./_build/css')
-    local('cp ./source/index.html ./_build')
     local('mkdir -p ./_build/javascript/libraries/require')
     local('uglifyjs -nc -o ./_build/javascript/libraries/require/%s \
            ./source/javascript/libraries/require/%s' % (REQUIREJS, REQUIREJS))
+
+    ga_file_contents = _read_google_analytics_file_contents().strip()
+
+    with open("./source/index.html") as index_file:
+        index_contents = index_file.read()
+
+    index_contents = index_contents.replace("<!--- google analytics -->", ga_file_contents)
+
+    with open("./_build/index.html", "w") as index_output_file:
+        index_output_file.write(index_contents)
+
 
 def rebuild():
     clean()
