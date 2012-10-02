@@ -1,13 +1,18 @@
-from fabric.api import env, hosts, local
+from fabric.api import env, execute, hosts, local
 import fabric.contrib.project as project
 
 
-REQUIREJS = 'require-2.0.5.js'
-
 env.use_ssh_config = True
 
+SOURCE_DIR = './source'
+BUILD_DIR = './_build'
+BUILD_JS_FILENAME = 'build.js'
+REQUIREJS_FILENAME = 'require-2.0.5.js'
+GOOGLE_ANALYTICS_FILENAME = 'google-analytics.txt'
+PUBLISH_HOST = 'stuartkeith'
+PUBLISH_REMOTE_DIR = '/home/stuartkeith/webapps/static/html/webaudiosequencer/'
 
-glue_each_template = """
+GLUE_EACH_TEMPLATE = """
 span.{{ class_name }}, .{{ class_name }}::-webkit-slider-thumb {
     background-image: url({{ sprite_url }});
     background-repeat: no-repeat;
@@ -32,58 +37,54 @@ ${{ class_name }}-height: {{ height }}px;
 
 def _read_google_analytics_file_contents():
     try:
-        with open("google-analytics.txt") as ga_file:
+        with open(GOOGLE_ANALYTICS_FILENAME) as ga_file:
             contents = ga_file.read()
     except IOError:
-            contents = ""
+            contents = ''
 
     return contents
 
 def clean():
-    local('rm _build -rf')
+    local('rm %s -rf' % BUILD_DIR)
 
 def scss():
-    local('sass ./source/scss/main.scss ./source/css/main.css \
-           --style compressed')
+    local('sass %s/scss/main.scss %s/css/main.css \
+           --style compressed' % (SOURCE_DIR, SOURCE_DIR))
 
 def glue():
-    local('glue ./source/sprites/buttons --img=./source/css/images \
-           --css=./source/scss --extension=scss -u images/ \
+    local('glue %(source_dir)s/sprites/buttons --img=%(source_dir)s/css/images \
+           --css=%(source_dir)s/scss --extension=scss -u images/ \
            --global-template='' \
-           --each-template=\'%s\'' % glue_each_template)
-    scss()
+           --each-template=\'%(glue_each_template)s\'' % { 'source_dir': SOURCE_DIR, 'glue_each_template': GLUE_EACH_TEMPLATE })
 
 def build():
-    local('mkdir -p _build')
-    local('r.js -o build.js')
-    local('cp -r ./source/css ./_build/css')
-    local('mkdir -p ./_build/javascript/libraries/require')
-    local('uglifyjs -nc -o ./_build/javascript/libraries/require/%s \
-           ./source/javascript/libraries/require/%s' % (REQUIREJS, REQUIREJS))
+    local('mkdir -p %s' % BUILD_DIR)
+    local('r.js -o %s' % BUILD_JS_FILENAME)
+    local('cp -r %s/css %s/css' % (SOURCE_DIR, BUILD_DIR))
+    local('mkdir -p %s/javascript/libraries/require' % BUILD_DIR)
+    local('uglifyjs -nc -o %s/javascript/libraries/require/%s \
+           %s/javascript/libraries/require/%s' % (BUILD_DIR, REQUIREJS_FILENAME, SOURCE_DIR, REQUIREJS_FILENAME))
 
     ga_file_contents = _read_google_analytics_file_contents().strip()
 
-    with open("./source/index.html") as index_file:
+    with open('%s/index.html' % SOURCE_DIR) as index_file:
         index_contents = index_file.read()
 
-    index_contents = index_contents.replace("<!--- google analytics -->", ga_file_contents)
+    index_contents = index_contents.replace('<!--- google analytics -->', ga_file_contents)
 
-    with open("./_build/index.html", "w") as index_output_file:
+    with open('%s/index.html' % BUILD_DIR, 'w') as index_output_file:
         index_output_file.write(index_contents)
 
-
 def rebuild():
-    clean()
-    glue()
-    scss()
-    build()
+    execute(clean)
+    execute(glue)
+    execute(scss)
+    execute(build)
 
-@hosts('stuartkeith')
+@hosts(PUBLISH_HOST)
 def publish():
-    rebuild()
-
     project.rsync_project(
-        remote_dir='/home/stuartkeith/newject/',
-        local_dir='./_build/',
+        remote_dir=PUBLISH_REMOTE_DIR,
+        local_dir=BUILD_DIR,
         delete=True
     )
