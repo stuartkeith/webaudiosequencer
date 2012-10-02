@@ -26,91 +26,28 @@ require.config({
 });
 
 require([
-	"underscore",
+	"require",
 	"jquery",
-	"backbone",
-	"jqueryUI",
-	"jqueryPreloadCssImages",
-	"soundOutput/soundOutput",
-	"sequencer/scheduler",
-	"tracks/trackCollection",
-	"commandMap",
-	"application/applicationView",
-	"./keyboardShortcuts",
-	"./documentListeners",
-	"utilities/functionChain",
 	"text!templates/unsupported.html"
-], function (_, $, Backbone, jqueryUI, jqueryPreloadCssImages, SoundOutput, Scheduler, TrackCollection, commandMap, ApplicationView, keyboardShortcuts, documentListeners, functionChain, unsupportedTemplateString) {
-	$.preloadCssImages();
-
-	var eventBus = _.clone(Backbone.Events);
-
-	var commandContext = {
-		eventBus: eventBus
-	};
-
-	_.each(commandMap, function (mappings, event) {
-		_.each(mappings, function (map) {
-			if (map.guards) {
-				eventBus.on(event, function () {
-					functionChain(map.guards, commandContext, arguments, map.successCommand, map.failureCommand);
-				});
-			} else {
-				eventBus.on(event, map.successCommand, commandContext);
-			}
-		});
-	});
+], function (require, $, unsupportedTemplateString) {
+	var description = $("#description"),
+	    fadeInTime = 1200;
 
 	if (window.webkitAudioContext) {
-		var context = new webkitAudioContext();
+		var loading = $("<p>Loading...</p>");
 
-		commandContext.scheduler = new Scheduler(context);
-		commandContext.selectedTrackModel = null;
-		commandContext.sequenceLength = 16;
-		commandContext.sequencePosition = 0;
-		commandContext.soundOutput = new SoundOutput(context);
-		commandContext.trackCollection = new TrackCollection();
+		description.append(loading);
 
-		var notes;
+		loading.hide().fadeIn(fadeInTime);
 
-		commandContext.scheduler.on("update", function (delaySeconds) {
-			commandContext.trackCollection.each(function (trackModel) {
-				notes = trackModel.get("sequencer").next();
-
-				trackModel.get("instrumentManager").processNotes(notes, function (buffer, note, volume) {
-					commandContext.soundOutput.playBuffer(buffer, note, volume, delaySeconds);
-				});
-			});
-
-			commandContext.sequencePosition++;
-
-			if (commandContext.sequencePosition >= commandContext.sequenceLength)
-				commandContext.sequencePosition = 0;
-		});
-
-		var applicationView = new ApplicationView({
-			eventBus: eventBus,
-			el: "#container",
-			model: {
-				scheduler: commandContext.scheduler,
-				soundOutput: commandContext.soundOutput,
-				trackCollection: commandContext.trackCollection
-			}
-		});
-
-		keyboardShortcuts(eventBus);
-		documentListeners(eventBus);
-
-		applicationView.render();
-
-		eventBus.trigger("initialize");
+		require(["application"]);
 	} else {
 		var unsupported = $(unsupportedTemplateString);
 
-		$("#description").append(unsupported);
+		description.append(unsupported);
 
 		// filter("*") required as of Firefox 15.0
 		// see http://bugs.jquery.com/ticket/12462
-		unsupported.filter("*").hide().fadeIn(1200);
+		unsupported.filter("*").hide().fadeIn(fadeInTime);
 	}
 });
