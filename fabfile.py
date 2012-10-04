@@ -60,6 +60,7 @@ def glue():
 def build():
     local('mkdir -p %s' % BUILD_DIR)
     local('r.js -o %s' % BUILD_JS_FILENAME)
+    local('rm -rf %sjavascript/templates' % BUILD_DIR)
     local('cp -r %scss %scss' % (SOURCE_DIR, BUILD_DIR))
     local('mkdir -p %sjavascript/libraries/require' % BUILD_DIR)
     local('uglifyjs -nc -o %sjavascript/libraries/require/%s \

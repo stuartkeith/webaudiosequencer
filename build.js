@@ -4,7 +4,7 @@
 	mainConfigFile: "./source/javascript/main.js",
 	modules: [
 		{
-			name: "main",
+			name: "main"
 		},
 		{
 			name: "application",
@@ -14,5 +14,6 @@
 			]
 		}
 	],
-	preserveLicenseComments: false
+	preserveLicenseComments: false,
+	removeCombined: true
 })
