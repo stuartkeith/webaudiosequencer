@@ -1,4 +1,4 @@
-define(function (require) {
+define(function () {
 	var restartPlayback = function () {
 		this.scheduler.play();
 	};

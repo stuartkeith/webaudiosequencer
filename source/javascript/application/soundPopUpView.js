@@ -1,7 +1,5 @@
 define(function(require) {
-	var $ = require("jquery"),
-	    _ = require("underscore"),
-	    BaseView = require("baseView"),
+	var BaseView = require("baseView"),
 	    InstrumentManagerSelectionView = require("./instrumentManagerSelectionView");
 
 	var SoundPopUpView = BaseView.extend({

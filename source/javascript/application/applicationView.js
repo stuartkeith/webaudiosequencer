@@ -1,14 +1,13 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"./volumeView",
-	"./instructionsPanel/instructionsPanelView",
-	"./soundBrowser/soundBrowserView",
-	"./trackPanelView",
-	"./soundPopUpView",
-	"text!templates/application.html"
-], function(_, Backbone, BaseView, VolumeView, InstructionsPanelView, SoundBrowserView, TrackPanelView, SoundPopUpView, applicationTemplateString) {
+define(function (require) {
+	var _ = require("underscore"),
+	    BaseView = require("baseView"),
+	    VolumeView = require("./volumeView"),
+	    InstructionsPanelView = require("./instructionsPanel/instructionsPanelView"),
+	    SoundBrowserView = require("./soundBrowser/soundBrowserView"),
+	    TrackPanelView = require("./trackPanelView"),
+	    SoundPopUpView = require("./soundPopUpView"),
+	    applicationTemplateString = require("text!templates/application.html");
+
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
 

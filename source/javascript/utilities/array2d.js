@@ -1,6 +1,6 @@
-define([
-	"underscore"
-], function() {
+define(function(require) {
+	var _ = require("underscore");
+
 	var Array2d = function () {
 		this._columns = {};
 	};
@@ -54,7 +54,7 @@ define([
 
 	Array2d.prototype.clear = function (location) {
 		var row = this._columns[location.x];
-		
+
 		if (!row)
 			return false;
 

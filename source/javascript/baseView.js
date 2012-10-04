@@ -1,7 +1,7 @@
-define([
-	"underscore",
-	"backbone"
-], function(_, Backbone) {
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone");
+
 	var getProperty = function (obj, property) {
 		if (_.isFunction(property))
 			return property;

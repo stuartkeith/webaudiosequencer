@@ -1,9 +1,7 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"text!templates/instructions/instructions.html"
-], function(_, Backbone, BaseView, instructionsString) {
+define(function (require) {
+	var BaseView = require("baseView"),
+	    instructionsString = require("text!templates/instructions/instructions.html");
+
 	var InstructionsPanelView = BaseView.extend({
 		id: "instructions-panel",
 

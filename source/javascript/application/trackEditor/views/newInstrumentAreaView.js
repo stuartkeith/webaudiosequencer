@@ -1,10 +1,8 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"dragDropMixIn",
-	"settings"
-], function(_, Backbone, BaseView, dragDropMixIn, settings) {
+define(function (require) {
+	var BaseView = require("baseView"),
+	    dragDropMixIn = require("dragDropMixIn"),
+	    settings = require("settings");
+
 	var NewInstrumentAreaView = BaseView.extend({
 		dragTarget: "SoundExtended",
 		dropEffect: "copy",

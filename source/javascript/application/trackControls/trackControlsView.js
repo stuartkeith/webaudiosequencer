@@ -1,9 +1,8 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"./views/trackControlView"
-], function(_, Backbone, BaseView, TrackControlView) {
+define(function (require) {
+	var _ = require("underscore"),
+	    BaseView = require("baseView"),
+	    TrackControlView = require("./views/trackControlView");
+
 	var TrackControlsView = BaseView.extend({
 		modelEvents: {
 			"add": function (trackModel) {

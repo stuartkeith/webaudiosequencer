@@ -1,7 +1,7 @@
 define(function () {
 	var setInstrumentVolume = function (args) {
-		var instrumentModel = args.instrumentModel;
-		var volume = args.volume;
+		var instrumentModel = args.instrumentModel,
+		    volume = args.volume;
 
 		instrumentModel.setVolume(volume);
 	};

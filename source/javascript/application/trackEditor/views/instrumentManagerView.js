@@ -1,9 +1,8 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"./instrumentView",
-], function(_, Backbone, BaseView, InstrumentView) {
+define(function(require) {
+	var _ = require("underscore"),
+	    BaseView = require("baseView"),
+	    InstrumentView = require("./instrumentView");
+
 	var InstrumentManagerView = BaseView.extend({
 		modelEvents: {
 			"instrumentAdded": "addInstrumentView"

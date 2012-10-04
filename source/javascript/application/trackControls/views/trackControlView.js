@@ -1,9 +1,8 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"text!templates/trackControls/trackControl.html"
-], function(_, Backbone, BaseView, trackControlTemplateString) {
+define(function (require) {
+	var _ = require("underscore"),
+	    BaseView = require("baseView"),
+	    trackControlTemplateString = require("text!templates/trackControls/trackControl.html");
+
 	var TrackControlView = BaseView.extend({
 		className: "track-control",
 		trackControlTemplate: _.template(trackControlTemplateString),

@@ -1,8 +1,8 @@
-define([
-], function () {
+define(function () {
 	var updateInstrument = function (args) {
-		var instrument = args.instrument;
-		var soundAttributes = args.soundAttributes;
+		var instrument = args.instrument,
+		    soundAttributes = args.soundAttributes,
+		    deferred;
 
 		instrument.buffer = null;
 
@@ -18,7 +18,7 @@ define([
 
 		instrument.changed();
 
-		var deferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);
+		deferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);
 
 		deferred.fail(function () {
 			instrument.state = instrument.STATE_ERROR;

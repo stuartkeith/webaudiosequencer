@@ -1,7 +1,7 @@
 define(function () {
 	var selectTrack = function (args) {
-		var trackModel = args.trackModel;
-		var trackIndex = args.trackIndex;
+		var trackModel = args.trackModel,
+		    trackIndex = args.trackIndex;
 
 		if (trackIndex != null) {
 			trackModel = this.trackCollection.at(trackIndex);

@@ -1,6 +1,5 @@
 define(function (require) {
 	var _ = require("underscore"),
-	    Backbone = require("backbone"),
 	    BaseView = require("baseView"),
 		playbackControlsTemplateString = require("text!templates/playbackControls/playbackControls.html");
 

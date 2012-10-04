@@ -1,7 +1,7 @@
-define([
-	"underscore",
-	"backbone"
-], function(_, Backbone) {
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone");
+
 	var SoundCloudCollection = Backbone.Collection.extend({
 		name: "SoundCloud",
 		description: "the world's largest community of sound creators.",

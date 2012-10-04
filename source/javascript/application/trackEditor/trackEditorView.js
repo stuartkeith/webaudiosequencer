@@ -1,12 +1,11 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"text!templates/trackEditor/trackEditor.html",
-	"./views/sequenceProgressView",
-	"./views/gridView",
-	"./views/instrumentPanelView"
-], function(_, Backbone, BaseView, TrackEditorTemplateString, SequenceProgressView, GridView, InstrumentPanelView) {
+define(function (require) {
+	var _ = require("underscore"),
+	    BaseView = require("baseView"),
+	    TrackEditorTemplateString = require("text!templates/trackEditor/trackEditor.html"),
+	    SequenceProgressView = require("./views/sequenceProgressView"),
+	    GridView = require("./views/gridView"),
+	    InstrumentPanelView = require("./views/instrumentPanelView");
+
 	var TrackEditorView = BaseView.extend({
 		className: "track-editor",
 		trackEditorTemplate: _.template(TrackEditorTemplateString),

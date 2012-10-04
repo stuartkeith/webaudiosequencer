@@ -1,10 +1,8 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"./instrumentManagerView",
-	"./newInstrumentAreaView"
-], function(_, Backbone, BaseView, InstrumentManagerView, NewInstrumentAreaView) {
+define(function (require) {
+	var BaseView = require("baseView"),
+	    InstrumentManagerView = require("./instrumentManagerView"),
+	    NewInstrumentAreaView = require("./newInstrumentAreaView");
+
 	var InstrumentPanelView = BaseView.extend({
 		initialize: function () {
 			this.instrumentManagerView = this.addChildView(InstrumentManagerView, {

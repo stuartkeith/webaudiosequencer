@@ -1,10 +1,7 @@
-define([
-	"jquery",
-	"underscore",
-	"backbone",
-	"baseView",
-	"dragDropMixIn",
-], function($, _, Backbone, BaseView, dragDropMixIn) {
+define (function (require) {
+	var BaseView = require("baseView"),
+	    dragDropMixIn = require("dragDropMixIn");
+
 	var DraggableView = BaseView.extend({
 		dragSource: "SoundExtended",
 		dragEffect: "copy",

@@ -1,7 +1,6 @@
-define([
-	"underscore",
-	"backbone"
-], function (_, Backbone) {
+define(function (require) {
+	var _ = require("underscore");
+
 	// the model currently being dragged.
 	var draggedData = { dragSource: null, model: null };
 

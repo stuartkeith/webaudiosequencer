@@ -1,6 +1,5 @@
 define(function (require) {
 	var _ = require("underscore"),
-	    Backbone = require("backbone"),
 	    BaseView = require("baseView"),
 	    SoundBrowserTemplateString = require("text!templates/soundBrowser/soundBrowser.html"),
 	    soundBrowserError = require("text!templates/soundBrowser/soundBrowserError.txt"),

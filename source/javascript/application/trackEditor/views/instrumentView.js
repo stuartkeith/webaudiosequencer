@@ -1,12 +1,11 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"settings",
-	"dragDropMixIn",
-	"application/volumeView",
-	"text!templates/trackEditor/instrument.html"
-], function(_, Backbone, BaseView, settings, dragDropMixIn, VolumeView, instrumentTemplateString) {
+define(function (require) {
+	_ = require("underscore"),
+	BaseView = require("baseView"),
+	settings = require("settings"),
+	dragDropMixIn = require("dragDropMixIn"),
+	VolumeView = require("application/volumeView"),
+	instrumentTemplateString = require("text!templates/trackEditor/instrument.html");
+
 	var InstrumentView = BaseView.extend({
 		className: "instrument drag-target",
 		instrumentTemplate: _.template(instrumentTemplateString),

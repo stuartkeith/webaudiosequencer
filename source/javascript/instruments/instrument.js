@@ -1,7 +1,7 @@
-define([
-	"underscore",
-	"backbone"
-], function (_, Backbone) {
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone");
+
 	var Instrument = function () {
 		this.buffer = null;
 		this.state = this.STATE_LOADED;

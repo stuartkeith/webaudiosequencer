@@ -1,7 +1,5 @@
 define(function(require) {
-	var $ = require("jquery"),
-	    _ = require("underscore"),
-	    BaseView = require("baseView"),
+	var BaseView = require("baseView"),
 	    instrumentManagerSelectionTemplateString = require("text!templates/instrumentManagerSelection.html")
 
 	var InstrumentManagerSelectionView = BaseView.extend({

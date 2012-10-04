@@ -1,8 +1,6 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView"
-], function(_, Backbone, BaseView) {
+define(function (require) {
+	var BaseView = require("baseView");
+
 	var VolumeView = BaseView.extend({
 		events: {
 			"change": function (event) {

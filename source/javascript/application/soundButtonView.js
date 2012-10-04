@@ -1,7 +1,5 @@
 define(function (require) {
-	var $ = require("jquery"),
-	    _ = require("underscore"),
-	    Backbone = require("backbone"),
+	var _ = require("underscore"),
 	    BaseView = require("baseView"),
 	    soundError = require("text!templates/soundBrowser/soundError.txt")
 

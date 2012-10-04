@@ -1,6 +1,5 @@
 define(function (require) {
 	var _ = require("underscore"),
-	    Backbone = require("backbone"),
 	    BaseView = require("baseView"),
 	    CanvasGrid = require("utilities/canvasGrid"),
 	    canvasGridConfiguration = require("templates/trackEditor/gridView/canvasGridConfiguration"),

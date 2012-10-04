@@ -1,7 +1,7 @@
-define([
-	"underscore",
-	"backbone"
-], function(_, Backbone) {
+define(function (require) {
+	var _ = require("underscore"),
+	    Backbone = require("backbone");
+
 	var FreeSoundCollection = Backbone.Collection.extend({
 		name: "FreeSound",
 		description: "a collaborative database of creative-commons licensed sound for musicians and sound lovers.",

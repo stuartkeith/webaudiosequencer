@@ -1,6 +1,6 @@
-define([
-	"underscore"
-], function(_) {
+define(function (require) {
+	var _ = require("underscore");
+
 	var CanvasGrid = function (canvas) {
 		this._canvas = canvas;
 		this._context = canvas.getContext('2d');

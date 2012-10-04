@@ -1,9 +1,9 @@
-define([
-	"underscore",
-	"backbone",
-	"baseView",
-	"./soundView"
-], function(_, Backbone, BaseView, SoundView) {
+define(function (require) {
+	var $ = require("jquery"),
+	    _ = require("underscore"),
+	    BaseView = require("baseView"),
+	    SoundView = require("./soundView");
+
 	var SoundsView = BaseView.extend({
 		initialize: function (options) {
 			this.columns = options.columns;

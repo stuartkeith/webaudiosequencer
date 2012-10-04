@@ -1,5 +1,6 @@
 define(function (require) {
-	var BaseView = require("baseView"),
+	var $ = require("jquery"),
+	    BaseView = require("baseView"),
 	    settings = require("settings");
 
 	var SequenceProgressView = BaseView.extend({
