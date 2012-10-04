@@ -50,7 +50,10 @@ define(function (require) {
 				this.$el.hide();
 			} else {
 				this.$el.show();
-				this.$el.height((this.model.instrumentRangeRemaining * settings.instrumentHeight) - this.heightDifference);
+
+				var height = (this.model.instrumentRangeRemaining * settings.instrumentHeight) - this.heightDifference;
+
+				this.$el.height(height).css('line-height', height + "px");
 			}
 		}
 	});
