@@ -30,11 +30,6 @@ $sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height -
 	}
 }
 
-.dragstart, .dragstart:hover {
-	background-color: $dragdrop-active-foreground;
-	border-color: $dragdrop-active-background;
-}
-
 .sound-button {
 	float: left;
 	height: 16px;
