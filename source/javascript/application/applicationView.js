@@ -10,23 +10,38 @@ define(function (require) {
 
 	var ApplicationView = BaseView.extend({
 		applicationTemplate: _.template(applicationTemplateString),
+		subView: null,
 
 		eventBusEvents: {
 			"trackAdded": function () {
 				if (this.model.trackCollection.length === 1) {
-					this.removeInstructionsPanel();
-
-					this.addTrackPanelView();
+					this.setSubView(this.trackPanelView);
 				}
 			},
 
 			"trackRemoved": function () {
 				if (this.model.trackCollection.length === 0) {
-					this.removeTrackPanelView();
-
-					this.addInstructionsPanel();
+					this.setSubView(this.instructionsPanelView);
 				}
 			}
+		},
+
+		setSubView: function (subView) {
+			if (subView === this.subView)
+				return;
+
+			this.trackPanelContainer.fadeOut(300, function () {
+				if (this.subView)
+					this.subView.$el.detach();
+
+				this.subView = subView;
+
+				this.trackPanelContainer.append(this.subView.$el);
+
+				this.subView.render();
+
+				this.trackPanelContainer.hide().fadeIn(300);
+			}.bind(this));
 		},
 
 		render: function () {
@@ -45,50 +60,21 @@ define(function (require) {
 				el: this.$el.find(".sound-browser:first")
 			}).render();
 
-			this.trackPanelContainer = this.$el.find(".track-panel-container:first");
+			this.instructionsPanelView = this.addChildView(InstructionsPanelView);
 
-			this.addInstructionsPanel();
+			this.trackPanelView = this.addChildView(TrackPanelView, {
+				model: this.model
+			});
+
+			this.trackPanelContainer = this.$el.find(".track-panel-container:first");
 
 			this.addChildView(SoundPopUpView, {
 				el: this.$el
 			}).render();
 
+			this.setSubView(this.instructionsPanelView);
+
 			return this;
-		},
-
-		addInstructionsPanel: function () {
-			if (!this.instructionsPanelView) {
-				this.instructionsPanelView = this.addChildView(InstructionsPanelView).render();
-
-				this.trackPanelContainer.append(this.instructionsPanelView.$el);
-			}
-		},
-
-		removeInstructionsPanel: function () {
-			if (this.instructionsPanelView) {
-				this.removeChildView(this.instructionsPanelView);
-				this.instructionsPanelView = null;
-			}
-		},
-
-		addTrackPanelView: function () {
-			if (!this.trackPanelView) {
-				this.trackPanelView = this.addChildView(TrackPanelView, {
-					model: this.model
-				});
-
-				this.trackPanelContainer.append(this.trackPanelView.$el);
-
-				this.trackPanelView.render();
-			}
-		},
-
-		removeTrackPanelView: function () {
-			if (this.trackPanelView) {
-				this.removeChildView(this.trackPanelView);
-
-				this.trackPanelView = null;
-			}
 		},
 
 		volumeViewChange: function (value) {
