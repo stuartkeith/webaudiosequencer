@@ -75,4 +75,6 @@ define(function (require) {
 	applicationView.render();
 
 	eventBus.trigger("initialize");
+
+	applicationView.$el.hide().fadeIn(1200);
 });
