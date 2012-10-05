@@ -23,19 +23,23 @@ define(function (require) {
 
 	_.extend(ExtendedView.prototype, Backbone.View.prototype, {
 		delegateEventBusEvents: function () {
-			_.each(this.eventBusEvents, function (fn, event) {
-				this.eventBus.on(event, getProperty(this, fn), this);
-			}, this);
+			if (this.eventBusEvents) {
+				_.each(this.eventBusEvents, function (fn, event) {
+					this.eventBus.on(event, getProperty(this, fn), this);
+				}, this);
+			}
 		},
 
 		undelegateEventBusEvents: function () {
-			_.each(this.eventBusEvents, function (fn, event) {
-				this.eventBus.off(event, getProperty(this, fn), this);
-			}, this);
+			if (this.eventBusEvents) {
+				_.each(this.eventBusEvents, function (fn, event) {
+					this.eventBus.off(event, getProperty(this, fn), this);
+				}, this);
+			}
 		},
 
 		delegateModelEvents: function () {
-			if (this.model && this.model.on) {
+			if (this.model && this.model.on && this.modelEvents) {
 				_.each(this.modelEvents, function (fn, event) {
 					this.model.on(event, getProperty(this, fn), this);
 				}, this);
@@ -43,7 +47,7 @@ define(function (require) {
 		},
 
 		undelegateModelEvents: function () {
-			if (this.model && this.model.off) {
+			if (this.model && this.model.off && this.modelEvents) {
 				_.each(this.modelEvents, function (fn, event) {
 					this.model.off(event, getProperty(this, fn), this);
 				}, this);

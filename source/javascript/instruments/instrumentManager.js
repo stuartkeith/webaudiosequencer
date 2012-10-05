@@ -52,9 +52,11 @@ define(function (require) {
 		},
 
 		processNotes: function (notes, fn) {
-			_.each(notes, function (data, note) {
-				this.processNote(parseInt(note, 10), fn);
-			}, this);
+			if (notes) {
+				_.each(notes, function (data, note) {
+					this.processNote(parseInt(note, 10), fn);
+				}, this);
+			}
 		},
 
 		createInstrument: function () {
