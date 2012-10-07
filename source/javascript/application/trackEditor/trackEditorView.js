@@ -9,9 +9,34 @@ define(function (require) {
 	var TrackEditorView = BaseView.extend({
 		className: "track-editor",
 		trackEditorTemplate: _.template(TrackEditorTemplateString),
+		fadeTime: 170,
+
+		initialize: function () {
+			this.hintEnabled = true;
+		},
 
 		eventBusEvents: {
-			"trackSelected": "updateTrackModel"
+			"trackSelected": "updateTrackModel",
+
+			"setGridViewState": function (args) {
+				if (this.hintEnabled && args.state === "play") {
+					this.gridHint.fadeOut();
+
+					this.hintEnabled = false;
+				}
+			}
+		},
+
+		events: {
+			"mouseenter .grid-container": function () {
+				if (this.hintEnabled)
+					this.gridHint.fadeTo(this.fadeTime, 0.5);
+			},
+
+			"mouseleave .grid-container": function () {
+				if (this.hintEnabled)
+					this.gridHint.fadeTo(this.fadeTime, 1);
+			}
 		},
 
 		render: function () {
@@ -25,8 +50,10 @@ define(function (require) {
 				el: this.$el.find(".instrument-panel:first")
 			});
 
+			this.gridHint = this.$el.find(".grid-hint:first");
+
 			this.gridView = this.addChildView(GridView, {
-				el: this.$el.find(".grid-canvas:first")
+				el: this.$el.find(".grid-container:first")
 			});
 
 			if (this.model)

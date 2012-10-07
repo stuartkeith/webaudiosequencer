@@ -7,7 +7,7 @@ define(function (require) {
 	    settings = require("settings");
 
 	var GridView = BaseView.extend({
-		className: "grid-view",
+		className: "grid",
 
 		HSM: generateHSM(["mousedown", "mouseup", "cellmove"], {
 			play: {
@@ -109,7 +109,7 @@ define(function (require) {
 
 			this.setState(this.hsm.rootState.addOrRemove);
 
-			this.canvasGrid = new CanvasGrid(this.el);
+			this.canvasGrid = new CanvasGrid(this.$el.find("canvas:first")[0]);
 
 			this.canvasGrid.setRows(settings.maxNotes);
 			this.canvasGrid.setColumnWidth(settings.gridWidth);
