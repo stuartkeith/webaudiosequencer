@@ -5,6 +5,13 @@
 	margin-right: 8px;
 	position: relative;
 	width: 128px;
+
+	& span {
+		display: inline-block;
+		font-size: 12px;
+		height: 100%;
+		vertical-align: middle;
+	}
 }
 
 .track-control-select {
