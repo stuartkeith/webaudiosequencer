@@ -31,23 +31,23 @@ require([
 	"text!templates/unsupported.html"
 ], function (require, $, unsupportedTemplateString) {
 	var description = $("#description"),
-	    fadeInTime = 1200;
+	    fadeInTime = 1200,
+	    fadeInContent;
 
-	if (window.webkitAudioContext) {
-		var loading = $("<p>Loading...</p>");
-
-		description.append(loading);
-
-		loading.hide().fadeIn(fadeInTime);
+	if (!window.webkitAudioContext) {
+		fadeInContent = $(unsupportedTemplateString);
+	} else if ('ontouchstart' in window) {
+		fadeInContent = $("<p>Unfortunately, this application currently requires a mouse and keyboard.</p>\
+			<p>Sorry about that.</p>");
+	} else {
+		fadeInContent = $("<p>Loading...</p>");
 
 		require(["application"]);
-	} else {
-		var unsupported = $(unsupportedTemplateString);
-
-		description.append(unsupported);
-
-		// filter("*") required as of Firefox 15.0
-		// see http://bugs.jquery.com/ticket/12462
-		unsupported.filter("*").hide().fadeIn(fadeInTime);
 	}
+
+	description.append(fadeInContent);
+
+	// filter("*") required as of Firefox 15.0
+	// see http://bugs.jquery.com/ticket/12462
+	fadeInContent.filter("*").hide().fadeIn(fadeInTime);
 });
