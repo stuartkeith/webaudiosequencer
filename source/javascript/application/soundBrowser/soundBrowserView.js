@@ -170,7 +170,8 @@ define(function (require) {
 
 			this.collectionLink = this.$el.find(".collection-link:first");
 
-			this.changeCollection(this.collections[0]);
+			// start with a random collection.
+			this.changeCollection(this.collections[_.random(this.collections.length - 1)]);
 
 			return this;
 		},
