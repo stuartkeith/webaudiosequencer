@@ -31,9 +31,13 @@ Here is an example Nginx configuration:
         rewrite \/soundcloud\/tracks\/(\d*) /tracks/$1/stream break;
         proxy_pass http://api.soundcloud.com;
         proxy_redirect ~^http://(.*)\.soundcloud\.com\/(.*)$ /soundcloud/media/$1/$2;
+
+        # or I use this for WebFaction:
+        # set_proxy_header X-Forwarded-Host $proxy_host;
+        # proxy_redirect ~^http://(.*)\.soundcloud\.com\/(.*)$ http://$host/soundcloud/media/$1/$2;
     }
 
-    location ~ /soundcloud/media/ {
+    location /soundcloud/media/ {
         resolver 8.8.8.8;
         rewrite \/soundcloud\/media\/(.*)\/(.*) /$2 break;
         proxy_pass http://$1.soundcloud.com;
