@@ -1,4 +1,5 @@
 *.pyc
+*.sublime*
 _build/
 source/css/main.css
 source/css/images/buttons.png
