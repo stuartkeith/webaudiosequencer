@@ -32,7 +32,7 @@ This application uses the following libraries:
 - [fabric](https://github.com/fabric/fabric) - building/compiling/deployment
 - [glue (my fork)](https://github.com/stuartkeith/glue) - CSS spritesheet
   generation
-- [SASS](http://sass-lang.com/) - CSS pre-processor
+- [Sass](http://sass-lang.com/) - CSS pre-processor
 
 
 Building/Compiling/Deployment
