@@ -83,7 +83,6 @@ Here is an example Nginx configuration:
 
         # I use the following for WebFaction:
         # set_proxy_header X-Forwarded-Host $proxy_host;
-        # proxy_redirect ~^http://(.*)\.soundcloud\.com\/(.*)$ http://$host/soundcloud/media/$1/$2;
     }
 
     location /soundcloud/media/ {
