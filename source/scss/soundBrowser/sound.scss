@@ -1,8 +1,8 @@
 $sound-width: 160px;
 $sound-height: 32px;
 $sound-border: 2px;
-$sound-button-margin: ($sound-height - $sound-border - $sprite-buttons-play-height - $button-border) / 2;
-$sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height - $button-border) / 2;
+$sound-button-margin: ($sound-height - $sound-border - $sprite-buttons-play-height) / 2;
+$sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height) / 2;
 
 .sound {
 	height: $sound-height;
