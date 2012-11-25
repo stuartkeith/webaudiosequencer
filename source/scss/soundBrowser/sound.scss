@@ -17,7 +17,7 @@ $sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height) 
 	background-color: $panel-foreground;
 	border-right: $sound-border solid $panel-background;
 	border-bottom: $sound-border solid $panel-background;
-	min-width: $sound-width;
+	min-width: $sound-width - $sound-border;
 }
 
 .draggable {
