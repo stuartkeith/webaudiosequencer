@@ -6,3 +6,4 @@ source/css/images/buttons.png
 source/scss/buttons.scss
 .sass-cache/
 google-analytics.txt
+.DS_Store
