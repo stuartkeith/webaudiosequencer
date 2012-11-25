@@ -4,6 +4,12 @@
 	white-space: nowrap;
 }
 
+.master-volume {
+	@include input-range(128px, 32px);
+	margin-right: 16px;
+	vertical-align: middle;
+}
+
 .sounds table {
 	border-collapse: separate;
 	display: inline-block;

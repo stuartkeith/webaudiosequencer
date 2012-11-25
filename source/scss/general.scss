@@ -60,13 +60,6 @@ input[type=range] {
 	}
 }
 
-.master-volume {
-	@include input-range(128px, 16px);
-	position: absolute;
-	right: 8px;
-	top: 8px;
-}
-
 #container {
 	text-align: center;
 	margin: 16px 0 32px;

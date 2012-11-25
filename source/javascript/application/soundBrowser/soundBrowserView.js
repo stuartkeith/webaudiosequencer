@@ -5,7 +5,8 @@ define(function (require) {
 	    soundBrowserError = require("text!templates/soundBrowser/soundBrowserError.txt"),
 	    FreeSoundCollection = require("./collections/freeSoundCollection"),
 	    SoundCloudCollection = require("./collections/soundCloudCollection"),
-	    SoundsView = require("./views/soundsView");
+	    SoundsView = require("./views/soundsView"),
+	    VolumeView = require("application/volumeView");
 
 	var soundsViewColumns = 7,
 	    soundsViewRows = 4,
@@ -132,6 +133,13 @@ define(function (require) {
 				_: _
 			}));
 
+			var volumeView = this.addChildView(VolumeView, {
+				el: this.$el.find(".master-volume:first"),
+				model: this.model.soundOutput
+			}).render();
+
+			volumeView.on("change", this.volumeViewChange, this);
+
 			this.collectionSelect = this.$el.find(".collection-select:first").buttonset();
 
 			this.refreshButton = this.$el.find(".refresh:first").button({
@@ -174,6 +182,12 @@ define(function (require) {
 			this.changeCollection(this.collections[_.random(this.collections.length - 1)]);
 
 			return this;
+		},
+
+		volumeViewChange: function (value) {
+			this.eventBus.trigger("setSoundOutputVolume", {
+				volume: value
+			});
 		},
 
 		changeCollection: function (collection) {
