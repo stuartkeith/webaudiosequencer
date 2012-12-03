@@ -12,8 +12,8 @@ define(function () {
 
 	return {
 		subCanvasses: {
-			off: squareFunctionFactory("#E0EADC", "#C5C6CD"),
-			on: squareFunctionFactory("#EDFCE5", "#D3D4DF"),
+			off: squareFunctionFactory("#E3EFF8", "#C5C4CD"),
+			on: squareFunctionFactory("#E9F4F7", "#C5C4CD"),
 			note: function (context, width, height) {
 				context.fillStyle = "#AE192B";
 				context.fillRect(0, 0, width, height);
