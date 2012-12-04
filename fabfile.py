@@ -9,7 +9,7 @@ BUILD_DIR = './_build/'
 BUILD_JS_FILENAME = 'build.js'
 REQUIREJS_FILENAME = 'require-2.1.0.js'
 GOOGLE_ANALYTICS_FILENAME = 'google-analytics.txt'
-PUBLISH_HOST = 'stuartkeith'
+PUBLISH_HOST = 'sk'
 PUBLISH_REMOTE_DIR = '/home/stuartkeith/webapps/static/html/webaudiosequencer/'
 
 GLUE_EACH_TEMPLATE = """
@@ -45,7 +45,7 @@ def _read_google_analytics_file_contents():
     return contents
 
 def clean():
-    local('rm %s -rf' % BUILD_DIR)
+    local('rm -rf %s' % BUILD_DIR)
 
 def scss():
     local('sass %sscss/main.scss %scss/main.css \
