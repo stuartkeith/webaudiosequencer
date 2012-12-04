@@ -38,6 +38,13 @@ This application uses the following libraries:
 Building/Compiling/Deployment
 -----------------------------
 
+The spritesheets and CSS must first be generated:
+
+1. `fab glue` will generate the spritesheets, and Sass files for those
+   spritesheets.
+
+2. `fab scss` will generate the CSS from the Sass files.
+
 `fab build` will generate the spritesheets, CSS, and optimised JavaScript into
 the `_build` directory.
 
