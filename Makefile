@@ -25,10 +25,13 @@ else
 	cp source/index.html optimized/index.html
 endif
 
+deploy:
+	rsync -avP -e ssh --delete --exclude=".*" -m optimized/* sk:~/webapps/static/html/webaudiosequencer
+
 clean:
 	rm -rf optimized
 	rm -f source/css/images/buttons.png
 	rm -f source/css/main.css
 	rm -f source/scss/buttons.scss
 
-.PHONY: optimize clean
+.PHONY: optimize deploy clean
