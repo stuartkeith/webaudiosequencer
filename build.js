@@ -1,6 +1,6 @@
 ({
 	baseUrl: "./source/javascript",
-	dir: "./_build/javascript",
+	dir: "./optimized/javascript",
 	mainConfigFile: "./source/javascript/main.js",
 	modules: [
 		{

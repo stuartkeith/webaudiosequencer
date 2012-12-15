@@ -1,9 +1,8 @@
-*.pyc
 *.sublime*
-_build/
+.DS_Store
+.sass-cache/
+google-analytics.txt
+optimized/
 source/css/main.css
 source/css/images/buttons.png
 source/scss/buttons.scss
-.sass-cache/
-google-analytics.txt
-.DS_Store

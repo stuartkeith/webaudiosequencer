@@ -1,0 +1,19 @@
+span.{{ class_name }}, .{{ class_name }}::-webkit-slider-thumb {
+    background-image: url({{ sprite_url }});
+    background-repeat: no-repeat;
+}
+
+span.{{ class_name }} {
+    background-position: {{ x }}px {{ y }}px;
+    height: {{ height }}px;
+    width: {{ width }}px;
+    margin-left: {{ (-width / 2)|int }}px;
+    margin-top: {{ (-height / 2)|int }}px;
+}
+
+.{{ class_name }}::-webkit-slider-thumb {
+    background-position: ({{ x }}px - $button-border) ({{ y }}px - $button-border);
+}
+
+${{ class_name }}-width: {{ width }}px;
+${{ class_name }}-height: {{ height }}px;

@@ -29,7 +29,6 @@ This application uses the following libraries:
 - [jQueryUI](http://jqueryui.com/) - buttons
 - [Underscore.js](http://underscorejs.org/) - various things!
 - [Backbone.js](http://backbonejs.org/) - application structure
-- [fabric](https://github.com/fabric/fabric) - building/compiling/deployment
 - [glue (my fork)](https://github.com/stuartkeith/glue) - CSS spritesheet
   generation
 - [Sass](http://sass-lang.com/) - CSS pre-processor
@@ -38,17 +37,10 @@ This application uses the following libraries:
 Building/Compiling/Deployment
 -----------------------------
 
-The spritesheets and CSS must first be generated:
+Run `make` to generate the spritesheets and Sass files.
 
-1. `fab glue` will generate the spritesheets, and Sass files for those
-   spritesheets.
-
-2. `fab scss` will generate the CSS from the Sass files.
-
-`fab build` will generate the spritesheets, CSS, and optimised JavaScript into
-the `_build` directory.
-
-See `fabfile.py` for additional commands.
+`make optimize` will compile an optimized version (one JavaScript file) into
+the `optimized` directory.
 
 
 Credits
