@@ -6,7 +6,7 @@
 
 .master-volume {
 	@include input-range(128px, 32px);
-	margin-right: 16px;
+	margin: 0 8px;
 	vertical-align: middle;
 }
 
@@ -17,7 +17,7 @@
 
 .previous, .refresh, .next {
 	height: 32px;
-	margin-right: 8px;
+	margin: 0 4px;
 	vertical-align: middle;
 	width: 32px;
 }
@@ -44,7 +44,7 @@
 }
 
 .search-input {
-	margin-left: 8px;
+	margin: 0 4px;
 	vertical-align: middle;
 	width: 24em;
 }
@@ -52,8 +52,8 @@
 .collection-link-description {
 	display: inline-block;
 	font-size: 10px;
-	margin-left: 8px;
 	text-align: left;
+	margin: 0 8px;
 	vertical-align: middle;
 	width: 20em;
 }
