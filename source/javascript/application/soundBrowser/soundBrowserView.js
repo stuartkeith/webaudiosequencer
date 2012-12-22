@@ -176,7 +176,13 @@ define(function (require) {
 				rows: soundsViewRows
 			});
 
-			this.collectionLink = this.$el.find(".collection-link:first");
+			this.collectionSource = this.$el.find(".collection-source:first").button({
+				icons: {
+					primary: "sprite-buttons-source-large"
+				},
+
+				text: false
+			});
 
 			// start with a random collection.
 			this.changeCollection(this.collections[_.random(this.collections.length - 1)]);
@@ -203,8 +209,8 @@ define(function (require) {
 			// refresh must be called afterwards.
 			this.collectionSelect.find("input:radio[value=" + this.collection.className + "]").prop("checked", true).button("refresh");
 
-			this.collectionLink.attr("href", this.collection.siteURL);
-			this.collectionLink.text(this.collection.name);
+			this.collectionSource.attr("href", this.collection.siteURL);
+			this.collectionSource.prop("title", "Visit " + this.collection.name);
 
 			this.fetch();
 		},
