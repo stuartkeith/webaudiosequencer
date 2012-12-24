@@ -1,10 +1,71 @@
 define(function (require) {
 	var _ = require("underscore"),
 	    BaseView = require("baseView"),
-	    soundError = require("text!templates/soundBrowser/soundError.txt")
+	    soundError = require("text!templates/soundBrowser/soundError.txt"),
+	    generateHSM = require("utilities/generateHSM");
 
 	var SoundButtonView = BaseView.extend({
 		soundErrorTemplate: _.template(soundError.trim()),
+
+		HSM: generateHSM(["play", "load", "stop", "error"], {
+			ready: {
+				play: function () {
+					this.view.playSoundAttributes();
+
+					return this.rootState.busy.loading;
+				},
+
+				idle: {
+					enter: function () {
+						this.view.setIconAndLabel("play");
+					}
+				},
+
+				showingError: {
+					enter: function () {
+						this.view.setIconAndLabel("error", this.view.lastErrorDescription);
+					}
+				}
+			},
+
+			busy: {
+				enter: function () {
+					this.view.$el.button("disable");
+
+					this.view.$el.addClass("sound-button-view-loading");
+				},
+
+				exit: function () {
+					this.view.$el.removeClass("sound-button-view-loading");
+
+					this.view.$el.button("enable");
+				},
+
+				loading: {
+					enter: function () {
+						this.view.setIconAndLabel("loading");
+					},
+
+					play: function () {
+						return this.rootState.busy.playing;
+					},
+
+					error: function () {
+						return this.rootState.ready.showingError;
+					}
+				},
+
+				playing: {
+					enter: function () {
+						this.view.setIconAndLabel("playing");
+					},
+
+					stop: function () {
+						return this.rootState.ready.idle;
+					}
+				}
+			}
+		}),
 
 		initialize: function () {
 			this.originalLabel = this.$el.text();
@@ -13,26 +74,23 @@ define(function (require) {
 				text: false
 			});
 
-			this.setIconAndLabel("play");
+			_.bindAll(this, "progressCallback", "doneCallback",
+				"failCallback");
 
-			_.bindAll(this, "progressCallback", "alwaysCallback",
-				"doneCallback", "failCallback");
+			this.hsm = new this.HSM({
+				view: this
+			});
+
+			this.hsm.changeState(this.hsm.rootState.ready.idle);
 		},
 
 		progressCallback: function (type) {
-			this.$el.addClass("sound-button-view-loading");
-
-			this.setIconAndLabel(type);
-		},
-
-		alwaysCallback: function () {
-			this.$el.removeClass("sound-button-view-loading");
-
-			this.$el.button("enable");
+			// type is either "load" or "play"
+			this.hsm[type]();
 		},
 
 		doneCallback: function () {
-			this.setIconAndLabel("play");
+			this.hsm.stop();
 		},
 
 		failCallback: function (reason, response) {
@@ -47,9 +105,11 @@ define(function (require) {
 				errorDescription = "The sound could not be decoded"
 			}
 
-			this.setIconAndLabel("error", this.soundErrorTemplate({
+			this.lastErrorDescription = this.soundErrorTemplate({
 				error: errorDescription
-			}));
+			});
+
+			this.hsm.error();
 		},
 
 		setIconAndLabel: function (newIcon, label) {
@@ -60,29 +120,22 @@ define(function (require) {
 			this.$el.prop("title", label || this.originalLabel);
 		},
 
-		createDeferred: function () {
+		playSoundAttributes: function () {
 			var deferred = new $.Deferred();
 
 			deferred.progress(this.progressCallback);
 			deferred.done(this.doneCallback);
 			deferred.fail(this.failCallback);
-			deferred.always(this.alwaysCallback);
 
-			return deferred;
+			this.eventBus.trigger("playSoundAttributes", {
+				deferred: deferred,
+				soundAttributes: this.model.attributes
+			});
 		},
 
 		events: {
 			"click": function (event) {
-				this.$el.button("disable");
-
-				event.preventDefault();
-
-				this.eventBus.trigger("playSoundAttributes", {
-					deferred: this.createDeferred(),
-					soundAttributes: this.model.attributes
-				});
-
-				return false;
+				this.hsm.play();
 			}
 		}
 	});

@@ -7,7 +7,7 @@ define(function () {
 		    delay = args.delay || 0;
 
 		if (deferred)
-			deferred.notify("loading");
+			deferred.notify("load");
 
 		var loadDeferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);
 
@@ -16,7 +16,7 @@ define(function () {
 
 		loadDeferred.done(function (buffer) {
 			if (deferred)
-				deferred.notify("playing");
+				deferred.notify("play");
 
 			this.soundOutput.playBuffer(buffer, note, volume, delay, function () {
 				this.soundOutput.freeSoundURL(soundAttributes.sound_url);
