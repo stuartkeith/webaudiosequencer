@@ -26,7 +26,7 @@ define(function (require) {
 
 	var callStateEnters = function (newState, startIndex, context) {
 		while (startIndex < newState.chain.length) {
-			newState.chain[i].enter.call(context);
+			newState.chain[startIndex].enter.call(context);
 
 			startIndex++;
 		}
