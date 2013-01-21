@@ -16,24 +16,25 @@ define(function () {
 		instrument.state = instrument.STATE_LOADING;
 		instrument.soundAttributes = soundAttributes;
 
-		instrument.changed();
+		instrument.triggerChange();
 
 		deferred = this.soundOutput.loadSoundURL(soundAttributes.sound_url);
 
-		deferred.fail(function () {
+		deferred.fail(function (reason, response) {
 			instrument.state = instrument.STATE_ERROR;
+			instrument.error.reason = reason;
+			instrument.error.data = response;
 
-			instrument.changed();
+			instrument.triggerError();
 		});
 
 		deferred.done(function (buffer) {
 			instrument.buffer = buffer;
-			instrument.state = instrument.STATE_LOADED;
+			instrument.state = instrument.STATE_READY;
 
-			instrument.changed();
+			instrument.triggerChange();
 		});
 	};
 
 	return updateInstrument;
 });
-

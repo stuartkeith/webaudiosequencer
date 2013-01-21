@@ -4,23 +4,31 @@ define(function (require) {
 
 	var Instrument = function () {
 		this.buffer = null;
-		this.state = this.STATE_LOADED;
+		this.state = this.STATE_READY;
 		this.range = 0;
 		this.soundAttributes = null;
 		this.transpose = 0;
 		this._volume = 1;
+		this.error = {
+			reason: null,
+			data: null
+		};
 	};
 
 	_.extend(Instrument.prototype, Backbone.Events, {
-		STATE_LOADING: "stateLoading",
-		STATE_LOADED: "stateLoaded",
-		STATE_ERROR: "stateError",
+		STATE_READY: "ready",
+		STATE_LOADING: "loading",
+		STATE_ERROR: "error",
 
-		changed: function () {
-			this.trigger("changed");
+		triggerChange: function () {
+			this.trigger("change");
 		},
 
-		remove: function () {
+		triggerError: function () {
+			this.trigger("error");
+		},
+
+		triggerRemove: function () {
 			this.trigger("remove");
 		},
 

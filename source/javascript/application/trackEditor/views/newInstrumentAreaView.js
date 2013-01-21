@@ -1,42 +1,129 @@
 define(function (require) {
 	var BaseView = require("baseView"),
 	    dragDropMixIn = require("dragDropMixIn"),
-	    settings = require("settings");
+	    settings = require("settings"),
+	    generateHSM = require("utilities/generateHSM");
 
 	var NewInstrumentAreaView = BaseView.extend({
 		dragTarget: "SoundExtended",
 		dropEffect: "copy",
 
+		HSM: generateHSM(["hint", "unhint", "activate", "deactivate", "over", "leave", "select"], {
+			hidden: {},
+
+			idle: {
+				activate: function (args) {
+					this.deferred = args.deferred;
+					this.sound = args.sound;
+
+					this.deferred.always(_.bind(this.deactivate, this));
+
+					return this.rootState.activated;
+				},
+
+				hint: function () {
+					return this.rootState.idle.hinted;
+				},
+
+				hinted: {
+					enter: function () {
+						this.view.$el.addClass("drag-hinted");
+					},
+
+					exit: function () {
+						this.view.$el.removeClass("drag-hinted");
+					},
+
+					unhint: function () {
+						return this.rootState.idle;
+					}
+				}
+			},
+
+			activated: {
+				enter: function () {
+					this.view.$el.addClass("drag-active");
+				},
+
+				exit: function () {
+					this.view.$el.removeClass("drag-active");
+				},
+
+				over: function () {
+					return this.rootState.activated.hover;
+				},
+
+				select: function () {
+					this.view.addInstrument(this.sound);
+
+					this.deferred.resolve();
+				},
+
+				deactivate: function () {
+					this.deferred = null;
+					this.sound = null;
+
+					return this.rootState.idle;
+				},
+
+				hover: {
+					enter: function () {
+						this.view.$el.addClass("drag-over");
+					},
+
+					exit: function () {
+						this.view.$el.removeClass("drag-over");
+					},
+
+					leave: function () {
+						return this.rootState.activated;
+					}
+				}
+			}
+		}),
+
 		initialize: function () {
-			this.heightDifference = this.$el.outerHeight(true) - this.$el.height();
+			this.hsm = new this.HSM({ view: this });
+			this.hsm.changeState(this.hsm.rootState.idle);
 		},
 
 		events: {
+			"mouseenter": function (event) {
+				this.hsm.over();
+			},
+
+			"mouseleave": function (event) {
+				this.hsm.leave();
+			},
+
 			"dragenter": function (model, event) {
-				this.$el.addClass("drag-over");
+				this.hsm.over();
 			},
 
 			"dragleave": function (model, event) {
-				this.$el.removeClass("drag-over");
+				this.hsm.leave();
 			},
 
 			"drop": function (model, event) {
-				this.$el.removeClass("drag-over");
+				this.hsm.select();
+			},
 
-				this.eventBus.trigger("addInstrument", {
-					instrumentManager: this.model,
-					soundAttributes: model
-				});
+			"click": function () {
+				this.hsm.select();
 			}
 		},
 
 		eventBusEvents: {
-			"overSoundExtended": function () {
-				this.$el.addClass("drag-available");
+			"selectSound": function (args) {
+				this.hsm.activate(args);
 			},
 
-			"outSoundExtended": function () {
-				this.$el.removeClass("drag-available");
+			"enterSound": function () {
+				this.hsm.hint();
+			},
+
+			"leaveSound": function () {
+				this.hsm.unhint();
 			}
 		},
 
@@ -45,15 +132,28 @@ define(function (require) {
 			"instrumentRemoved": "render"
 		},
 
+		addInstrument: function (soundAttributes) {
+			this.eventBus.trigger("addInstrument", {
+				instrumentManager: this.model,
+				soundAttributes: soundAttributes
+			});
+		},
+
 		render: function () {
 			if (this.model.instrumentRangeRemaining === 0) {
 				this.$el.hide();
+
+				this.hsm.changeState(this.hsm.rootState.hidden);
 			} else {
 				this.$el.show();
 
-				var height = (this.model.instrumentRangeRemaining * settings.instrumentHeight) - this.heightDifference;
+				var heightDifference = this.$el.outerHeight(true) - this.$el.height();
+
+				var height = (this.model.instrumentRangeRemaining * settings.instrumentHeight) - heightDifference;
 
 				this.$el.height(height).css('line-height', height + "px");
+
+				this.hsm.changeState(this.hsm.rootState.idle);
 			}
 		}
 	});

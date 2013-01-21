@@ -35,7 +35,7 @@ define(function (require) {
 				this.instrumentRange -= instrument.range;
 				this.instrumentRangeRemaining += instrument.range;
 
-				instrument.remove();
+				instrument.triggerRemove();
 
 				this.trigger("instrumentRemoved", instrument);
 

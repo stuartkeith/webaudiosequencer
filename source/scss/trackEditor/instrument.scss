@@ -1,20 +1,3 @@
-$drag-target-border: 2px;
-
-.drag-target {
-	background: $dragdrop-foreground;
-	border: $drag-target-border solid $dragdrop-background;
-}
-
-.drag-available {
-	background: $dragdrop-active-foreground;
-	border-color: $dragdrop-active-background;
-}
-
-.drag-over {
-	background: $dragdrop-accepted-foreground;
-	border-color: $dragdrop-accepted-background;
-}
-
 .instrument-controls {
 	font-size: 0; // remove gaps between inline-blocks
 	line-height: 32px - $drag-target-border * 2;
@@ -43,12 +26,12 @@ $drag-target-border: 2px;
 	vertical-align: middle;
 }
 
-.instrument-state-loading {
+.instrument-state-loading .instrument-title {
 	font-style: italic;
 	-webkit-animation: pulse 0.1s infinite linear alternate;
 }
 
-.instrument-state-error {
+.instrument-state-error .instrument-title {
 	font-weight: bold;
 	text-decoration: line-through;
 }

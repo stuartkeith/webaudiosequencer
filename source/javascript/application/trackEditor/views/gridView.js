@@ -101,13 +101,12 @@ define(function (require) {
 
 		initialize: function () {
 			this.currentCell = {};
-			this.isMouseDown = false;
 
 			this.hsm = new this.HSM({
 				view: this
 			});
 
-			this.setState(this.hsm.rootState.addOrRemove);
+			this.hsm.changeState(this.hsm.rootState.addOrRemove);
 
 			this.canvasGrid = new CanvasGrid(this.$el.find("canvas:first")[0]);
 
@@ -118,22 +117,16 @@ define(function (require) {
 			this.canvasGrid.setCanvasSelector(canvasGridConfiguration.canvasSelector);
 		},
 
-		setState: function (newState) {
-			if (this.isMouseDown)
-				this.hsm.mouseup();
-
-			this.hsm.changeState(newState);
-
-			if (this.isMouseDown)
-				this.hsm.mousedown();
-
-			if (this.currentCell.x != null && this.currentCell.y != null)
-				this.hsm.cellmove();
-		},
-
 		eventBusEvents: {
 			"setGridViewState": function (args) {
-				this.setState(this.hsm.rootState[args.state]);
+				this.hsm.mouseup();
+
+				this.hsm.changeState(this.hsm.rootState[args.state]);
+
+				this.hsm.mousedown();
+
+				if (this.currentCell.x != null && this.currentCell.y != null)
+					this.hsm.cellmove();
 			}
 		},
 
@@ -149,39 +142,43 @@ define(function (require) {
 
 		events: {
 			"mousedown": function (event) {
-				if (event.which === 1) {
-					this.isMouseDown = true;
-
-					this.hsm.mousedown();
-
-					this.hsm.cellmove();
-				}
+				this.mouseDown(event);
 			},
 
 			"mouseup": function (event) {
-				if (event.which === 1) {
-					this.isMouseDown = false;
-
-					this.hsm.mouseup();
-
-					this.hsm.cellmove();
-				}
+				this.mouseUp(event);
 			},
 
 			"mouseenter": function (event) {
 				this.updateCurrentCell(event);
 
-				this.events.mousedown.call(this, event);
+				this.mouseDown(event);
 			},
 
 			"mouseleave": function (event) {
-				this.events.mouseup.call(this, event);
+				this.mouseUp(event);
 
 				this.currentCell.x = this.currentCell.y = null;
 			},
 
 			"mousemove": function (event) {
 				this.updateCurrentCell(event);
+			}
+		},
+
+		mouseDown: function (event) {
+			if (event.which === 1) {
+				this.hsm.mousedown();
+
+				this.hsm.cellmove();
+			}
+		},
+
+		mouseUp: function (event) {
+			if (event.which === 1) {
+				this.hsm.mouseup();
+
+				this.hsm.cellmove();
 			}
 		},
 

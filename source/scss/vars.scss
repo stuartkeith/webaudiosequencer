@@ -29,12 +29,10 @@ $chrome-foreground-alternate: #5BB8D3;
 $chrome-background: #CDE1FF;
 
 // dragdrop - elements that can be dragged or dropped.
-// active is element being dragged or highlighted.
+$drag-target-border: 2px;
 $dragdrop-foreground: #F0F0F0;
 $dragdrop-background: #E8E8E8;
-$dragdrop-active-foreground: $dragdrop-foreground;
-$dragdrop-active-background: $action-background;
-$dragdrop-accepted-foreground: $dragdrop-foreground;
-$dragdrop-accepted-background: #FF0000;
+$dragdrop-hinted-background: $action-foreground;
+$dragdrop-active-background: #FF970F;
 
 $track-control-height: 32px;

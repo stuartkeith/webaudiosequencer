@@ -86,3 +86,16 @@ input[type=range] {
 	position: absolute;
 	z-index: 999999;
 }
+
+.drag-target {
+	background: $dragdrop-foreground;
+	border: $drag-target-border solid $dragdrop-background;
+}
+
+.drag-hinted {
+	border-color: $dragdrop-hinted-background;
+}
+
+.drag-active {
+	border-color: $dragdrop-active-background;
+}
