@@ -28,14 +28,14 @@ define(function (require) {
 		render: function () {
 			this.$el.html(this.trackControlTemplate());
 
-			this.select = this.$el.find(".track-control-select:first");
+			this.select = this.$(".track-control-select:first");
 
 			// store the title so it can added and removed later
 			this.selectTitle = this.select.attr("title");
 
 			this.updateSelect();
 
-			this.$el.find(".remove-track:first").button({
+			this.$(".remove-track:first").button({
 				icons: {
 					primary: "sprite-buttons-remove"
 				},

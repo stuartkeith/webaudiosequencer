@@ -15,17 +15,17 @@ define(function (require) {
 			this.$el.html(this.trackPanelTemplate());
 
 			this.addChildView(PlaybackControlsView, {
-				el: this.$el.find(".playback-controls"),
+				el: this.$(".playback-controls"),
 				model: this.model.scheduler
 			}).render();
 
 			this.addChildView(TrackControlsView, {
-				el: this.$el.find(".track-controls"),
+				el: this.$(".track-controls"),
 				model: this.model.trackCollection
 			}).render();
 
 			this.addChildView(TrackEditorView, {
-				el: this.$el.find(".track-editor"),
+				el: this.$(".track-editor"),
 				model: this.model.trackCollection.models[0]
 			}).render();
 

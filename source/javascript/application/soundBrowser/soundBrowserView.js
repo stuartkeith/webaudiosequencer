@@ -134,15 +134,15 @@ define(function (require) {
 			}));
 
 			var volumeView = this.addChildView(VolumeView, {
-				el: this.$el.find(".master-volume:first"),
+				el: this.$(".master-volume:first"),
 				model: this.model.soundOutput
 			}).render();
 
 			volumeView.on("change", this.volumeViewChange, this);
 
-			this.collectionSelect = this.$el.find(".collection-select:first").buttonset();
+			this.collectionSelect = this.$(".collection-select:first").buttonset();
 
-			this.refreshButton = this.$el.find(".refresh:first").button({
+			this.refreshButton = this.$(".refresh:first").button({
 				icons: {
 					primary: this.refreshIconClass
 				},
@@ -150,7 +150,7 @@ define(function (require) {
 				text: false
 			});
 
-			this.nextButton = this.$el.find(".next:first").button({
+			this.nextButton = this.$(".next:first").button({
 				icons: {
 					primary: "sprite-buttons-next-large"
 				},
@@ -158,7 +158,7 @@ define(function (require) {
 				text: false
 			});
 
-			this.previousButton = this.$el.find(".previous:first").button({
+			this.previousButton = this.$(".previous:first").button({
 				icons: {
 					primary: "sprite-buttons-previous-large"
 				},
@@ -166,9 +166,9 @@ define(function (require) {
 				text: false
 			});
 
-			this.searchInput = this.$el.find(".search-input:first");
+			this.searchInput = this.$(".search-input:first");
 
-			var sounds = this.$el.find(".sounds:first");
+			var sounds = this.$(".sounds:first");
 
 			this.soundsView = this.addChildView(SoundsView, {
 				el: sounds,
@@ -176,7 +176,7 @@ define(function (require) {
 				rows: soundsViewRows
 			});
 
-			this.collectionSource = this.$el.find(".collection-source:first").button({
+			this.collectionSource = this.$(".collection-source:first").button({
 				icons: {
 					primary: "sprite-buttons-source-large"
 				},

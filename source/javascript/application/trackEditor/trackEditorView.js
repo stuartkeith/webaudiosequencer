@@ -43,17 +43,17 @@ define(function (require) {
 			this.$el.html(this.trackEditorTemplate());
 
 			this.sequenceProgressView = this.addChildView(SequenceProgressView, {
-				el: this.$el.find(".sequence-progress:first")
+				el: this.$(".sequence-progress:first")
 			});
 
 			this.instrumentPanelView = this.addChildView(InstrumentPanelView, {
-				el: this.$el.find(".instrument-panel:first")
+				el: this.$(".instrument-panel:first")
 			});
 
-			this.gridHint = this.$el.find(".grid-hint:first");
+			this.gridHint = this.$(".grid-hint:first");
 
 			this.gridView = this.addChildView(GridView, {
-				el: this.$el.find(".grid-container:first")
+				el: this.$(".grid-container:first")
 			});
 
 			if (this.model)

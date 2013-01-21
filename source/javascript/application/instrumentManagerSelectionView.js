@@ -25,7 +25,7 @@ define(function(require) {
 		render: function () {
 			this.$el.html(instrumentManagerSelectionTemplateString);
 
-			this.$el.find("button").each(function (index, element) {
+			this.$("button").each(function (index, element) {
 				$(element).button();
 			});
 

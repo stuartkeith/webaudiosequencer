@@ -6,11 +6,11 @@ define(function (require) {
 	var InstrumentPanelView = BaseView.extend({
 		initialize: function () {
 			this.instrumentManagerView = this.addChildView(InstrumentManagerView, {
-				el: this.$el.find(".instrument-manager:first")
+				el: this.$(".instrument-manager:first")
 			});
 
 			this.newInstrumentAreaView = this.addChildView(NewInstrumentAreaView, {
-				el: this.$el.find(".new-instrument-area:first")
+				el: this.$(".new-instrument-area:first")
 			});
 		},
 

@@ -108,7 +108,7 @@ define(function (require) {
 
 			this.hsm.changeState(this.hsm.rootState.addOrRemove);
 
-			this.canvasGrid = new CanvasGrid(this.$el.find("canvas:first")[0]);
+			this.canvasGrid = new CanvasGrid(this.$("canvas:first")[0]);
 
 			this.canvasGrid.setRows(settings.maxNotes);
 			this.canvasGrid.setColumnWidth(settings.gridWidth);

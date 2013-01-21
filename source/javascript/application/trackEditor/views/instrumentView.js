@@ -200,18 +200,18 @@ define(function (require) {
 		render: function () {
 			this.$el.html(this.instrumentTemplate());
 
-			this.instrumentTitle = this.$el.find(".instrument-title:first");
+			this.instrumentTitle = this.$(".instrument-title:first");
 
 			this.heightDifference = this.$el.outerHeight(true) - this.$el.height();
 
 			var volumeView = this.addChildView(VolumeView, {
-				el: this.$el.find(".instrument-volume:first"),
+				el: this.$(".instrument-volume:first"),
 				model: this.model
 			}).render();
 
 			volumeView.on("change", this.volumeViewChange, this);
 
-			this.$el.find(".remove-instrument:first").button({
+			this.$(".remove-instrument:first").button({
 				icons: {
 					primary: "sprite-buttons-remove"
 				},

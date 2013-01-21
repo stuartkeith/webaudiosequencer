@@ -119,7 +119,7 @@ define(function (require) {
 		render: function () {
 			this.$el.html(this.soundTemplate(this.model.toJSON()));
 
-			this.$el.find(".add:first").button({
+			this.$(".add:first").button({
 				icons: {
 					primary: "sprite-buttons-add"
 				},
@@ -128,7 +128,7 @@ define(function (require) {
 			});
 
 			this.addChildView(SoundButtonView, {
-				el: this.$el.find(".sound-button:first"),
+				el: this.$(".sound-button:first"),
 				model: this.model
 			});
 

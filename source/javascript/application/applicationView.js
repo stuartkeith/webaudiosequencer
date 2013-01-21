@@ -49,7 +49,7 @@ define(function (require) {
 			this.$el.html(this.applicationTemplate());
 
 			var soundBrowserView = this.addChildView(SoundBrowserView, {
-				el: this.$el.find(".sound-browser:first"),
+				el: this.$(".sound-browser:first"),
 				model: this.model
 			}).render();
 
@@ -59,7 +59,7 @@ define(function (require) {
 				model: this.model
 			});
 
-			this.trackPanelContainer = this.$el.find(".track-panel-container:first");
+			this.trackPanelContainer = this.$(".track-panel-container:first");
 
 			this.addChildView(SoundPopUpView, {
 				el: this.$el

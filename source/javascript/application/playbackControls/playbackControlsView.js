@@ -32,17 +32,17 @@ define(function (require) {
 		render: function () {
 			this.$el.html(this.playbackControlsTemplate());
 
-			this.playStop = this.$el.find(".play-stop:first");
+			this.playStop = this.$(".play-stop:first");
 
 			this.playStop.button({
 				text: false
 			});
 
-			this.bpmNumber = this.$el.find(".bpm-number:first")[0];
+			this.bpmNumber = this.$(".bpm-number:first")[0];
 			this.bpmNumber.min = this.bpmMinimum;
 			this.bpmNumber.max = this.bpmMaximum;
 
-			this.bpmSlider = this.$el.find(".bpm-slider:first")[0];
+			this.bpmSlider = this.$(".bpm-slider:first")[0];
 			this.bpmSlider.min = this.bpmMinimum;
 			this.bpmSlider.max = this.bpmMaximum;
 
