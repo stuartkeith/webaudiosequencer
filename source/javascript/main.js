@@ -4,7 +4,7 @@ require.config({
 		jqueryUI: "libraries/jquery/jquery-ui-1.9.0.custom",
 		jqueryPreloadCssImages: "libraries/jquery/preloadCssImages.jQuery_v5",
 		underscore: "libraries/underscore/underscore-1.4.1",
-		backbone: "libraries/backbone/backbone-0.9.2",
+		backbone: "libraries/backbone/backbone-0.9.10",
 		templates: "../templates",
 		text: "libraries/require/text-2.0.3"
 	},
