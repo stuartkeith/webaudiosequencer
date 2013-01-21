@@ -1,7 +1,7 @@
 require.config({
 	paths: {
-		jquery: "libraries/jquery/jquery-1.8.2",
-		jqueryUI: "libraries/jquery/jquery-ui-1.9.0.custom",
+		jquery: "libraries/jquery/jquery-1.9.0",
+		jqueryUI: "libraries/jquery/jquery-ui-1.10.0.custom",
 		jqueryPreloadCssImages: "libraries/jquery/preloadCssImages.jQuery_v5",
 		underscore: "libraries/underscore/underscore-1.4.1",
 		backbone: "libraries/backbone/backbone-0.9.10",
