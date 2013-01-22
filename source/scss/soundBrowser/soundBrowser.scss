@@ -51,8 +51,8 @@
 
 .collection-source {
 	display: inline-block;
-	height: 32px;
+	height: 32px - $button-border * 2;
 	margin: 0 8px;
 	vertical-align: middle;
-	width: 32px;
+	width: 32px - $button-border * 2;
 }
