@@ -1,17 +1,14 @@
-$sound-width: 160px;
 $sound-height: 32px;
 $sound-border: 2px;
-$sound-button-margin: ($sound-height - $sound-border - $sprite-buttons-play-height) / 2;
-$sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height) / 2;
+$button-offset: floor(($sound-height - $sound-border) / 4);
+$title-offset: $button-offset + 16px + $button-offset;
 
 .sound, .empty-sound {
-	@include set-width($sound-width, 0, $sound-border);
 	@include set-height($sound-height, $sound-border, 0);
 	background-color: $panel-foreground;
 	border-right: $sound-border solid $panel-background;
 	border-bottom: $sound-border solid $panel-background;
 	font-size: 10px;
-	max-width: $sound-width - $sound-border;
 }
 
 .sound {
@@ -20,23 +17,29 @@ $sound-add-margin: ($sound-height - $sound-border - $sprite-buttons-add-height) 
 	text-align: left;
 }
 
-.sound-button {
-	float: left;
-	height: 16px;
-	margin: $sound-button-margin;
+.sound-button, .add {
+	position: absolute;
 	width: 16px;
+	height: 16px;
+	top: $button-offset;
+}
+
+.sound-button {
+	left: $button-offset;
 }
 
 .add {
-	float: right;
-	height: 16px;
-	margin: $sound-add-margin;
-	width: 16px;
+	right: $button-offset;
 }
 
 .title {
-	display: block;
+	bottom: 0;
+	left: $title-offset;
+	line-height: $sound-height - $sound-border;
 	overflow: hidden;
+	position: absolute;
+	right: $title-offset;
+	top: 0;
 	white-space: nowrap;
 }
 

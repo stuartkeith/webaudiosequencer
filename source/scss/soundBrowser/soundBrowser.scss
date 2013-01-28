@@ -12,7 +12,11 @@
 
 .sounds table {
 	border-collapse: separate;
-	display: inline-block;
+	margin: 0 auto;
+	max-width: 1280px;
+	padding: 0 32px;
+	table-layout: fixed;
+	width: 100%;
 }
 
 .previous, .refresh, .next {
