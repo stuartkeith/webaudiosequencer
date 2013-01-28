@@ -48,7 +48,10 @@
 }
 
 .search-input {
+	box-sizing: border-box;
 	margin: 0 4px;
+	height: 32px;
+	padding-left: 0.5em;
 	vertical-align: middle;
 	width: 24em;
 }
