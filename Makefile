@@ -13,6 +13,7 @@ source/css/images/buttons.png: source/sprites/buttons/*.png glue-template.txt
 
 optimize: build
 	@echo "Optimizing..."
+	rm -rf optimized/
 	mkdir -p optimized/javascript/libraries/require
 	r.js -o build.js
 	rm -rf optimized/javascript/templates
