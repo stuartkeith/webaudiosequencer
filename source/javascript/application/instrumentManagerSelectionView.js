@@ -1,5 +1,6 @@
 define(function(require) {
 	var BaseView = require("baseView"),
+	    buttonHelpers = require("utilities/buttonHelpers"),
 	    instrumentManagerSelectionTemplateString = require("text!templates/instrumentManagerSelection.html")
 
 	var InstrumentManagerSelectionView = BaseView.extend({
@@ -26,7 +27,7 @@ define(function(require) {
 			this.$el.html(instrumentManagerSelectionTemplateString);
 
 			this.$("button").each(function (index, element) {
-				$(element).button();
+				buttonHelpers.button($(element));
 			});
 
 			return this;

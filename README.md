@@ -26,7 +26,6 @@ This application uses the following libraries:
 
 - [RequireJS](http://requirejs.org/) - module loading
 - [jQuery](http://jquery.com/) - DOM manipulation and deferreds/promises
-- [jQueryUI](http://jqueryui.com/) - buttons
 - [Underscore.js](http://underscorejs.org/) - various things!
 - [Backbone.js](http://backbonejs.org/) - application structure
 - [glue (my fork)](https://github.com/stuartkeith/glue) - CSS spritesheet

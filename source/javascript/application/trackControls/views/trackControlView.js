@@ -1,6 +1,7 @@
 define(function (require) {
 	var _ = require("underscore"),
 	    BaseView = require("baseView"),
+	    buttonHelpers = require("utilities/buttonHelpers"),
 	    trackControlTemplateString = require("text!templates/trackControls/trackControl.html");
 
 	var TrackControlView = BaseView.extend({
@@ -35,13 +36,7 @@ define(function (require) {
 
 			this.updateSelect();
 
-			this.$(".remove-track:first").button({
-				icons: {
-					primary: "sprite-buttons-remove"
-				},
-
-				text: false
-			});
+			buttonHelpers.button(this.$(".remove-track:first"), "sprite-buttons-remove");
 
 			return this;
 		},

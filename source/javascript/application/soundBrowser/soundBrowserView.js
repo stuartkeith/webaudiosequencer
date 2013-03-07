@@ -1,6 +1,7 @@
 define(function (require) {
 	var _ = require("underscore"),
 	    BaseView = require("baseView"),
+	    buttonHelpers = require("utilities/buttonHelpers"),
 	    SoundBrowserTemplateString = require("text!templates/soundBrowser/soundBrowser.html"),
 	    soundBrowserError = require("text!templates/soundBrowser/soundBrowserError.txt"),
 	    FreeSoundCollection = require("./collections/freeSoundCollection"),
@@ -38,6 +39,9 @@ define(function (require) {
 
 		events: {
 			"change .collection-select": function (event) {
+				if (this.collection.className === event.target.value)
+					return;
+
 				var collection = _.find(this.collections, function (collection) {
 					return collection.className === event.target.value;
 				});
@@ -81,9 +85,7 @@ define(function (require) {
 		_fetch: function () {
 			var self = this;
 
-			this.refreshButton.button("option", "icons", {
-				primary: this.refreshIconClass
-			});
+			this.refreshButton.data("options").setIcon(this.refreshIconClass);
 
 			this.setEnabled(false);
 			this.soundsView.render();
@@ -114,9 +116,7 @@ define(function (require) {
 					else
 						errorContext.error = "Error " + response.status + " - " + response.statusText;
 
-					self.refreshButton.button("option", "icons", {
-						primary: self.refreshErrorIconClass
-					});
+					this.refreshButton.data("options").setIcon(self.refreshErrorIconClass);
 
 					self.refreshButton.prop("title", self.soundBrowserErrorTemplate(errorContext));
 
@@ -140,31 +140,13 @@ define(function (require) {
 
 			volumeView.on("change", this.volumeViewChange, this);
 
-			this.collectionSelect = this.$(".collection-select:first").buttonset();
+			this.collectionSelect = buttonHelpers.buttonset(this.$(".collection-select:first"));
 
-			this.refreshButton = this.$(".refresh:first").button({
-				icons: {
-					primary: this.refreshIconClass
-				},
+			this.refreshButton = buttonHelpers.button(this.$(".refresh:first"), this.refreshIconClass);
 
-				text: false
-			});
+			this.nextButton = buttonHelpers.button(this.$(".next:first"), "sprite-buttons-next-large");
 
-			this.nextButton = this.$(".next:first").button({
-				icons: {
-					primary: "sprite-buttons-next-large"
-				},
-
-				text: false
-			});
-
-			this.previousButton = this.$(".previous:first").button({
-				icons: {
-					primary: "sprite-buttons-previous-large"
-				},
-
-				text: false
-			});
+			this.previousButton = buttonHelpers.button(this.$(".previous:first"), "sprite-buttons-previous-large");
 
 			this.searchInput = this.$(".search-input:first");
 
@@ -176,13 +158,7 @@ define(function (require) {
 				rows: soundsViewRows
 			});
 
-			this.collectionSource = this.$(".collection-source:first").button({
-				icons: {
-					primary: "sprite-buttons-source-large"
-				},
-
-				text: false
-			});
+			this.collectionSource = buttonHelpers.button(this.$(".collection-source:first"), "sprite-buttons-source-large");
 
 			// start with a random collection.
 			this.changeCollection(this.collections[_.random(this.collections.length - 1)]);
@@ -206,8 +182,7 @@ define(function (require) {
 
 			this.searchInput.prop("placeholder", "Search " + this.collection.name);
 
-			// refresh must be called afterwards.
-			this.collectionSelect.find("input:radio[value=" + this.collection.className + "]").prop("checked", true).button("refresh");
+			this.collectionSelect.find("input:radio[value=" + this.collection.className + "]").prop("checked", true).change();
 
 			this.collectionSource.attr("href", this.collection.siteURL);
 			this.collectionSource.prop("title", "Visit " + this.collection.name);
@@ -221,11 +196,11 @@ define(function (require) {
 			this.previousEnabled = this.page > 1;
 			this.nextEnabled = this.collection.length >= limit;
 
-			this.collectionSelect.buttonset('option', 'disabled', !value);
+			this.collectionSelect.data('options').disable(!value);
 			this.searchInput.attr('disabled', !value);
-			this.refreshButton.button('option', 'disabled', !value);
-			this.previousButton.button('option', 'disabled', !(value && this.previousEnabled));
-			this.nextButton.button('option', 'disabled', !(value && this.nextEnabled));
+			this.refreshButton.data('options').disable(!value);
+			this.previousButton.data('options').disable(!(value && this.previousEnabled));
+			this.nextButton.data('options').disable(!(value && this.nextEnabled));
 		}
 	});
 

@@ -1,11 +1,10 @@
 define(function (require) {
 	var $ = require("jquery"),
 	    BaseView = require("baseView"),
+	    buttonHelpers = require("utilities/buttonHelpers"),
 	    settings = require("settings");
 
 	var SequenceProgressView = BaseView.extend({
-		activeClassName: "ui-state-active",
-
 		initialize: function () {
 			this.progressElements = [];
 			this.progressIndex = null;
@@ -68,11 +67,11 @@ define(function (require) {
 
 			this.$el.width(length * settings.gridWidth);
 
-			this.$el.buttonset();
+			buttonHelpers.buttonset(this.$el);
 		},
 
 		addActiveClass: function () {
-			this.progressElements[this.progressIndex].addClass(this.activeClassName);
+			$(this.progressElements[this.progressIndex]).data("options").setActivated(true);
 		},
 
 		removeActiveClass: function () {
@@ -80,7 +79,7 @@ define(function (require) {
 				var progressElement = this.progressElements[this.progressIndex];
 
 				if (progressElement)
-					progressElement.removeClass(this.activeClassName);
+					$(progressElement).data("options").setActivated(false);
 			}
 		},
 

@@ -1,7 +1,8 @@
 define(function (require) {
 	var _ = require("underscore"),
 	    BaseView = require("baseView"),
-		playbackControlsTemplateString = require("text!templates/playbackControls/playbackControls.html");
+	    buttonHelpers = require("utilities/buttonHelpers"),
+	    playbackControlsTemplateString = require("text!templates/playbackControls/playbackControls.html");
 
 	var PlaybackControlsView = BaseView.extend({
 		bpmMinimum: 30,
@@ -34,9 +35,7 @@ define(function (require) {
 
 			this.playStop = this.$(".play-stop:first");
 
-			this.playStop.button({
-				text: false
-			});
+			buttonHelpers.button(this.playStop, "dummy");
 
 			this.bpmNumber = this.$(".bpm-number:first")[0];
 			this.bpmNumber.min = this.bpmMinimum;
@@ -59,11 +58,8 @@ define(function (require) {
 
 			this.playStop.prop("checked", this.model.isPlaying);
 
-			this.playStop.button("option", "icons", {
-				primary: iconName
-			});
-
-			this.playStop.button("refresh");
+			this.playStop.data("options").setIcon(iconName);
+			this.playStop.data("options").setActivated(this.model.isPlaying);
 		},
 
 		updateBPMInputs: function () {

@@ -1,6 +1,7 @@
 define(function (require) {
 	_ = require("underscore"),
 	BaseView = require("baseView"),
+	buttonHelpers = require("utilities/buttonHelpers"),
 	settings = require("settings"),
 	dragDropMixIn = require("dragDropMixIn"),
 	VolumeView = require("application/volumeView"),
@@ -211,13 +212,7 @@ define(function (require) {
 
 			volumeView.on("change", this.volumeViewChange, this);
 
-			this.$(".remove-instrument:first").button({
-				icons: {
-					primary: "sprite-buttons-remove"
-				},
-
-				text: false
-			});
+			buttonHelpers.button(this.$(".remove-instrument:first"), "sprite-buttons-remove");
 
 			this.modelChange();
 

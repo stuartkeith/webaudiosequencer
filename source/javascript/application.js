@@ -2,7 +2,6 @@ define(function (require) {
 	var _ = require("underscore"),
 	    $ = require("jquery"),
 	    Backbone = require("backbone"),
-	    jqueryUI = require("jqueryUI"),
 	    jqueryPreloadCssImages = require("jqueryPreloadCssImages"),
 	    SoundOutput = require("soundOutput/soundOutput"),
 	    Scheduler = require("sequencer/scheduler"),

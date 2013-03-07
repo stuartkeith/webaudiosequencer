@@ -26,12 +26,12 @@
 	width: 32px;
 }
 
-.refresh .ui-icon {
+.refresh .button-icon {
 	-webkit-animation: rotate-360 1.2s infinite linear;
 	-webkit-animation-play-state: paused;
 }
 
-.refresh:disabled .ui-icon {
+.refresh:disabled .button-icon {
 	-webkit-animation-play-state: running;
 }
 
@@ -58,8 +58,8 @@
 
 .collection-source {
 	display: inline-block;
-	height: 32px - $button-border * 2;
+	height: 32px;
 	margin: 0 8px;
 	vertical-align: middle;
-	width: 32px - $button-border * 2;
+	width: 32px;
 }

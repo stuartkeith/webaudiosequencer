@@ -1,0 +1,53 @@
+.buttonset {
+	font-size: 0;
+}
+
+.button {
+	background: $action-foreground;
+	border: $button-border-width solid $action-background;
+	box-sizing: border-box;
+	color: $action-text;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	position: relative;
+	text-decoration: none !important;
+}
+
+/*
+.button-normal:hover {
+	background: $action-foreground-hover;
+	border-color: $action-background-hover;
+}
+*/
+
+.button-active {
+	background: $action-foreground-active;
+	border-color: $action-background-active;
+	color: $action-text;
+}
+
+.button-icon {
+	display: block;
+	left: 50%;
+	overflow: hidden;
+	position: absolute;
+	top: 50%;
+}
+
+.button-disabled {
+	background-color: $disabled-foreground;
+	border-color: $disabled-background;
+	cursor: default;
+}
+
+.button-left {
+	border-top-left-radius: $button-border-radius;
+	border-bottom-left-radius: $button-border-radius;
+}
+
+.button-right {
+	border-top-right-radius: $button-border-radius;
+	border-bottom-right-radius: $button-border-radius;
+}

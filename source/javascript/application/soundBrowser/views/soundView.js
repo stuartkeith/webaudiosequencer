@@ -2,6 +2,7 @@ define(function (require) {
 	var _ = require("underscore"),
 	    $ = require("jquery"),
 	    BaseView = require("baseView"),
+	    buttonHelpers = require("utilities/buttonHelpers"),
 	    globalClickListener = require("utilities/globalClickListener"),
 	    dragDropMixIn = require("dragDropMixIn"),
 	    generateHSM = require("utilities/generateHSM");
@@ -119,13 +120,7 @@ define(function (require) {
 		render: function () {
 			this.$el.html(this.soundTemplate(this.model.toJSON()));
 
-			this.$(".add:first").button({
-				icons: {
-					primary: "sprite-buttons-add"
-				},
-
-				text: false
-			});
+			buttonHelpers.button(this.$(".add:first"), "sprite-buttons-add");
 
 			this.addChildView(SoundButtonView, {
 				el: this.$(".sound-button:first"),

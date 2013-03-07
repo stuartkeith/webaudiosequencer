@@ -1,6 +1,7 @@
 define(function (require) {
 	var _ = require("underscore"),
 	    BaseView = require("baseView"),
+	    buttonHelpers = require("utilities/buttonHelpers"),
 	    soundError = require("text!templates/soundBrowser/soundError.txt"),
 	    generateHSM = require("utilities/generateHSM");
 
@@ -30,7 +31,7 @@ define(function (require) {
 
 			busy: {
 				enter: function () {
-					this.view.$el.button("disable");
+					this.view.$el.data("options").disable(true);
 
 					this.view.$el.addClass("sound-button-view-loading");
 				},
@@ -38,7 +39,7 @@ define(function (require) {
 				exit: function () {
 					this.view.$el.removeClass("sound-button-view-loading");
 
-					this.view.$el.button("enable");
+					this.view.$el.data("options").disable(false);
 				},
 
 				loading: {
@@ -70,9 +71,7 @@ define(function (require) {
 		initialize: function () {
 			this.originalLabel = this.$el.text();
 
-			this.$el.button({
-				text: false
-			});
+			buttonHelpers.button(this.$el, "dummy");
 
 			_.bindAll(this, "progressCallback", "doneCallback",
 				"failCallback");
@@ -113,9 +112,7 @@ define(function (require) {
 		},
 
 		setIconAndLabel: function (newIcon, label) {
-			this.$el.button("option", "icons", {
-				primary: "sprite-buttons-" + newIcon
-			});
+			this.$el.data("options").setIcon("sprite-buttons-" + newIcon);
 
 			this.$el.prop("title", label || this.originalLabel);
 		},
