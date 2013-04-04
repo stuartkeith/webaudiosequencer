@@ -3,7 +3,9 @@ define(function (require) {
 	    _ = require("underscore");
 
 	var html = $("html"),
-	    listeners = [];
+	    listeners = [],
+	    touchmoveEvents,
+	    isTouch = 'ontouchstart' in window;
 
 	// Listen for a click event anywhere in the document.
 	//
@@ -31,13 +33,25 @@ define(function (require) {
 	};
 
 	var addEventListeners = function () {
-		html.on("mousedown", startHandler);
-		html.on("click", endHandler);
+		if (isTouch) {
+			html.on("touchstart", touchstartHandler);
+			html.on("touchmove", touchmoveHandler);
+			html.on("touchend", touchendHandler);
+		} else {
+			html.on("mousedown", startHandler);
+			html.on("click", endHandler);
+		}
 	};
 
 	var removeEventListeners = function () {
-		html.off("mousedown", startHandler);
-		html.off("click", endHandler);
+		if (isTouch) {
+			html.off("touchstart", touchstartHandler);
+			html.off("touchmove", touchmoveHandler);
+			html.off("touchend", touchendHandler);
+		} else {
+			html.off("mousedown", startHandler);
+			html.off("click", endHandler);
+		}
 	};
 
 	var startHandler = function (event) {
@@ -78,6 +92,24 @@ define(function (require) {
 
 		if (listeners.length === 0)
 			removeEventListeners();
+	};
+
+	var touchstartHandler = function (event) {
+		if (event.originalEvent.touches.length === 1) {
+			touchmoveEvents = 0;
+
+			startHandler(event);
+		}
+	};
+
+	var touchmoveHandler = function () {
+		if (event.originalEvent.touches.length === 1)
+			touchmoveEvents++;
+	};
+
+	var touchendHandler = function (event) {
+		if (event.originalEvent.touches.length === 0 && touchmoveEvents < 5)
+			endHandler(event);
 	};
 
 	return globalClickListener;

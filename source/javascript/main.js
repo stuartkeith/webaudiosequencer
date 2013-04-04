@@ -33,9 +33,6 @@ require([
 
 	if (!window.webkitAudioContext) {
 		fadeInContent = $(unsupportedTemplateString);
-	} else if ('ontouchstart' in window) {
-		fadeInContent = $("<p>Unfortunately, this application currently requires a mouse and keyboard.</p>\
-			<p>Sorry about that.</p>");
 	} else {
 		fadeInContent = $("<p>Loading...</p>");
 

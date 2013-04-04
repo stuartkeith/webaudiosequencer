@@ -18,10 +18,6 @@ It uses the following browser features:
 - CSS3 animations
 - Page Visibility API (Chrome only)
 
-While Safari on iOS 6 supports the Web Audio API, it does not support drag and
-drop, so the application prevents iOS users from accessing the application
-(for now!).
-
 This application uses the following libraries:
 
 - [RequireJS](http://requirejs.org/) - module loading
