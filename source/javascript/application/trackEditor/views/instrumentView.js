@@ -54,18 +54,30 @@ define(function (require) {
 		}),
 
 		HSM: generateHSM(["hint", "unhint", "activate", "deactivate", "over", "leave", "select"], {
+			activate: function (args) {
+				this.sound = args.sound;
+
+				this.deferred = args.deferred;
+				this.deferred.always(_.bind(this.deactivate, this));
+
+				this.view.activations++;
+
+				return this.rootState.activated;
+			},
+
+			deactivate: function () {
+				this.view.activations--;
+
+				if (this.view.activations === 0) {
+					this.deferred = null;
+
+					return this.rootState.idle;
+				}
+			},
+
 			idle: {
 				hint: function () {
 					return this.rootState.idle.hinting;
-				},
-
-				activate: function (args) {
-					this.sound = args.sound;
-
-					this.deferred = args.deferred;
-					this.deferred.always(_.bind(this.deactivate, this));
-
-					return this.rootState.activated;
 				},
 
 				hinting: {
@@ -90,12 +102,6 @@ define(function (require) {
 
 				exit: function () {
 					this.view.$el.removeClass("drag-active");
-				},
-
-				deactivate: function () {
-					this.deferred = null;
-
-					return this.rootState.idle;
 				},
 
 				over: function () {
@@ -128,6 +134,8 @@ define(function (require) {
 		}),
 
 		initialize: function () {
+			this.activations = 0;
+
 			this.hsm = new this.HSM({ view: this });
 			this.hsm.changeState(this.hsm.rootState.idle);
 
