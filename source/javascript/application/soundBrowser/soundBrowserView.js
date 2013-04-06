@@ -7,7 +7,8 @@ define(function (require) {
 	    FreeSoundCollection = require("./collections/freeSoundCollection"),
 	    SoundCloudCollection = require("./collections/soundCloudCollection"),
 	    SoundsView = require("./views/soundsView"),
-	    VolumeView = require("application/volumeView");
+	    VolumeView = require("application/volumeView"),
+	    Alertify = require("alertify");
 
 	var soundsViewColumns = 7,
 	    soundsViewRows = 4,
@@ -62,7 +63,7 @@ define(function (require) {
 			if (this.enabled) {
 				this.page = 1;
 
-				this._fetch();
+				this._fetch(this.fetch);
 			}
 		},
 
@@ -70,7 +71,7 @@ define(function (require) {
 			if (this.nextEnabled) {
 				this.page++;
 
-				this._fetch();
+				this._fetch(this.fetchNext);
 			}
 		},
 
@@ -78,11 +79,11 @@ define(function (require) {
 			if (this.previousEnabled) {
 				this.page--;
 
-				this._fetch();
+				this._fetch(this.fetchPrevious);
 			}
 		},
 
-		_fetch: function () {
+		_fetch: function (retryFunction) {
 			var self = this;
 
 			this.refreshButton.data("options").setIcon(this.refreshIconClass);
@@ -107,7 +108,7 @@ define(function (require) {
 					}, 100);
 				},
 				error: function (collection, response) {
-					var errorContext = {
+					var error, errorContext = {
 						name: self.collection.name
 					};
 
@@ -118,9 +119,15 @@ define(function (require) {
 
 					self.refreshButton.data("options").setIcon(self.refreshErrorIconClass);
 
-					self.refreshButton.prop("title", self.soundBrowserErrorTemplate(errorContext));
+					error = self.soundBrowserErrorTemplate(errorContext);
+
+					self.refreshButton.prop("title", error);
 
 					self.setEnabled(true);
+
+					Alertify.dialog.confirm(error, function () {
+						retryFunction.call(self, retryFunction);
+					});
 				}
 			});
 		},

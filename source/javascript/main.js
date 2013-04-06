@@ -1,5 +1,6 @@
 require.config({
 	paths: {
+		alertify: "libraries/alertify/alertify-0.4.0rc1",
 		jquery: "libraries/jquery/jquery-1.9.0",
 		jqueryPreloadCssImages: "libraries/jquery/preloadCssImages.jQuery_v5",
 		underscore: "libraries/underscore/underscore-1.4.1",
@@ -9,6 +10,10 @@ require.config({
 	},
 
 	shim: {
+		alertify: {
+			exports: "Alertify"
+		},
+
 		underscore: {
 			exports: "_"
 		},

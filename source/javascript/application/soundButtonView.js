@@ -3,7 +3,8 @@ define(function (require) {
 	    BaseView = require("baseView"),
 	    buttonHelpers = require("utilities/buttonHelpers"),
 	    soundError = require("text!templates/soundBrowser/soundError.txt"),
-	    generateHSM = require("utilities/generateHSM");
+	    generateHSM = require("utilities/generateHSM"),
+	    Alertify = require("alertify");
 
 	var SoundButtonView = BaseView.extend({
 		soundErrorTemplate: _.template(soundError.trim()),
@@ -25,6 +26,10 @@ define(function (require) {
 				showingError: {
 					enter: function () {
 						this.view.setIconAndLabel("error", this.view.lastErrorDescription);
+
+						Alertify.dialog.confirm(this.view.lastErrorDescription, function () {
+							this.play();
+						}.bind(this));
 					}
 				}
 			},

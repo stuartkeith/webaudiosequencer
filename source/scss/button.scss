@@ -2,7 +2,7 @@
 	font-size: 0;
 }
 
-.button {
+.button, .alertify-button {
 	background: $action-foreground;
 	border: $button-border-width solid $action-background;
 	box-sizing: border-box;
@@ -23,7 +23,7 @@
 }
 */
 
-.button-active {
+.button-active, .alertify-button-ok {
 	background: $action-foreground-active;
 	border-color: $action-background-active;
 	color: $action-text;

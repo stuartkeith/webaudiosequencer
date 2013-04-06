@@ -1,0 +1,47 @@
+@import "mixins/_design.scss";
+@import "mixins/_prefix.scss";
+
+// dialog default configs
+$dialogWidth : 550px;
+$btnOK       : #FE1A00;
+$btnCancel   : #5CB811;
+
+.alertify-dialog {
+    width: $dialogWidth;
+    margin-left: -$dialogWidth * .5;
+    background: #FFF;
+    border: 10px solid #333;
+    border: 10px solid rgba(0,0,0,.7);
+    border-radius: 8px;
+    box-shadow: 0 3px 3px rgba(0,0,0,.3);
+    @include prefix(background-clip, padding, true, true, false, false, false);
+    background-clip: padding-box;
+}
+    .alertify-dialog-inner {
+        padding: 25px;
+    }
+        .alertify-inner {
+            text-align: center;
+        }
+            .alertify-text {
+                border: 1px solid #CCC;
+                padding: 10px;
+                border-radius: 4px;
+            }
+            .alertify-message {
+                padding-bottom: 2em;
+            }
+            .alertify-button {
+                line-height: 2em;
+                min-width: 8em;
+                padding: 0 2em;
+            }
+
+@media only screen and (max-width: 680px) {
+    .alertify-dialog {
+        width: 90%;
+        left: 5%;
+        margin: 0;
+        @include prefix(box-sizing, border-box);
+    }
+}

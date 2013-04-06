@@ -35,6 +35,10 @@
 	-webkit-animation-play-state: running;
 }
 
+.refresh .sprite-buttons-error-large {
+	-webkit-animation: none;
+}
+
 .collection-select {
 	display: inline-block;
 	height: 32px - $button-border * 2;
