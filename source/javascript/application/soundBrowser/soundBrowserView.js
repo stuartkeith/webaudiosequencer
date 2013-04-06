@@ -116,7 +116,7 @@ define(function (require) {
 					else
 						errorContext.error = "Error " + response.status + " - " + response.statusText;
 
-					this.refreshButton.data("options").setIcon(self.refreshErrorIconClass);
+					self.refreshButton.data("options").setIcon(self.refreshErrorIconClass);
 
 					self.refreshButton.prop("title", self.soundBrowserErrorTemplate(errorContext));
 
