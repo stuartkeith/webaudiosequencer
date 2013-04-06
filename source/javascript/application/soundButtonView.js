@@ -9,6 +9,13 @@ define(function (require) {
 	var SoundButtonView = BaseView.extend({
 		soundErrorTemplate: _.template(soundError.trim()),
 
+		withOptions: function (fn, context) {
+			var options = this.$el.data("options");
+
+			if (options)
+				fn.call(this, options);
+		},
+
 		HSM: generateHSM(["play", "load", "stop", "error"], {
 			ready: {
 				play: function () {
@@ -36,7 +43,9 @@ define(function (require) {
 
 			busy: {
 				enter: function () {
-					this.view.$el.data("options").disable(true);
+					this.view.withOptions(function (options) {
+						options.disable(true);
+					});
 
 					this.view.$el.addClass("sound-button-view-loading");
 				},
@@ -44,7 +53,9 @@ define(function (require) {
 				exit: function () {
 					this.view.$el.removeClass("sound-button-view-loading");
 
-					this.view.$el.data("options").disable(false);
+					this.view.withOptions(function (options) {
+						options.disable(false);
+					});
 				},
 
 				loading: {
@@ -117,7 +128,9 @@ define(function (require) {
 		},
 
 		setIconAndLabel: function (newIcon, label) {
-			this.$el.data("options").setIcon("sprite-buttons-" + newIcon);
+			this.withOptions(function (options) {
+				options.setIcon("sprite-buttons-" + newIcon);
+			});
 
 			this.$el.prop("title", label || this.originalLabel);
 		},
