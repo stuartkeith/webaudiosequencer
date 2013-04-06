@@ -61,29 +61,29 @@ define(function (require) {
 
 		fetch: function () {
 			if (this.enabled) {
-				this.page = 1;
-
-				this._fetch(this.fetch);
+				this._fetch(this.fetch, function () {
+					this.page = 1;
+				});
 			}
 		},
 
 		fetchNext: function () {
 			if (this.nextEnabled) {
-				this.page++;
-
-				this._fetch(this.fetchNext);
+				this._fetch(this.fetchNext, function () {
+					this.page++;
+				});
 			}
 		},
 
 		fetchPrevious: function () {
 			if (this.previousEnabled) {
-				this.page--;
-
-				this._fetch(this.fetchPrevious);
+				this._fetch(this.fetchPrevious, function () {
+					this.page--;
+				});
 			}
 		},
 
-		_fetch: function (retryFunction) {
+		_fetch: function (retryFunction, onSuccess) {
 			var self = this;
 
 			this.refreshButton.data("options").setIcon(this.refreshIconClass);
@@ -99,6 +99,8 @@ define(function (require) {
 			this.collection.fetch({
 				data: data,
 				success: function (collection, response) {
+					onSuccess.call(self);
+
 					self.setEnabled(true);
 
 					// rendering can be time-intensive.
