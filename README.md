@@ -12,7 +12,7 @@ etc.
 
 It uses the following browser features:
 
-- Web Audio API (Chrome and Safari 6 only)
+- Web Audio API
 - HTML5 drag and drop API
 - Canvas
 - CSS3 animations
