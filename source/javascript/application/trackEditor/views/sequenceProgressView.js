@@ -50,7 +50,7 @@ define(function (require) {
 				for (var i = existingLength; i < length; i++) {
 					progressElement = $("<button>" + this.getButtonLabel(i) + "</button>");
 					progressElement.data("progressIndex", i);
-					progressElement.width(settings.gridWidth);
+					progressElement.outerWidth(settings.gridWidth);
 
 					this.$el.append(progressElement);
 
