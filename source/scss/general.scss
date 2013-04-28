@@ -1,9 +1,9 @@
 * {
-	-webkit-user-select: none;
+	@include vendor-prefix(user-select, none);
 }
 
 input {
-	-webkit-user-select: auto;
+	@include vendor-prefix(user-select, auto);
 	color: #3F3F3F;
 	margin: 0;
 }
@@ -37,25 +37,27 @@ strong {
 }
 
 input[type=range] {
-	-webkit-appearance: none;
+	@include vendor-prefix(appearance, none);
 	background-color: $range-background;
-	box-sizing: border-box;
+	@include vendor-prefix(box-sizing, border-box);
 	cursor: pointer;
 
-	&::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		background-color: $action-foreground;
-		border: $button-border-width solid $action-background;
-		border-radius: $button-border-radius;
+	@each $prefix in '', '-webkit-', '-moz-' {
+		&::#{$prefix}slider-thumb {
+			#{$prefix}appearance: none;
+			background-color: $action-foreground;
+			border: $button-border-width solid $action-background;
+			border-radius: $button-border-radius;
 
-		&:hover {
-			background-color: $action-foreground-hover;
-			border-color: $action-background-hover;
-		}
+			&:hover {
+				background-color: $action-foreground-hover;
+				border-color: $action-background-hover;
+			}
 
-		&:active {
-			background-color: $action-foreground-active;
-			border-color: $action-background-active;
+			&:active {
+				background-color: $action-foreground-active;
+				border-color: $action-background-active;
+			}
 		}
 	}
 }

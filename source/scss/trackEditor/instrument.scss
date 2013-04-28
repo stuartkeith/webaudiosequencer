@@ -28,7 +28,7 @@
 
 .instrument-state-loading .instrument-title {
 	font-style: italic;
-	-webkit-animation: pulse 0.1s infinite linear alternate;
+	@include vendor-prefix(animation, pulse 0.1s infinite linear alternate);
 }
 
 .instrument-state-error .instrument-title {

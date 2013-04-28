@@ -46,6 +46,5 @@ $title-offset: $button-offset + 16px + $button-offset;
 
 .sound-button-view-loading {
 	cursor: busy;
-	-webkit-animation: pulse 0.1s infinite linear alternate;
-	animation: pulse 0.1s infinite linear alternate;
+	@include vendor-prefix(animation, pulse 0.1s infinite linear alternate);
 }

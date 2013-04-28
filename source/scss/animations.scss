@@ -1,11 +1,27 @@
-@-webkit-keyframes pulse {
+@mixin pulse {
 	0% { opacity: 0.2; }
 
 	100% { opacity: 0.8; }
 }
 
-@-webkit-keyframes rotate-360 {
-	0% { -webkit-transform: rotate(0deg); }
+@keyframes pulse {
+	@include pulse;
+}
 
-	100% { -webkit-transform: rotate(360deg); }
+@-webkit-keyframes pulse {
+	@include pulse;
+}
+
+@mixin rotate-360($prefix) {
+	0% { #{$prefix}transform: rotate(0deg); }
+
+	100% { #{$prefix}transform: rotate(360deg); }
+}
+
+@keyframes rotate-360 {
+	@include rotate-360('');
+}
+
+@-webkit-keyframes rotate-360 {
+	@include rotate-360('-webkit-');
 }

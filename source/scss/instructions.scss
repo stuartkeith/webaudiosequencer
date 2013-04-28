@@ -6,7 +6,7 @@
 	text-align: left;
 
 	& * {
-		-webkit-user-select: text;
+		@include vendor-prefix(user-select, text);
 	}
 
 	& p {

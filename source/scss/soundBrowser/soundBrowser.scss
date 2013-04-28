@@ -30,16 +30,16 @@
 }
 
 .refresh .button-icon {
-	-webkit-animation: rotate-360 1.2s infinite linear;
-	-webkit-animation-play-state: paused;
+	@include vendor-prefix(animation, rotate-360 1.2s infinite linear);
+	@include vendor-prefix(animation-play-state, paused);
 }
 
 .refresh:disabled .button-icon {
-	-webkit-animation-play-state: running;
+	@include vendor-prefix(animation-play-state, running);
 }
 
 .refresh .sprite-buttons-error-large {
-	-webkit-animation: none;
+	@include vendor-prefix(animation, none);
 }
 
 .collection-select {
@@ -55,7 +55,7 @@
 }
 
 .search-input {
-	box-sizing: border-box;
+	@include vendor-prefix(box-sizing, border-box);
 	margin: 0 4px;
 	height: 32px;
 	padding-left: 0.5em;
