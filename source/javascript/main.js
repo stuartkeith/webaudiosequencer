@@ -36,12 +36,12 @@ require([
 	    fadeInTime = 1200,
 	    fadeInContent;
 
-	if (!window.webkitAudioContext) {
-		fadeInContent = $(unsupportedTemplateString);
-	} else {
+	if (window.AudioContext || window.webkitAudioContext) {
 		fadeInContent = $("<p>Loading...</p>");
 
 		require(["application"]);
+	} else {
+		fadeInContent = $(unsupportedTemplateString);
 	}
 
 	description.append(fadeInContent);

@@ -32,7 +32,7 @@ define(function (require) {
 		});
 	});
 
-	var context = new webkitAudioContext();
+	var context = window.AudioContext ? new AudioContext() : new webkitAudioContext();
 
 	commandContext.scheduler = new Scheduler(context);
 	commandContext.selectedTrackModel = null;
