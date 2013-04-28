@@ -2,6 +2,7 @@ define(function (require) {
 	var _ = require("underscore"),
 	    $ = require("jquery"),
 	    Backbone = require("backbone"),
+	    settings = require("settings"),
 	    jqueryPreloadCssImages = require("jqueryPreloadCssImages"),
 	    SoundOutput = require("soundOutput/soundOutput"),
 	    Scheduler = require("sequencer/scheduler"),
@@ -34,7 +35,7 @@ define(function (require) {
 
 	var context = window.AudioContext ? new AudioContext() : new webkitAudioContext();
 
-	commandContext.scheduler = new Scheduler(context);
+	commandContext.scheduler = new Scheduler(context, settings.bpmDefault);
 	commandContext.selectedTrackModel = null;
 	commandContext.sequenceLength = 16;
 	commandContext.sequencePosition = 0;

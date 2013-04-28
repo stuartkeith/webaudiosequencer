@@ -1,12 +1,11 @@
 define(function (require) {
 	var _ = require("underscore"),
+	    settings = require("settings"),
 	    BaseView = require("baseView"),
 	    buttonHelpers = require("utilities/buttonHelpers"),
 	    playbackControlsTemplateString = require("text!templates/playbackControls/playbackControls.html");
 
 	var PlaybackControlsView = BaseView.extend({
-		bpmMinimum: 30,
-		bpmMaximum: 300,
 		playbackControlsTemplate: _.template(playbackControlsTemplateString),
 
 		events: {
@@ -38,12 +37,12 @@ define(function (require) {
 			buttonHelpers.button(this.playStop, "dummy");
 
 			this.bpmNumber = this.$(".bpm-number:first")[0];
-			this.bpmNumber.min = this.bpmMinimum;
-			this.bpmNumber.max = this.bpmMaximum;
+			this.bpmNumber.min = settings.bpmMinimum;
+			this.bpmNumber.max = settings.bpmMaximum;
 
 			this.bpmSlider = this.$(".bpm-slider:first")[0];
-			this.bpmSlider.min = this.bpmMinimum;
-			this.bpmSlider.max = this.bpmMaximum;
+			this.bpmSlider.min = settings.bpmMinimum;
+			this.bpmSlider.max = settings.bpmMaximum;
 
 			this.updatePlayStopInput();
 			this.updateBPMInputs();

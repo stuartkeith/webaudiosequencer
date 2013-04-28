@@ -2,11 +2,11 @@ define(function(require) {
 	var _ = require("underscore"),
 	    Backbone = require("backbone");
 
-	var Scheduler = function (context) {
+	var Scheduler = function (context, bpm) {
 		this._context = context;
 
 		this.isPlaying = false;
-		this.setBPM(120);
+		this.setBPM(bpm);
 
 		// ensure setTimeout callback has correct context
 		this._updateBound = _.bind(this.update, this);
