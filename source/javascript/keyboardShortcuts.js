@@ -1,4 +1,5 @@
 define(function (require) {
+	var $ = require("jquery");
 	var documentKeyboardHandler = require("utilities/documentKeyboardHandler");
 
 	var keyboardShortcuts = function (eventBus) {
@@ -24,6 +25,9 @@ define(function (require) {
 
 			// number keys 1 to 9
 			if (isDown && event.which >= 49 && event.which <= 57) {
+				if ($(event.target).is("input"))
+					return;
+
 				if (!isRepeated)
 					eventBus.trigger("selectTrack", {
 						trackIndex: event.which - 49
