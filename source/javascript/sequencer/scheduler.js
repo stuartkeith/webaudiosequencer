@@ -17,12 +17,10 @@ define(function(require) {
 		updateBufferSeconds: 0.2, // how far to look ahead for updates
 
 		setBPM: function (value) {
-			if (this.bpm !== value) {
-				this.bpm = value;
-				this._bpmSeconds = 60.0 / this.bpm;
+			this.bpm = value;
+			this._bpmSeconds = 60.0 / this.bpm;
 
-				this.trigger("bpm", value);
-			}
+			this.trigger("bpm", value);
 		},
 
 		play: function () {
