@@ -10,11 +10,14 @@
 	vertical-align: middle;
 }
 
-.sounds table {
-	border-collapse: separate;
+.sounds {
 	margin: 0 auto;
 	max-width: 1280px;
 	padding: 0 32px;
+}
+
+.sounds table {
+	border-collapse: separate;
 	table-layout: fixed;
 	width: 100%;
 }
