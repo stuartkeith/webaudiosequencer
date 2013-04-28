@@ -142,44 +142,24 @@ define(function (require) {
 
 		events: {
 			"mousedown": function (event) {
-				this.mouseDown(event);
-			},
-
-			"mouseup": function (event) {
-				this.mouseUp(event);
-			},
-
-			"mouseenter": function (event) {
-				this.updateCurrentCell(event);
-
-				this.mouseDown(event);
-			},
-
-			"mouseleave": function (event) {
-				this.mouseUp(event);
-
-				this.currentCell.x = this.currentCell.y = null;
-			},
-
-			"mousemove": function (event) {
-				this.updateCurrentCell(event);
-			}
-		},
-
-		mouseDown: function (event) {
-			if (event.which === 1) {
 				this.hsm.mousedown();
 
 				this.hsm.cellmove();
-			}
-		},
+			},
 
-		mouseUp: function (event) {
-			if (event.which === 1) {
+			"mouseup": function (event) {
 				this.hsm.mouseup();
 
 				this.hsm.cellmove();
-			}
+			},
+
+			"mouseenter": "updateCurrentCell",
+
+			"mouseleave": function (event) {
+				this.currentCell.x = this.currentCell.y = null;
+			},
+
+			"mousemove": "updateCurrentCell"
 		},
 
 		updateCurrentCell: function (event) {
