@@ -13,8 +13,12 @@ $title-offset: $button-offset + 16px + $button-offset;
 
 .sound {
 	cursor: move;
-	position: relative; // needed for drag and drop
 	text-align: left;
+}
+
+// to avoid position issues with Firefox (table cell related)
+.sound-container {
+	position: relative;
 }
 
 .sound-button, .add {
@@ -33,17 +37,15 @@ $title-offset: $button-offset + 16px + $button-offset;
 }
 
 .title {
-	bottom: 0;
 	left: $title-offset;
-	line-height: $sound-height - $sound-border;
 	overflow: hidden;
 	position: absolute;
 	right: $title-offset;
-	top: 0;
 	white-space: nowrap;
 }
 
 .sound-button-view-loading {
 	cursor: busy;
 	-webkit-animation: pulse 0.1s infinite linear alternate;
+	animation: pulse 0.1s infinite linear alternate;
 }
