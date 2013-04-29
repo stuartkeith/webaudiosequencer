@@ -27,6 +27,7 @@ This application uses the following libraries:
 - [glue (my fork)](https://github.com/stuartkeith/glue) - CSS spritesheet
   generation
 - [Sass](http://sass-lang.com/) - CSS pre-processor
+- [Alertify](https://github.com/fabien-d/alertify.js) - alert pop-ups
 
 
 Building/Compiling/Deployment
