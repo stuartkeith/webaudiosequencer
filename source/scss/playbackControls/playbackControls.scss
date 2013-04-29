@@ -17,6 +17,12 @@
 	vertical-align: middle;
 }
 
+.bpm-number {
+	@include vendor-prefix(box-sizing, border-box);
+	height: 24px;
+	width: 4em;
+}
+
 .bpm-slider, .bpm-number {
 	margin-left: 8px;
 	display: inline-block;
