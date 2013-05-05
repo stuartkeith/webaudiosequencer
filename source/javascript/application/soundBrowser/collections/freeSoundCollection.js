@@ -11,6 +11,7 @@ define(function (require) {
 		apiKey: "f9c1dfcdd51e4d90940f7719c964a43a",
 		urlSubIndex: "http://www.freesound.org/data/previews/".length,
 		fixedSoundURLPath: "freesound/",
+		soundMimeType: "audio/ogg",
 
 		initialize: function (options) {
 			this.defaultFetchOptions = options.defaultFetchOptions;

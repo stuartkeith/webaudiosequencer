@@ -11,6 +11,7 @@ define(function (require) {
 		clientID: "92a7894544c99bb2ba74e6ded0f3945a",
 		urlSubIndex: "http://api.soundcloud.com/tracks/".length,
 		fixedSoundURLPath: "soundcloud/tracks/",
+		soundMimeType: "audio/mp3",
 
 		initialize: function (options) {
 			this.defaultFetchOptions = options.defaultFetchOptions;
