@@ -28,7 +28,7 @@ define(function (require) {
 				convertedResponse.push({
 					duration: sound.duration,
 					id: sound.id,
-					sound_url: this.fixSoundURL(sound['preview-hq-mp3']),
+					sound_url: this.fixSoundURL(sound['preview-hq-ogg']),
 					source_name: this.name,
 					source_url: sound.url,
 					tags: sound.tags,
