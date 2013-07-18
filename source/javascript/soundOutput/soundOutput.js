@@ -12,7 +12,7 @@ define(function(require) {
 	var SoundOutput = function (context) {
 		this._context = context;
 
-		this._gainNode = this._context.createGainNode();
+		this._gainNode = this._context.createGain();
 		this._gainNode.connect(this._context.destination);
 
 		this._deferredURLs = {};
@@ -41,7 +41,7 @@ define(function(require) {
 			else
 				playbackRate = 1;
 
-			var gainNode = this._context.createGainNode();
+			var gainNode = this._context.createGain();
 			gainNode.gain.value = volume;
 			gainNode.connect(this._gainNode);
 
@@ -49,7 +49,7 @@ define(function(require) {
 			bufferSource.buffer = buffer;
 			bufferSource.connect(gainNode);
 			bufferSource.playbackRate.value = playbackRate;
-			bufferSource.noteOn(delay);
+			bufferSource.start(delay);
 
 			if (callback) {
 				var relativeDelay = delay > 0 ? delay - this._context.currentTime : 0;
