@@ -1,5 +1,17 @@
 .buttonset {
 	font-size: 0;
+
+	& .button-normal {
+		font-weight: normal;
+	}
+
+	& .button-active {
+		font-weight: bold;
+	}
+
+	& .button-normal:nth-child(odd) {
+		background-color: $action-foreground-odd;
+	}
 }
 
 .button, .alertify-button {
@@ -11,6 +23,7 @@
 	display: inline-block;
 	font-size: 12px;
 	font-weight: bold;
+	outline: none;
 	padding: 0;
 	position: relative;
 	text-decoration: none !important;
@@ -22,6 +35,11 @@
 	border-color: $action-background-hover;
 }
 */
+
+.button-active {
+	// h-shadow v-shadow blur spread color |inset|initial|inherit;
+	box-shadow: 0 8px 0 -4px rgba(0,0,0,0.2) inset;
+}
 
 .button-active, .alertify-button-ok {
 	background: $action-foreground-active;

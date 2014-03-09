@@ -12,7 +12,6 @@ $btnCancel   : #5CB811;
     background: #FFF;
     border: 10px solid #333;
     border: 10px solid rgba(0,0,0,.7);
-    border-radius: 8px;
     box-shadow: 0 3px 3px rgba(0,0,0,.3);
     @include prefix(background-clip, padding, true, true, false, false, false);
     background-clip: padding-box;

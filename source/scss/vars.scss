@@ -1,13 +1,15 @@
-$button-border: 1px;
-$button-border-radius: 4px;
-$button-border-width: 1px;
+$button-border: 0;
+$button-border-radius: 0;
+$button-border-width: 0;
 
 $background: #FFFFFF;
 
 $background-darken: 25%;
+$action-foreground-odd-darken: 5%;
 
 // action - buttons, etc.
 $action-foreground: #EB7583;
+$action-foreground-odd: darken($action-foreground, $action-foreground-odd-darken);
 $action-background: darken($action-foreground, $background-darken);
 $action-text: #FFFFFF;
 $action-foreground-hover: lighten($action-foreground, 5%);
