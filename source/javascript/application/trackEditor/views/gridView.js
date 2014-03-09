@@ -173,7 +173,7 @@ define(function (require) {
 		},
 
 		addNoteAtCurrentCell: function (override) {
-			this.model.addNoteAt(_.extend(this.currentCell, override));
+			this.eventBus.trigger("addNote", _.extend(this.currentCell, override));
 		},
 
 		removeNoteAtCurrentCell: function () {

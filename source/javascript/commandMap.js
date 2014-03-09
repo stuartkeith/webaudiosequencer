@@ -1,5 +1,6 @@
 define(function (require) {
 	var addInstrument = require("commands/addInstrument"),
+	    addNote = require("commands/addNote"),
 	    addTrack = require("commands/addTrack"),
 	    createTrack = require("commands/createTrack"),
 	    initialize = require("commands/initialize"),
@@ -35,6 +36,7 @@ define(function (require) {
 	};
 
 	add('addInstrument', null, addInstrument);
+	add('addNote', null, addNote);
 	add('addTrack', [areTracksRemaining], addTrack);
 	add('createTrack', [areTracksRemaining], createTrack);
 	add('initialize', null, initialize);
