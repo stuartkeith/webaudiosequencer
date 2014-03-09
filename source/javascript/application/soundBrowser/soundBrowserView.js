@@ -4,8 +4,8 @@ define(function (require) {
 	    buttonHelpers = require("utilities/buttonHelpers"),
 	    SoundBrowserTemplateString = require("text!templates/soundBrowser/soundBrowser.html"),
 	    soundBrowserError = require("text!templates/soundBrowser/soundBrowserError.txt"),
-	    FreeSoundCollection = require("./collections/freeSoundCollection"),
-	    SoundCloudCollection = require("./collections/soundCloudCollection"),
+	    FreeSoundCollection = require("collections/freeSoundCollection"),
+	    SoundCloudCollection = require("collections/soundCloudCollection"),
 	    SoundsView = require("./views/soundsView"),
 	    VolumeView = require("application/volumeView"),
 	    Alertify = require("alertify");
