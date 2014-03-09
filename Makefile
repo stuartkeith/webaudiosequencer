@@ -5,7 +5,7 @@ build: source/css/main.css
 
 source/css/main.css: source/css/images/buttons.png $(SCSS_FILES)
 	@echo "Generating Sass files..."
-	sass source/scss/main.scss source/css/main.css --style compressed --load-path source/scss/alertify
+	sass source/scss/main.scss source/css/main.css --style compressed --load-path source/scss/alertify --sourcemap
 
 source/css/images/buttons.png: source/sprites/buttons/*.png glue-template.txt
 	@echo "Generating spritesheets..."

@@ -4,5 +4,6 @@
 google-analytics.txt
 optimized/
 source/css/main.css
+source/css/main.css.map
 source/css/images/buttons.png
 source/scss/buttons.scss
