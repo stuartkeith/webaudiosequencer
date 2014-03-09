@@ -11,32 +11,8 @@ define(function (require) {
 		trackEditorTemplate: _.template(TrackEditorTemplateString),
 		fadeTime: 170,
 
-		initialize: function () {
-			this.hintEnabled = true;
-		},
-
 		eventBusEvents: {
-			"trackSelected": "updateTrackModel",
-
-			"setGridViewState": function (args) {
-				if (this.hintEnabled && args.state === "play") {
-					this.gridHint.fadeOut();
-
-					this.hintEnabled = false;
-				}
-			}
-		},
-
-		events: {
-			"mouseenter .grid-container": function () {
-				if (this.hintEnabled)
-					this.gridHint.fadeTo(this.fadeTime, 0.5);
-			},
-
-			"mouseleave .grid-container": function () {
-				if (this.hintEnabled)
-					this.gridHint.fadeTo(this.fadeTime, 1);
-			}
+			"trackSelected": "updateTrackModel"
 		},
 
 		render: function () {
@@ -49,8 +25,6 @@ define(function (require) {
 			this.instrumentPanelView = this.addChildView(InstrumentPanelView, {
 				el: this.$(".instrument-panel:first")
 			});
-
-			this.gridHint = this.$(".grid-hint:first");
 
 			this.gridView = this.addChildView(GridView, {
 				el: this.$(".grid-container:first")
