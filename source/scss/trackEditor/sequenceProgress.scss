@@ -1,6 +1,5 @@
 .sequence-progress {
-	height: 24px;
-	margin-left: $instrument-view-width;
+	height: $sequence-progress-height;
 
 	& button {
 		height: 100%;

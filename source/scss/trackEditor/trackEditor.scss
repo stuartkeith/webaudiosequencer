@@ -1,16 +1,21 @@
-$instrument-view-width: 256px;
-
 .track-editor {
 	background-color: $chrome-foreground;
-	display: inline-block;
+	display: flex;
+	flex-direction: row;
 	padding: 16px 0;
+	position: relative;
 }
 
 .new-instrument-area {
 	font-size: 10px;
 	text-align: center;
-}
-
-.grid-container {
+	flex: 1;
 	position: relative;
+	overflow: hidden;
+
+	.instructions {
+		position: absolute;
+		width: 100%;
+		top: 50%;
+	}
 }

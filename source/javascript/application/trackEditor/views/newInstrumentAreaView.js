@@ -155,12 +155,6 @@ define(function (require) {
 			} else {
 				this.$el.show();
 
-				var heightDifference = this.$el.outerHeight(true) - this.$el.height();
-
-				var height = (this.model.instrumentRangeRemaining * settings.instrumentHeight) - heightDifference;
-
-				this.$el.height(height).css('line-height', height + "px");
-
 				this.hsm.changeState(this.hsm.rootState.idle);
 			}
 		}

@@ -1,4 +1,6 @@
 .instrument-panel {
-	float: left;
-	width: $instrument-view-width;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding-top: $sequence-progress-height;
 }
