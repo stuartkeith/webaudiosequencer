@@ -5,11 +5,11 @@ build: source/css/main.css
 
 source/css/main.css: source/css/images/buttons.png $(SCSS_FILES)
 	@echo "Generating Sass files..."
-	sass source/scss/main.scss source/css/main.css --style compressed --load-path source/scss/alertify --sourcemap
+	sass source/scss/main.scss source/css/main.css --style compressed --load-path source/scss/alertify
 
-source/css/images/buttons.png: source/sprites/buttons/*.png glue-template.txt
+source/css/images/buttons.png: source/sprites/buttons/*.png tools/glueTemplate.jinja
 	@echo "Generating spritesheets..."
-	glue source/sprites/buttons --img=source/css/images --css=source/scss --extension=scss -u images/ --global-template='' --each-template='$(shell cat glue-template.txt)'
+	glue source/sprites/buttons --img=source/css/images -u images/ --scss=source/scss --scss-template=tools/glueTemplate.jinja
 
 optimize: build
 	@echo "Optimizing..."

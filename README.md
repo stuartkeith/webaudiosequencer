@@ -24,7 +24,7 @@ This application uses the following libraries:
 - [jQuery](http://jquery.com/) - DOM manipulation and deferreds/promises
 - [Underscore.js](http://underscorejs.org/) - various things!
 - [Backbone.js](http://backbonejs.org/) - application structure
-- [glue (my fork)](https://github.com/stuartkeith/glue) - CSS spritesheet
+- [glue](https://github.com/jorgebastida/glue) - CSS spritesheet
   generation
 - [Sass](http://sass-lang.com/) - CSS pre-processor
 - [Alertify](https://github.com/fabien-d/alertify.js) - alert pop-ups
