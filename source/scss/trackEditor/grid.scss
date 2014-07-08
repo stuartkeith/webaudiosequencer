@@ -1,6 +1,7 @@
 .grid-container {
 	cursor: pointer;
 	display: flex;
+	display: -webkit-flex;
 }
 
 .play-state {

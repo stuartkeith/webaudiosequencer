@@ -1,7 +1,8 @@
 .track-editor {
 	background-color: $chrome-foreground;
 	display: flex;
-	flex-direction: row;
+	display: -webkit-flex;
+	@include vendor-prefix(flex-direction, row);
 	padding: 16px 0;
 	position: relative;
 }
@@ -9,7 +10,7 @@
 .new-instrument-area {
 	font-size: 10px;
 	text-align: center;
-	flex: 1;
+	@include vendor-prefix(flex, 1);
 	position: relative;
 	overflow: hidden;
 
