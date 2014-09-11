@@ -61,9 +61,6 @@ handled:
 - {index.html path}/soundcloud/tracks/{id} to
     https://api.soundcloud.com/tracks/{id}/stream
 
-The SoundCloud URL returns a 302 redirect to the actual MP3, so if the proxy
-doesn't handle that itself then it will be necessary to handle that too.
-
 Here is an example Nginx configuration:
 
     location /freesound/ {
@@ -74,14 +71,7 @@ Here is an example Nginx configuration:
     location /soundcloud/tracks/ {
         rewrite \/soundcloud\/tracks\/(\d*) /tracks/$1/stream break;
         proxy_pass https://api.soundcloud.com;
-        proxy_redirect ~^https://(.*)\.soundcloud\.com\/(.*)$ /soundcloud/media/$1/$2;
 
         # I use the following for WebFaction:
         # set_proxy_header X-Forwarded-Host $proxy_host;
-    }
-
-    location /soundcloud/media/ {
-        resolver 8.8.8.8;
-        rewrite \/soundcloud\/media\/(.*)\/(.*) /$2 break;
-        proxy_pass https://$1.soundcloud.com;
     }
