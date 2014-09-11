@@ -48,30 +48,3 @@ set by [interactivemania](http://www.interactivemania.com/).
 The tiled background is the 'Subtle Dots' pattern by
 [Designova](http://www.designova.net/) (downloaded via
 [Subtle Patterns](http://subtlepatterns.com/subtle-dots/)).
-
-
-Required Server Configuration
------------------------------
-
-To get around cross domain AJAX restrictions, the following URLs should be
-handled:
-
-- {index.html path}/freesound/{id} to
-    http://www.freesound.org/data/previews/{id}
-- {index.html path}/soundcloud/tracks/{id} to
-    https://api.soundcloud.com/tracks/{id}/stream
-
-Here is an example Nginx configuration:
-
-    location /freesound/ {
-        rewrite \/freesound\/(.*) /data/previews/$1 break;
-        proxy_pass http://www.freesound.org;
-    }
-
-    location /soundcloud/tracks/ {
-        rewrite \/soundcloud\/tracks\/(\d*) /tracks/$1/stream break;
-        proxy_pass https://api.soundcloud.com;
-
-        # I use the following for WebFaction:
-        # set_proxy_header X-Forwarded-Host $proxy_host;
-    }

@@ -18,7 +18,7 @@ define(function (require) {
 		},
 
 		fixSoundURL: function (sound_url) {
-			return this.fixedSoundURLPath + sound_url.substr(this.urlSubIndex) + "?client_id=" + this.clientID;
+			return sound_url + "?client_id=" + this.clientID;
 		},
 
 		parse: function (response) {
