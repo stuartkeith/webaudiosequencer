@@ -7,9 +7,9 @@ define(function (require) {
 		description: "the world's largest community of sound creators.",
 		siteURL: "https://soundcloud.com/",
 		className: "soundcloud",
-		url: "http://api.soundcloud.com/tracks.json",
+		url: "https://api.soundcloud.com/tracks.json",
 		clientID: "92a7894544c99bb2ba74e6ded0f3945a",
-		urlSubIndex: "http://api.soundcloud.com/tracks/".length,
+		urlSubIndex: "https://api.soundcloud.com/tracks/".length,
 		fixedSoundURLPath: "soundcloud/tracks/",
 		soundMimeType: "audio/mp3",
 
