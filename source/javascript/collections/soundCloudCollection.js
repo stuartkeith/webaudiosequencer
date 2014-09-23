@@ -9,8 +9,6 @@ define(function (require) {
 		className: "soundcloud",
 		url: "https://api.soundcloud.com/tracks.json",
 		clientID: "92a7894544c99bb2ba74e6ded0f3945a",
-		urlSubIndex: "https://api.soundcloud.com/tracks/".length,
-		fixedSoundURLPath: "soundcloud/tracks/",
 		soundMimeType: "audio/mp3",
 
 		initialize: function (options) {
