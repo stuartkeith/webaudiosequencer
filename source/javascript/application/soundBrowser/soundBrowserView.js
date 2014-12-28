@@ -65,29 +65,29 @@ define(function (require) {
 
 		fetch: function () {
 			if (this.enabled) {
-				this._fetch(this.fetch, function () {
-					this.page = 1;
-				});
+				this.page = 1;
+
+				this._fetch();
 			}
 		},
 
 		fetchNext: function () {
 			if (this.nextEnabled) {
-				this._fetch(this.fetchNext, function () {
-					this.page++;
-				});
+				this.page += 1;
+
+				this._fetch();
 			}
 		},
 
 		fetchPrevious: function () {
 			if (this.previousEnabled) {
-				this._fetch(this.fetchPrevious, function () {
-					this.page--;
-				});
+				this.page -= 1;
+
+				this._fetch();
 			}
 		},
 
-		_fetch: function (retryFunction, onSuccess) {
+		_fetch: function () {
 			var self = this;
 
 			this.refreshButton.data("options").setIcon(this.refreshIconClass);
@@ -103,8 +103,6 @@ define(function (require) {
 			this.collection.fetch({
 				data: data,
 				success: function (collection, response) {
-					onSuccess.call(self);
-
 					self.setEnabled(true);
 
 					// rendering can be time-intensive.
@@ -132,7 +130,7 @@ define(function (require) {
 					self.setEnabled(true);
 
 					Alertify.dialog.confirm(error, function () {
-						retryFunction.call(self, retryFunction);
+						self._fetch();
 					});
 				}
 			});
