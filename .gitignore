@@ -1,9 +1,8 @@
-*.sublime*
 .DS_Store
-.sass-cache/
+node_modules/
 google-analytics.txt
-optimized/
+build/
 source/css/main.css
 source/css/main.css.map
-source/css/images/buttons.png
-source/scss/buttons.scss
+source/css/images/sprites.png
+source/scss/sprites.scss

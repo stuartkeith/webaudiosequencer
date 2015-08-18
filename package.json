@@ -1,0 +1,24 @@
+{
+  "name": "webaudiosequencer",
+  "version": "1.0.0",
+  "description": "Make music with sounds from around the web using HTML5 and the Web Audio API.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stuartkeith/webaudiosequencer.git"
+  },
+  "author": "Stuart Keith",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stuartkeith/webaudiosequencer/issues"
+  },
+  "homepage": "https://github.com/stuartkeith/webaudiosequencer#readme",
+  "devDependencies": {
+    "fs-extra": "^0.23.1",
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-webserver": "^0.9.1",
+    "gulp.spritesmith": "^4.0.0",
+    "requirejs": "^2.1.20"
+  }
+}

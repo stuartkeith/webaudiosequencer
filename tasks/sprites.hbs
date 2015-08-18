@@ -1,0 +1,35 @@
+{{#sprites}}
+
+@mixin sprite-{{name}} {
+	background-image: url({{ escaped_image }});
+	background-repeat: no-repeat;
+	background-position: {{ px.offset_x }} {{ px.offset_y }};
+}
+
+span.sprite-buttons-{{ name }} {
+    @include sprite-{{name}};
+}
+
+.sprite-buttons-{{ name }}::slider-thumb {
+    @include sprite-{{name}};
+}
+
+.sprite-buttons-{{ name }}::-webkit-slider-thumb {
+    @include sprite-{{name}};
+}
+
+.sprite-buttons-{{ name }}::-moz-slider-thumb {
+    @include sprite-{{name}};
+}
+
+span.sprite-buttons-{{ name }} {
+	height: {{ px.height }};
+	width: {{ px.width }};
+	margin-left: ({{ px.width }} / -2);
+	margin-top: ({{ px.height }} / -2);
+}
+
+$sprite-buttons-{{ name }}-width: {{ px.width }};
+$sprite-buttons-{{ name }}-height: {{ px.height }};
+
+{{/sprites}}

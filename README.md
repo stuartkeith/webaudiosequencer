@@ -24,8 +24,6 @@ This application uses the following libraries:
 - [jQuery](http://jquery.com/) - DOM manipulation and deferreds/promises
 - [Underscore.js](http://underscorejs.org/) - various things!
 - [Backbone.js](http://backbonejs.org/) - application structure
-- [glue](https://github.com/jorgebastida/glue) - CSS spritesheet
-  generation
 - [Sass](http://sass-lang.com/) - CSS pre-processor
 - [Alertify](https://github.com/fabien-d/alertify.js) - alert pop-ups
 
@@ -33,10 +31,13 @@ This application uses the following libraries:
 Building/Compiling/Deployment
 -----------------------------
 
-Run `make` to generate the spritesheets and Sass files.
+`npm install` to install the dependencies.
 
-`make optimize` will compile an optimized version (one JavaScript file) into
-the `optimized` directory.
+`gulp` to generate the sprites and CSS files, and start a webserver on
+port 8000.
+
+`gulp build` to compile an optimized version (one JavaScript file) into
+the `build` directory.
 
 
 Credits
