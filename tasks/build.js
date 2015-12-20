@@ -36,10 +36,11 @@ function copyIndex () {
 	var index = fs.readFileSync("./source/index.html", { encoding: "utf8" });
 	var googleAnalytics;
 
-	if (fs.exists("./google-analytics.txt"))
+	try {
 		googleAnalytics = fs.readFileSync("./google-analytics.txt", { encoding: "utf8" });
-	else
+	} catch (error) {
 		googleAnalytics = "";
+	}
 
 	index = index.replace("<!-- google analytics -->", googleAnalytics);
 
