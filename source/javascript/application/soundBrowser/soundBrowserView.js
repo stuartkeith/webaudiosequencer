@@ -32,14 +32,10 @@ define(function (require) {
 		initialize: function () {
 			this.enabled = true;
 
-			var audioElement = document.createElement("audio");
-
-			this.collections = _.filter([
+			this.collections = [
 				new FreeSoundCollection(this.collectionOptions),
 				new SoundCloudCollection(this.collectionOptions)
-			], function (collection) {
-				return audioElement.canPlayType(collection.soundMimeType);
-			});
+			];
 		},
 
 		events: {

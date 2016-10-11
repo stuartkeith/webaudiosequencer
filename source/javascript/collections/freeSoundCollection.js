@@ -9,7 +9,6 @@ define(function (require) {
 		className: "freesound",
 		url: "http://www.freesound.org/apiv2/search/text/",
 		token: "f5841aeab4b8615b708e334f5e7033aedecd1ace",
-		soundMimeType: "audio/ogg",
 
 		initialize: function (options) {
 			this.defaultFetchOptions = options.defaultFetchOptions;
@@ -24,7 +23,7 @@ define(function (require) {
 				return {
 					duration: sound.duration,
 					id: sound.id,
-					sound_url: this.fixSoundURL(sound.previews["preview-hq-ogg"]),
+					sound_url: this.fixSoundURL(sound.previews["preview-hq-mp3"]),
 					source_name: this.name,
 					source_url: sound.url,
 					tags: sound.tags,
