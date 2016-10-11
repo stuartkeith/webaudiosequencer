@@ -31,7 +31,7 @@ This application uses the following libraries:
 Building/Compiling/Deployment
 -----------------------------
 
-`npm install` to install the dependencies.
+`yarn install` or `npm install` to install the dependencies.
 
 `gulp` to generate the sprites and CSS files, and start a webserver on
 port 8000.
