@@ -11,7 +11,8 @@ define(function (require) {
 	    ApplicationView = require("application/applicationView"),
 	    keyboardShortcuts = require("./keyboardShortcuts"),
 	    documentListeners = require("./documentListeners"),
-	    functionChain = require("utilities/functionChain");
+	    functionChain = require("utilities/functionChain"),
+	    unlockWebAudioContext = require("utilities/unlockWebAudioContext");
 
 	$.preloadCssImages();
 
@@ -34,6 +35,8 @@ define(function (require) {
 	});
 
 	var context = window.AudioContext ? new AudioContext() : new webkitAudioContext();
+
+	unlockWebAudioContext(context);
 
 	commandContext.scheduler = new Scheduler(context, settings.bpmDefault);
 	commandContext.selectedTrackModel = null;
