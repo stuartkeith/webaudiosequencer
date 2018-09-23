@@ -18,7 +18,7 @@ define(function(require) {
 
 		setBPM: function (value) {
 			this.bpm = value;
-			this._bpmSeconds = 60.0 / this.bpm;
+			this._bpmSeconds = 60 / this.bpm / 4;
 
 			this.trigger("bpm", value);
 		},
