@@ -1,12 +1,12 @@
 define(function (require) {
-	_ = require("underscore"),
-	BaseView = require("baseView"),
-	buttonHelpers = require("utilities/buttonHelpers"),
-	settings = require("settings"),
-	dragDropMixIn = require("dragDropMixIn"),
-	VolumeView = require("application/volumeView"),
-	instrumentTemplateString = require("text!templates/trackEditor/instrument.html"),
-	generateHSM = require("utilities/generateHSM");
+	var _ = require("underscore"),
+	    BaseView = require("baseView"),
+	    buttonHelpers = require("utilities/buttonHelpers"),
+	    settings = require("settings"),
+	    dragDropMixIn = require("dragDropMixIn"),
+	    VolumeView = require("application/volumeView"),
+	    instrumentTemplateString = require("text!templates/trackEditor/instrument.html"),
+	    generateHSM = require("utilities/generateHSM");
 
 	var InstrumentView = BaseView.extend({
 		className: "instrument drag-target",

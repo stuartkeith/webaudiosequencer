@@ -1,5 +1,6 @@
 define(function (require) {
-	var BaseView = require("baseView"),
+	var _ = require("underscore"),
+	    BaseView = require("baseView"),
 	    PlaybackControlsView = require("./playbackControls/playbackControlsView"),
 	    TrackControlsView = require("./trackControls/trackControlsView"),
 	    TrackEditorView = require("./trackEditor/trackEditorView"),

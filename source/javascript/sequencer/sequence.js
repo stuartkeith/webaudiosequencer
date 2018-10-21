@@ -1,5 +1,6 @@
 define(function(require) {
 	var Backbone = require("backbone"),
+	    _ = require("underscore"),
 	    Array2d = require("utilities/array2d");
 
 	var Sequence = function (length) {

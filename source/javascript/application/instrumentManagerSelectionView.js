@@ -1,7 +1,8 @@
 define(function(require) {
-	var BaseView = require("baseView"),
+	var $ = require("jquery"),
+	    BaseView = require("baseView"),
 	    buttonHelpers = require("utilities/buttonHelpers"),
-	    instrumentManagerSelectionTemplateString = require("text!templates/instrumentManagerSelection.html")
+	    instrumentManagerSelectionTemplateString = require("text!templates/instrumentManagerSelection.html");
 
 	var InstrumentManagerSelectionView = BaseView.extend({
 		className: "instrument-manager-selection-view",

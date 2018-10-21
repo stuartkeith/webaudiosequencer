@@ -92,7 +92,7 @@ define(function (require) {
 		if (_dragleave) {
 			events.dragleave = function (event) {
 				if (draggedData.dragSource === this.dragTarget)
-					dragEnterDepth--
+					dragEnterDepth--;
 
 					if (dragEnterDepth === 0)
 						_dragleave.call(this, draggedData.model, event);

@@ -1,5 +1,6 @@
 define(function (require) {
-	var BaseView = require("baseView"),
+	var _ = require("underscore"),
+	    BaseView = require("baseView"),
 	    dragDropMixIn = require("dragDropMixIn"),
 	    settings = require("settings"),
 	    generateHSM = require("utilities/generateHSM");

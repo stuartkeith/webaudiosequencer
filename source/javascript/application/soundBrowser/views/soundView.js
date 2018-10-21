@@ -5,7 +5,7 @@ define(function (require) {
 	    buttonHelpers = require("utilities/buttonHelpers"),
 	    globalClickListener = require("utilities/globalClickListener"),
 	    dragDropMixIn = require("dragDropMixIn"),
-	    generateHSM = require("utilities/generateHSM");
+	    generateHSM = require("utilities/generateHSM"),
 	    SoundButtonView = require("application/soundButtonView"),
 	    soundTemplateString = require("text!templates/soundBrowser/sound.html");
 

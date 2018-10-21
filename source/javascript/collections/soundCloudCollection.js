@@ -23,7 +23,7 @@ define(function (require) {
 
 			_.each(response, function (sound) {
 				if (!sound.streamable) {
-					console.error("Skipping non-streamable SoundCloud sound:", sound);
+					console.error("Skipping non-streamable SoundCloud sound:", sound); // eslint-disable-line no-console
 
 					return;
 				}

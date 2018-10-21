@@ -1,4 +1,6 @@
 define(function (require) {
+	var $ = require("jquery");
+
 	var buttonHelpers = {};
 
 	buttonHelpers.button = function ($element, iconClass, isNotFirst, isNotLast) {

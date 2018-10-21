@@ -34,7 +34,7 @@ define(function (require) {
 		});
 	});
 
-	var context = window.AudioContext ? new AudioContext() : new webkitAudioContext();
+	var context = window.AudioContext ? new window.AudioContext() : new window.webkitAudioContext();
 
 	unlockWebAudioContext(context);
 

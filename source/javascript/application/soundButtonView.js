@@ -1,5 +1,6 @@
 define(function (require) {
-	var _ = require("underscore"),
+	var $ = require("jquery"),
+	    _ = require("underscore"),
 	    BaseView = require("baseView"),
 	    buttonHelpers = require("utilities/buttonHelpers"),
 	    soundError = require("text!templates/soundBrowser/soundError.txt"),
@@ -117,7 +118,7 @@ define(function (require) {
 				else
 					errorDescription = "Error " + response.status + " - " + response.statusText;
 			} else if (reason === "decode") {
-				errorDescription = "The sound could not be decoded"
+				errorDescription = "The sound could not be decoded";
 			}
 
 			this.lastErrorDescription = this.soundErrorTemplate({

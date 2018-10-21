@@ -13,6 +13,7 @@
   },
   "homepage": "https://github.com/stuartkeith/webaudiosequencer#readme",
   "devDependencies": {
+    "eslint": "^5.7.0",
     "fs-extra": "^0.30.0",
     "gulp": "^3.9.1",
     "gulp-rsync": "^0.0.6",
@@ -20,6 +21,11 @@
     "gulp-sourcemaps": "^2.0.0",
     "gulp-webserver": "^0.9.1",
     "gulp.spritesmith": "^6.2.1",
-    "requirejs": "^2.3.2"
+    "jquery": "^3.3.1",
+    "requirejs": "^2.3.2",
+    "text-loader": "0.0.1",
+    "underscore": "^1.9.1",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2"
   }
 }
