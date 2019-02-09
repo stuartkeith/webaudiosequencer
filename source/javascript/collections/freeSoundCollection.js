@@ -5,9 +5,9 @@ define(function (require) {
 	var FreeSoundCollection = Backbone.Collection.extend({
 		name: "FreeSound",
 		description: "a collaborative database of Creative Commons Licensed sounds.",
-		siteURL: "http://www.freesound.org/",
+		siteURL: "https://freesound.org/",
 		className: "freesound",
-		url: "http://www.freesound.org/apiv2/search/text/",
+		url: "https://www.freesound.org/apiv2/search/text/",
 		token: "f5841aeab4b8615b708e334f5e7033aedecd1ace",
 
 		initialize: function (options) {
