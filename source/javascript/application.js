@@ -3,7 +3,6 @@ define(function (require) {
 	    $ = require("jquery"),
 	    Backbone = require("backbone"),
 	    settings = require("settings"),
-	    jqueryPreloadCssImages = require("jqueryPreloadCssImages"),
 	    SoundOutput = require("soundOutput/soundOutput"),
 	    Scheduler = require("sequencer/scheduler"),
 	    TrackCollection = require("tracks/trackCollection"),
@@ -12,9 +11,9 @@ define(function (require) {
 	    keyboardShortcuts = require("./keyboardShortcuts"),
 	    documentListeners = require("./documentListeners"),
 	    functionChain = require("utilities/functionChain"),
-	    unlockWebAudioContext = require("utilities/unlockWebAudioContext");
+			unlockWebAudioContext = require("utilities/unlockWebAudioContext");
 
-	$.preloadCssImages();
+	Backbone.$ = $;
 
 	var eventBus = _.clone(Backbone.Events);
 

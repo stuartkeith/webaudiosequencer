@@ -1,8 +1,8 @@
 require([
-	"require",
 	"jquery",
-	"text!templates/unsupported.html"
-], function (require, $, unsupportedTemplateString) {
+	"text!templates/unsupported.html",
+	"main.scss"
+], function ($, unsupportedTemplateString) {
 	var description = $("#description"),
 	    fadeInTime = 1200,
 	    fadeInContent;
@@ -10,7 +10,7 @@ require([
 	if (window.AudioContext || window.webkitAudioContext) {
 		fadeInContent = $("<p>Loading...</p>");
 
-		require(["application"]);
+		import("application");
 	} else {
 		fadeInContent = $(unsupportedTemplateString);
 	}

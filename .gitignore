@@ -1,9 +1,4 @@
 .DS_Store
 node_modules/
 google-analytics.txt
-build/
 dist/
-source/css/main.css
-source/css/main.css.map
-source/css/images/sprites.png
-source/scss/sprites.scss

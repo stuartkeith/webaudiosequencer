@@ -1,5 +1,5 @@
-@import "mixins/_animate";
-@import "mixins/_prefix";
+@import "./mixins/_animate.scss";
+@import "./mixins/_prefix.scss";
 
 .alertify-cover {
     position: fixed; z-index: 9999;

@@ -16,11 +16,15 @@
   },
   "homepage": "https://github.com/stuartkeith/webaudiosequencer#readme",
   "devDependencies": {
+    "css-loader": "^2.1.1",
     "eslint": "^5.7.0",
     "jquery": "^3.3.1",
-    "requirejs": "^2.3.2",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
     "text-loader": "0.0.1",
     "underscore": "^1.9.1",
+    "url-loader": "^1.1.2",
     "webpack": "^4.22.0",
     "webpack-cli": "^3.1.2"
   }
