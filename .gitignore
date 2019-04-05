@@ -1,6 +1,5 @@
 .DS_Store
 node_modules/
-google-analytics.txt
 build/
 source/css/main.css
 source/css/main.css.map

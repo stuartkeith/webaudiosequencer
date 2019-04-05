@@ -13,13 +13,15 @@
   },
   "homepage": "https://github.com/stuartkeith/webaudiosequencer#readme",
   "devDependencies": {
-    "fs-extra": "^0.30.0",
-    "gulp": "^3.9.1",
-    "gulp-rsync": "^0.0.6",
-    "gulp-sass": "^2.3.2",
-    "gulp-sourcemaps": "^2.0.0",
-    "gulp-webserver": "^0.9.1",
-    "gulp.spritesmith": "^6.2.1",
-    "requirejs": "^2.3.2"
+    "fs-extra": "^7.0.1",
+    "node-sass": "^4.11.0",
+    "requirejs": "^2.3.2",
+    "spritesmith": "^3.3.1"
+  },
+  "scripts": {
+    "sprites": "node tasks/sprites",
+    "styles": "node-sass source/scss/main.scss source/css/main.css --style compressed --include-path source/scss/alertify",
+    "start": "",
+    "build": "node tasks/build"
   }
 }

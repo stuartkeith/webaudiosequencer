@@ -1,5 +1,5 @@
 var fs = require("fs-extra");
-var gulp = require("gulp");
+var path = require('path');
 var requirejs = require("requirejs");
 
 
@@ -34,27 +34,21 @@ function copyCSS () {
 
 function copyIndex () {
 	var index = fs.readFileSync("./source/index.html", { encoding: "utf8" });
-	var googleAnalytics;
+	var googleAnalytics = process.env.WAS_GOOGLE_ANALYTICS;
 
-	try {
-		googleAnalytics = fs.readFileSync("./google-analytics.txt", { encoding: "utf8" });
-	} catch (error) {
-		googleAnalytics = "";
+	if (googleAnalytics) {
+		var template = fs.readFileSync(path.join(__dirname, './google-analytics.txt')).toString();
+
+		template = template.replace('{{ code }}', googleAnalytics);
+
+		index = index.replace("<!-- google analytics -->", template);
 	}
-
-	index = index.replace("<!-- google analytics -->", googleAnalytics);
 
 	fs.writeFileSync("./build/index.html", index);
 }
 
-module.exports = function (callback) {
-	requirejs.optimize(config, function (buildResponse) {
-		removeUnusedFiles();
-		copyCSS();
-		copyIndex();
-
-		callback();
-	}, function (error) {
-		callback(error);
-	});
-}
+requirejs.optimize(config, function (buildResponse) {
+	removeUnusedFiles();
+	copyCSS();
+	copyIndex();
+});

@@ -1,0 +1,31 @@
+@mixin sprite-{{ name }} {
+	background-image: url("/css/images/sprites.png");
+	background-repeat: no-repeat;
+	background-position: -{{ x }}px -{{ y }}px;
+}
+
+span.sprite-buttons-{{ name }} {
+	@include sprite-{{ name }};
+}
+
+.sprite-buttons-{{ name }}::slider-thumb {
+	@include sprite-{{ name }};
+}
+
+.sprite-buttons-{{ name }}::-webkit-slider-thumb {
+	@include sprite-{{ name }};
+}
+
+.sprite-buttons-{{ name }}::-moz-slider-thumb {
+	@include sprite-{{ name }};
+}
+
+span.sprite-buttons-{{ name }} {
+	height: {{ height }}px;
+	width: {{ width }}px;
+	margin-left: ({{ width }}px / -2);
+	margin-top: ({{ height }}px / -2);
+}
+
+$sprite-buttons-{{ name }}-width: {{ width }}px;
+$sprite-buttons-{{ name }}-height: {{ height }}px;
