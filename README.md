@@ -31,13 +31,12 @@ This application uses the following libraries:
 Building/Compiling/Deployment
 -----------------------------
 
-`yarn install` or `npm install` to install the dependencies.
+`npm install` to install the dependencies.
 
-`gulp` to generate the sprites and CSS files, and start a webserver on
-port 8000.
+`npm start` to generate the sprite sheet, compile Sass, and start a local HTTP
+server. The application is available at http://localhost:8080/.
 
-`gulp build` to compile an optimized version (one JavaScript file) into
-the `build` directory.
+`npm run build` to generate a build.
 
 
 Credits

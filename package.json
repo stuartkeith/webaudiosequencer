@@ -14,6 +14,7 @@
   "homepage": "https://github.com/stuartkeith/webaudiosequencer#readme",
   "devDependencies": {
     "fs-extra": "^7.0.1",
+    "http-server": "^0.11.1",
     "node-sass": "^4.11.0",
     "requirejs": "^2.3.2",
     "spritesmith": "^3.3.1"
@@ -21,7 +22,7 @@
   "scripts": {
     "sprites": "node tasks/sprites",
     "styles": "node-sass source/scss/main.scss source/css/main.css --style compressed --include-path source/scss/alertify",
-    "start": "",
+    "start": "npm run sprites && npm run styles && http-server ./source",
     "build": "node tasks/build"
   }
 }
