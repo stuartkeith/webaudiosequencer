@@ -1,12 +1,8 @@
 Web Audio Sequencer
 ===================
 
-By [Stuart Keith](http://stuartkeith.com).
-
 *Web Audio Sequencer* is a web application used to compose music. It sources
-sounds from external websites, such as
-[FreeSound](http://www.freesound.org), [SoundCloud](https://soundcloud.com),
-etc.
+sounds from [FreeSound](http://www.freesound.org) and [SoundCloud](https://soundcloud.com).
 
 [Try it here](http://webaudiosequencer.stuartkeith.com/).
 
