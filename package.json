@@ -15,7 +15,7 @@
   "devDependencies": {
     "fs-extra": "^7.0.1",
     "http-server": "^0.11.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "requirejs": "^2.3.2",
     "spritesmith": "^3.3.1"
   },
